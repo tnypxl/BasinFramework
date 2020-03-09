@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium", "Selenium\Selenium.csproj", "{A4D9B093-3A16-445E-896B-DDC77F7E3E65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Selenium", "Basin.Selenium\Basin.Selenium.csproj", "{A4D9B093-3A16-445E-896B-DDC77F7E3E65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
