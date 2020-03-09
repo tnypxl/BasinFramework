@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     public class Elements : ReadOnlyCollection<IWebElement>
     {

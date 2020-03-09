@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     public class Window
     {

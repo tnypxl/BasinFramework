@@ -1,10 +1,10 @@
+using Basin.Selenium.Browsers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using Selenium.Browsers;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     public static class DriverFactory
     {

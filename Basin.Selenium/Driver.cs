@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using OpenQA.Selenium;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Driver

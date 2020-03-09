@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
-namespace Selenium.Browsers
+namespace Basin.Selenium.Browsers
 {
     public class Firefox
     {

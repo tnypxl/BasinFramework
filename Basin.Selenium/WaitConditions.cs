@@ -1,7 +1,7 @@
 using System;
 using OpenQA.Selenium;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     public sealed class WaitConditions
     {

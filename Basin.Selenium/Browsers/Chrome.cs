@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Selenium.Browsers
+namespace Basin.Selenium.Browsers
 {
     internal class Chrome
     {

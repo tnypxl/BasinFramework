@@ -3,7 +3,7 @@ using System.Drawing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace Selenium
+namespace Basin.Selenium
 {
     public class Element : IWebElement
     {
