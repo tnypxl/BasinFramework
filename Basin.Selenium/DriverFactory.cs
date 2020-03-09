@@ -10,13 +10,17 @@ namespace Selenium
     {
         public static IWebDriver Build(string browserName, object options = null)
         {
-            return browserName.ToLower() switch
+            switch (browserName.ToLower())
             {
-                "chrome" => new Chrome((ChromeOptions)options).Current,
-                "firefox" => new Firefox((FirefoxOptions)options).Current,
-                "internet explorer" => new InternetExplorer((InternetExplorerOptions)options).Current,
-                _ => throw new System.ArgumentException($"{browserName} not supported.")
-            };
+                case "chrome":
+                    return new Chrome((ChromeOptions) options).Current;
+                case "firefox":
+                    return new Firefox((FirefoxOptions) options).Current;
+                case "internet explorer":
+                    return new InternetExplorer((InternetExplorerOptions) options).Current;
+                default:
+                    throw new System.ArgumentException($"{browserName} not supported.");
+            }
         }
     }
 }

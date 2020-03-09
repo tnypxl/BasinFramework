@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <PackageId>BasinFramework</PackageId>
+        <PackageId>BasinFramework.Selenium</PackageId>
         <Authors>Arik Jones</Authors>
         <PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
@@ -12,11 +11,15 @@
         <PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>Selenium</RootNamespace>
+        <PackageVersion>0.0.2</PackageVersion>
+        <Title>BasinFramework.Selenium</Title>
+        <TargetFrameworks>net472;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Selenium.Chrome.WebDriver" Version="79.0.0" />
-      <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha04" />
+      <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+      <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+      <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
       <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0" />
       <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1" />
     </ItemGroup>
