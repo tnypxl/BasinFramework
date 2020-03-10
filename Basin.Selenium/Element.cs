@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
@@ -31,6 +32,10 @@ namespace Basin.Selenium
         public Size Size => Current.Size;
 
         public bool Displayed => Current.Displayed;
+
+        public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(Current);
+
+        public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(Current);
 
         public void Clear()
         {
