@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Downloads\MostThingsWeb-css2xpath-reloaded-b607205a42b2\Basin.Utils\Basin.Utils.csproj" />
+      <ProjectReference Include="..\Basin.Utils\Basin.Utils.csproj" />
     </ItemGroup>
 
 </Project>

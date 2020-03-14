@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Selenium", "Basin.Selenium\Basin.Selenium.csproj", "{A4D9B093-3A16-445E-896B-DDC77F7E3E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Utils", "..\..\..\Downloads\MostThingsWeb-css2xpath-reloaded-b607205a42b2\Basin.Utils\Basin.Utils.csproj", "{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Screens", "Basin.Screens\Basin.Screens.csproj", "{891BA36B-9EEE-4464-8EB3-526D7A42EBAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Utils", "Basin.Utils\Basin.Utils.csproj", "{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		{A4D9B093-3A16-445E-896B-DDC77F7E3E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D9B093-3A16-445E-896B-DDC77F7E3E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4D9B093-3A16-445E-896B-DDC77F7E3E65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{891BA36B-9EEE-4464-8EB3-526D7A42EBAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{891BA36B-9EEE-4464-8EB3-526D7A42EBAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{891BA36B-9EEE-4464-8EB3-526D7A42EBAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{891BA36B-9EEE-4464-8EB3-526D7A42EBAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

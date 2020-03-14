@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A7520E6-D8C2-4AF9-9E56-A025DC10FE51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Basin.Utils</RootNamespace>
+    <AssemblyName>Basin.Utils.DotNetStd</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CssToXpath\Converter.cs" />
+    <Compile Include="CssToXpath\Exceptions.cs" />
+    <Compile Include="CssToXpath\Extensions.cs" />
+    <Compile Include="CssToXpath\Parser.cs" />
+    <Compile Include="CssToXpath\Selectors\Attrib.cs" />
+    <Compile Include="CssToXpath\Selectors\Class.cs" />
+    <Compile Include="CssToXpath\Selectors\CombinedSelector.cs" />
+    <Compile Include="CssToXpath\Selectors\Element.cs" />
+    <Compile Include="CssToXpath\Selectors\Function.cs" />
+    <Compile Include="CssToXpath\Selectors\Hash.cs" />
+    <Compile Include="CssToXpath\Selectors\ISelector.cs" />
+    <Compile Include="CssToXpath\Selectors\Or.cs" />
+    <Compile Include="CssToXpath\Selectors\Pseudo.cs" />
+    <Compile Include="CssToXpath\Tokenizer.cs" />
+    <Compile Include="CssToXpath\Tokens.cs" />
+    <Compile Include="CssToXpath\TokenStream.cs" />
+    <Compile Include="CssToXpath\XPathExpr.cs" />
+    <Compile Include="CssToXpath\XPathExprOr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
