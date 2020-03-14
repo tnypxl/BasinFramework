@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <PackageId>BasinFramework.Screens</PackageId>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Authors>Arik Jones</Authors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Basin.Selenium\Basin.Selenium.csproj" />
+    </ItemGroup>
+
+</Project>

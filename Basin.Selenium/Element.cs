@@ -17,7 +17,7 @@ namespace Basin.Selenium
             _element = element;
         }
 
-        private IWebElement Current => _element ?? throw new System.NullReferenceException("_element is null.");
+        private IWebElement Current => _element ?? throw new NullReferenceException("_element is null.");
 
         public string TagName => Current.TagName;
 
@@ -33,9 +33,9 @@ namespace Basin.Selenium
 
         public bool Displayed => Current.Displayed;
 
-        public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(Current);
+        public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(_element);
 
-        public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(Current);
+        public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(_element);
 
         public void Clear()
         {
