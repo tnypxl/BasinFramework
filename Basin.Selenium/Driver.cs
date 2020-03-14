@@ -1,10 +1,9 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
+using Basin.Utils.CssToXpath;
 using OpenQA.Selenium;
 
 namespace Basin.Selenium
 {
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Driver
     {
         [ThreadStatic] private static IWebDriver _driver;
@@ -39,6 +38,16 @@ namespace Basin.Selenium
                 FoundBy = by
             };
         }
+
+        public static Element Locate(string css)
+        {
+            var byXPath = By.XPath(Converter.CSSToXPath(css));
+            var element = Wait.Until(driver => driver.FindElement(byXPath));
+            return new Element(element)
+            {
+                FoundBy = byXPath
+            };
+        }
         
         public static Elements LocateAll(By by)
         {
@@ -47,11 +56,6 @@ namespace Basin.Selenium
                 FoundBy = by
             };
         }
-
-        // TODO: Implement locating an element inside of another element
-        // public static Element LocateInside(By by, By parent)
-        // {
-        // }
 
         // TODO: Implement screenshots
         // public static void TakeScreenshot(string imageName)

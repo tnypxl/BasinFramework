@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>BasinFramework.Screens</PackageId>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Authors>Arik Jones</Authors>
+        <LangVersion>8</LangVersion>
+        <TargetFrameworks>net472;netstandard2.0;netcoreapp2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>BasinFramework.Screens</Title>
+        <PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>selenium, pageobjects</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Basin.Selenium\Basin.Selenium.csproj" />
+    </ItemGroup>
+
+</Project>
