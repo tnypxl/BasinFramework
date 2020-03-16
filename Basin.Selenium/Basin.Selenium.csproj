@@ -9,11 +9,12 @@
         <PackageTags>selenium, webdriver</PackageTags>
         <PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageVersion>0.0.8</PackageVersion>
+        <PackageVersion>1.0.0</PackageVersion>
         <Title>BasinFramework.Selenium</Title>
         <TargetFrameworks>net472;netstandard2.0;netcoreapp2.1</TargetFrameworks>
         <LangVersion>8</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>A sane, opinionated implementation of the Selenium.WebDriver library. </Description>
     </PropertyGroup>
 
     <ItemGroup>
