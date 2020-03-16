@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Basin.Screens.Interfaces;
 using Basin.Selenium;
 using OpenQA.Selenium;
