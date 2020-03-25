@@ -1,0 +1,11 @@
+{
+  "SiteConfig": {
+    "Name": "DuckDuckGo",
+    "Url": "https://duckduckgo.com"
+  },
+  
+  "DriverConfig": {
+    "Browser": "Chrome",
+    "Timeout": 20
+  }
+}

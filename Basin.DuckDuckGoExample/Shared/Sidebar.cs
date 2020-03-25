@@ -10,7 +10,7 @@ namespace Basin.DuckDuckGoExample.Shared
 
         public Sidebar SlideOpen()
         {
-            Map.HamburgerButton.Click();
+            Map.HamburgerMenu.Click();
             Wait.Until(Map.Container.IsDisplaying);
             
             return this;
@@ -47,7 +47,7 @@ namespace Basin.DuckDuckGoExample.Shared
 
         public Element Container => Locate(By.CssSelector(SidebarContainer));
 
-        public Element HamburgerButton => Locate(By.CssSelector(".header--aside .header__button--menu.js-side-menu-open"));
+        public Element HamburgerMenu => Locate(By.CssSelector(".header--aside .header__button--menu.js-side-menu-open"));
 
         public Element Themes => Locate(LinkBy("https://duckduckgo.com/settings#theme"));
         
