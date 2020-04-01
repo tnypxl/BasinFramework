@@ -5,11 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Basin.Screens\Basin.Screens.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Home" />
+      <ProjectReference Include="..\Basin\Basin.csproj" />
     </ItemGroup>
 
 </Project>

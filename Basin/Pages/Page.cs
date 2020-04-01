@@ -7,19 +7,18 @@ namespace Basin.Pages
     {
         protected Page() {}
         
-        public Wait Wait { get; set; } = Driver.Wait;
+        public Wait Wait { get; } = Driver.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
     public abstract class Page<TPageMap> : Page
     {
-        protected Page(TPageMap map)
+        protected Page()
         {
-            Map = map;
         }
 
-        public TPageMap Map;
+        protected TPageMap Map { get; set; }
     }
 
 }
