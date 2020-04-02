@@ -3,3 +3,5 @@ obj/
 /packages/
 /.idea/**/*.*
 .DS_Store
+Basin.sln.DotSettings.user
+/.vscode
