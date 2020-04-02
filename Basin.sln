@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Utils", "Basin.Utils\Basin.Utils.csproj", "{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.DuckDuckGoExample", "Basin.DuckDuckGoExample\Basin.DuckDuckGoExample.csproj", "{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin", "Basin\Basin.csproj", "{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}"
@@ -12,10 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6E80C20-6D67-42B2-8C3F-0E58FDE47EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
