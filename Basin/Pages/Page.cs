@@ -20,5 +20,9 @@ namespace Basin.Pages
 
         protected TPageMap Map { get; set; }
     }
+    
+    public abstract class PageComponent : Page {}
+    
+    public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> {}
 
 }
