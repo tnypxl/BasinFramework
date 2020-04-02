@@ -17,6 +17,8 @@ namespace Basin.Selenium
 
         public By FoundBy { get; set; }
 
+        public By ParentFoundBy { get; set; }
+
         private IWebElement Current => _element ?? throw new NullReferenceException("_element is null.");
 
         public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(_element);

@@ -31,5 +31,15 @@ namespace Basin.Selenium
         {
             return _wait.Until(condition);
         }
+
+        public Elements Until(Func<IWebDriver, Elements> condition)
+        {
+            return _wait.Until(condition);
+        }
+        
+        public Element Until(Func<IWebDriver, Element> condition)
+        {
+            return _wait.Until(condition);
+        }
     }
 }

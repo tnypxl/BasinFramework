@@ -1,38 +1,36 @@
 ﻿using Basin.DuckDuckGoExample.Shared;
-using Basin.Screens.Interfaces;
+using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
 namespace Basin.DuckDuckGoExample
 {
     // This class represents all relevant behaviors that can be executed on the DuckDuckGo homepage
-    public class HomePage : PageBase, IPage<HomePageMap>
+    public class HomePage : Page<HomePageMap>
     {
-        // This exposes webdriver elements defined in the map class
-        public HomePageMap Map => new HomePageMap();
-        
-        
-
-        // This is a behavior we can execute on this page
-        public void PerformSearch(string query)
+        public HomePage()
         {
-            Wait.Until(WaitConditions.ElementDisplayed(Map.Container));
+            Map = new HomePageMap();
+        }
+
+        public HomePage PerformSearch(string query)
+        {
             Map.SearchField.SendKeys(query);
             Map.SearchButton.Click();
+
+            return this;
         }
     }
 
-    // This class holds all the elements defined for the homepage
-    public class HomePageMap : PageMapBase, IPageMap
+    public class HomePageMap : PageMap
     {
-        
-        
         private const string HomePageContainer = "#pg-index.body--home";
-        public Element Container => Locate(By.CssSelector(HomePageContainer));
         
-        public Element SearchField => new SearchField().Map.HomePage;
+        private readonly SearchFieldMap _searchField = new SearchFieldMap();
+
+        public Element SearchField => _searchField.HomePage;
 
         public Element SearchButton => Locate(By.Id("search_button_homepage"));
-        
+        public Element Container => Locate(By.CssSelector(HomePageContainer));
     }
 }
