@@ -15,6 +15,8 @@ namespace Basin.Selenium
 
         public By FoundBy { get; set; }
 
+        public By ParentFoundBy { get; set; }
+
         public bool IsEmpty => Count == 0;
     }
 }

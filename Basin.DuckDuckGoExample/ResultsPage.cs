@@ -1,13 +1,17 @@
-using Basin.Screens.Interfaces;
+using Basin.Pages;
+using Basin.Selenium;
 
 namespace Basin.DuckDuckGoExample
 {
-    public class ResultsPage : PageBase, IPage<ResultsPageMap>
+    public class ResultsPage : Page<ResultsPageMap>
     {
-        public ResultsPageMap Map => new ResultsPageMap();
+        protected ResultsPage()
+        {
+            Map = new ResultsPageMap();
+        }
     }
 
-    public class ResultsPageMap : PageMapBase
+    public class ResultsPageMap : PageMap
     {
     }
 }
