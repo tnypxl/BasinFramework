@@ -3,26 +3,24 @@ using Basin.Selenium;
 
 namespace Basin.Pages
 {
-    public abstract class Page : IPageBase
+    public abstract class Page : PageMap, IPageBase
     {
-        protected Page() {}
-        
         public Wait Wait { get; } = Driver.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
-    public abstract class Page<TPageMap> : Page
+    public abstract class Page<TPageMap> : IPageBase
     {
-        protected Page()
-        {
-        }
+        public Wait Wait { get; } = Driver.Wait;
+
+        public TPage On<TPage>() where TPage : new() => new TPage();
 
         protected TPageMap Map { get; set; }
     }
-    
-    public abstract class PageComponent : Page {}
-    
-    public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> {}
+
+    public abstract class PageComponent : Page { }
+
+    public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> { }
 
 }

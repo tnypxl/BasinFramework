@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <PackageId>BasinFramework</PackageId>
@@ -11,11 +11,13 @@
         <PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
-        <RepositoryType>GitHub</RepositoryType>
+        <RepositoryType>Git</RepositoryType>
         <PackageTags>selenium, browser, automation, framework</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageReleaseNotes>Added a dynamic locator class. Refactored interfaces for pages and page maps. Add a page/map component class. Removed Screens.</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <OutputType>Library</OutputType>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,11 +30,11 @@
 
     <ItemGroup>
       <Folder Include="Config" />
+      <Folder Include="Selenium" />
     </ItemGroup>
 
     <ItemGroup>
       <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)' == 'net472'" />
-      <Reference Include="Mono.CSharp" Condition="'$(TargetFramework)' == 'net472'" />
     </ItemGroup>
 
 </Project>

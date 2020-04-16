@@ -6,20 +6,19 @@ namespace Basin.Pages
 {
     public abstract class PageMap : IPageMap
     {
-        public Element Locate(string selector) => Driver.Locate(selector);
+        private readonly IWebDriver driver = Driver.Current;
 
-        public Element Locate(By @by) => Driver.Locate(by);
 
-        public Element LocateInside(string selector, string parentSelector) => Driver.LocateInside(selector, parentSelector);
+        public Element Locate(By @by) => new Element(@by);
 
-        public Element LocateInside(By @by, By parentBy) => Driver.LocateInside(by, parentBy);
+        public Element LocateInside(By @by, By parentBy) => new Element(@by, parentBy);
 
-        public Elements LocateAll(string selector) => Driver.LocateAll(selector);
+        public Elements LocateAll(By @by) => new Elements(driver.FindElements(@by));
 
-        public Elements LocateAll(By @by) => Driver.LocateAll(by);
+        public Elements LocateAllInside(By @by, By parentBy) => new Elements(Locate(parentBy).FindElements(@by));
 
-        public Elements LocateAllInside(string selector, string parentSelector) => Driver.LocateAllInside(selector, parentSelector);
+        public string CssClassXPath(string className) => $"contains(concat(' ',normalize-space(@class),' '),' {className} ')";
 
-        public Elements LocateAllInside(By @by, By parentBy) => Driver.LocateAllInside(by, parentBy);
+        public string TextXPath(string text) => $"contains(., '{text}')";
     }
 }

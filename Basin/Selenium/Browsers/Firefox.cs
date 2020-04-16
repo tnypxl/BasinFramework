@@ -1,3 +1,4 @@
+using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
@@ -10,7 +11,7 @@ namespace Basin.Selenium.Browsers
         public Firefox(FirefoxOptions opts = null)
         {
             var options = opts ?? new FirefoxOptions();
-            var service = FirefoxDriverService.CreateDefaultService();
+            var service = FirefoxDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
 
             service.HideCommandPromptWindow = true;
 

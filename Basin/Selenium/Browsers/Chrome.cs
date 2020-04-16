@@ -1,3 +1,4 @@
+using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -10,7 +11,7 @@ namespace Basin.Selenium.Browsers
         public Chrome(ChromeOptions opts = null)
         {
             var options = opts ?? new ChromeOptions();
-            var service = ChromeDriverService.CreateDefaultService();
+            var service = ChromeDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
 
             service.HideCommandPromptWindow = true;
 

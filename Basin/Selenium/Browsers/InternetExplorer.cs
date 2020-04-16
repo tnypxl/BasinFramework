@@ -1,3 +1,4 @@
+using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
 
@@ -10,7 +11,7 @@ namespace Basin.Selenium.Browsers
         public InternetExplorer(InternetExplorerOptions opts = null)
         {
             var options = opts ?? new InternetExplorerOptions();
-            var service = InternetExplorerDriverService.CreateDefaultService();
+            var service = InternetExplorerDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
 
             service.HideCommandPromptWindow = true;
 
