@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
 namespace Basin.Selenium
@@ -53,12 +55,12 @@ namespace Basin.Selenium
             return Condition;
         }
 
-        public static Func<IWebDriver, Elements> ElementsNotEmpty(Elements elements)
+        public static Func<IWebDriver, ReadOnlyCollection<IWebElement>> ElementsNotEmpty(Elements elements)
         {
-            Elements Condition(IWebDriver driver)
+            ReadOnlyCollection<IWebElement> Condition(IWebDriver driver)
             {
-                var foundElements = Driver.LocateAll(elements.FoundBy);
-                return foundElements.IsEmpty ? null : foundElements;
+                var foundElements = driver.FindElements(elements.FoundBy);
+                return foundElements.Count == 0 ? null : foundElements;
             }
 
             return Condition;

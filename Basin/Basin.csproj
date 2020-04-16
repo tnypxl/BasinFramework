@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>BasinFramework</PackageId>
-        <PackageVersion>0.0.2</PackageVersion>
+        <PackageVersion>0.0.3</PackageVersion>
         <Title>Arik Jones</Title>
         <Authors>BasinFramework</Authors>
         <TargetFrameworks>net472;netcoreapp2.1</TargetFrameworks>
@@ -14,13 +14,15 @@
         <RepositoryType>Git</RepositoryType>
         <PackageTags>selenium, browser, automation, framework</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageReleaseNotes>Added a dynamic locator class. Refactored interfaces for pages and page maps. Add a page/map component class. Removed Screens.</PackageReleaseNotes>
+        <PackageReleaseNotes>Lots of breaking changes. Better to just read commits at the repo. Changelog</PackageReleaseNotes>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <OutputType>Library</OutputType>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Mono.CSharp" Version="4.0.0.143" Condition="$(TargetFramework) == 'net472'" />
+      <PackageReference Include="Microsoft.CSharp" Version="4.0.0.143" Condition="$(TargetFramework) == 'net472'" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
       <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
       <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="80.0.3987.10600" />
@@ -31,10 +33,6 @@
     <ItemGroup>
       <Folder Include="Config" />
       <Folder Include="Selenium" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)' == 'net472'" />
     </ItemGroup>
 
 </Project>
