@@ -1,9 +1,8 @@
 using Basin.Pages;
-using Basin.Pages.Interfaces;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.DuckDuckGoExample.Shared
+namespace Basin.DuckDuckGoExample.Pages.Shared
 {
     public class Sidebar : Page<SidebarMap>
     {

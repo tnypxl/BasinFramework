@@ -1,9 +1,9 @@
-﻿using Basin.DuckDuckGoExample.Shared;
+﻿using Basin.DuckDuckGoExample.Pages.Shared;
 using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.DuckDuckGoExample
+namespace Basin.DuckDuckGoExample.Pages
 {
     // This class represents all relevant behaviors that can be executed on the DuckDuckGo homepage
     public class HomePage : Page<HomePageMap>

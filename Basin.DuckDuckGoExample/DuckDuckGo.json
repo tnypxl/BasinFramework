@@ -1,10 +1,12 @@
 {
-  "SiteConfig": {
-    "Name": "DuckDuckGo",
-    "Url": "https://duckduckgo.com"
-  },
-  
-  "DriverConfig": {
+  "CurrentSite": "DuckDuckGo",
+  "Sites": [
+    {
+      "Name": "DuckDuckGo",
+      "Url": "https://duckduckgo.com"
+    }
+  ],
+  "Driver": {
     "Browser": "Chrome",
     "Timeout": 20
   }
