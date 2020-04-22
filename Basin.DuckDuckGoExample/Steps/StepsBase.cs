@@ -8,10 +8,10 @@ namespace Basin.DuckDuckGoExample.Steps
     public class StepsBase
     {
         private static readonly string ProjectPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
-            "\\bin\\Debug\\netcoreapp3.1", 
+            "/bin/Debug/netcoreapp2.1",
             "");
 
-        public static Basin Config => Basin.FromJson($"{ProjectPath}/DuckDuckGo.json");
+        protected static Basin Config => Basin.FromJson($"{ProjectPath}/DuckDuckGo.json");
 
         [BeforeFeature]
         public static void BeforeFeatureHook()

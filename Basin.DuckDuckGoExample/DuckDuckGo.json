@@ -8,6 +8,6 @@
   ],
   "Driver": {
     "Browser": "Chrome",
-    "Timeout": 20
+    "Timeout": 10
   }
 }
