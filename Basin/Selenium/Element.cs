@@ -11,56 +11,47 @@ namespace Basin.Selenium
     {
         private readonly IWebElement _element;
         private readonly IWebElement _parentElement;
-
-        private static DefaultWait<IWebDriver> _wait(int timeout)
-        {
-            var wait = new DefaultWait<IWebDriver>(Driver.Current)
-            {
-                Timeout = TimeSpan.FromSeconds(timeout)
-            };
-            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-
-            return wait;
-        }
-
+        private readonly int _timeout;
+        
         public Element(IWebElement element)
         {
             _element = element;
         }
 
-        public Element(By by)
+        public Element(By by, int timeout = 2)
         {
             FoundBy = by;
+            _timeout = timeout;
         }
 
-        public Element(By by, By parentBy)
+        public Element(By by, By parentBy, int timeout = 2)
         {
             FoundBy = by;
             ParentFoundBy = parentBy;
-            _parentElement = new Element(parentBy);
+            _parentElement = new Element(parentBy, timeout);
+            _timeout = timeout;
 
-        }
-
-        public bool Exists
-        {
-            get
-            {
-                try
-                {
-                    return _wait(2).Until(d => d.FindElement(FoundBy).Displayed);
-                }
-                catch (WebDriverTimeoutException)
-                {
-                    return false;
-                }
-            }
         }
 
         public By FoundBy { get; set; }
 
         public By ParentFoundBy { get; set; }
 
+        private DefaultWait<IWebDriver> Wait
+        {
+            get
+            {
+                var wait = new DefaultWait<IWebDriver>(Driver.Current)
+                {
+                    Timeout = TimeSpan.FromSeconds(_timeout)
+                };
+                wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+
+                return wait;
+            }
+        }
+        
         /// <summary>
         /// Locates and returns an <see cref="IWebElement"/>, will return null if its
         /// </summary>
@@ -68,19 +59,18 @@ namespace Basin.Selenium
         {
             get
             {
-                return _wait(2).Until(driver =>
+                return Wait.Until(driver =>
                 {
-                    var element = _parentElement != null
-                        ? _parentElement.FindElement(FoundBy)
+                    var element = ParentFoundBy != null
+                        ? CurrentParent.FindElement(FoundBy)
                         : driver.FindElement(FoundBy);
 
-                    return element.Displayed ? element : null;
+                    return element.Displayed
+                        ? element 
+                        : null;
                 });
             }
         }
-
-
-        //private IWebElement Current => _element ?? throw new NullReferenceException("_element is null.");
 
         private IWebElement Current => Locate ?? throw new NullReferenceException("Element could not located because it was null");
 

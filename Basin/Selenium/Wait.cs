@@ -18,7 +18,8 @@ namespace Basin.Selenium
             _wait.IgnoreExceptionTypes(
                 typeof(NoSuchElementException),
                 typeof(ElementNotVisibleException),
-                typeof(StaleElementReferenceException)
+                typeof(StaleElementReferenceException),
+                typeof(WebDriverTimeoutException)
             );
         }
 
