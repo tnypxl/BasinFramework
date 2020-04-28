@@ -4,5 +4,6 @@ namespace Basin.Config.Interfaces
     {
         int Timeout { get; set; }
         string Browser { get; set; }
+        string PathToDrivers { get; set; } 
     }
 }

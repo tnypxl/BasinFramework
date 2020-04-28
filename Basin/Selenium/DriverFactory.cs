@@ -1,5 +1,7 @@
 using System;
-using Basin.Selenium.Browsers;
+using System.Collections.Generic;
+using Basin.Selenium.Builders;
+using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -9,18 +11,34 @@ namespace Basin.Selenium
 {
     public static class DriverFactory
     {
-        public static IWebDriver Build(string browserName, object options = null)
+        public static IWebDriver Build(string name, object driverService = null, object driverOptions = null)
         {
-            switch (browserName.ToLower())
+            var builder = GetDriverBuilder(name.ToLower());
+            builder.CreateService(driverService);
+            builder.CreateOptions(driverOptions);
+
+            return builder.GetDriver();
+        }
+
+        private static IDriverBuilder GetDriverBuilder(string name)
+        {
+            return Builders.ContainsKey(name)
+                ? Builders[name]
+                : throw new ArgumentException($"Invalid Argument: There is no driver builder called '{name}'");
+        }
+
+        private static Dictionary<string, IDriverBuilder> Builders
+        {
+            get
             {
-                case "chrome":
-                    return new Chrome((ChromeOptions) options).Current;
-                case "firefox":
-                    return new Firefox((FirefoxOptions) options).Current;
-                case "internet explorer":
-                    return new InternetExplorer((InternetExplorerOptions) options).Current;
-                default:
-                    throw new ArgumentException($"{browserName} not supported.");
+                var builders = new Dictionary<string, IDriverBuilder>()
+                {
+                    {"chrome", new ChromeBuilder()},
+                    {"firefox", new FirefoxBuilder()},
+                    {"internet explorer", new InternetExplorerBuilder()}
+                };
+
+                return builders;
             }
         }
     }
