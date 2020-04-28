@@ -1,5 +1,9 @@
 ﻿using System;
+using System.IO;
 using Basin.Selenium;
+using Basin.Selenium.Builders;
+using Basin.Selenium.Interfaces;
+using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace Basin.DuckDuckGoExample.Steps
@@ -7,21 +11,25 @@ namespace Basin.DuckDuckGoExample.Steps
     [Binding]
     public class StepsBase
     {
-        private static readonly string ProjectPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
-            "/bin/Debug/netcoreapp2.1",
+        private static readonly string ConfigPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
+            "/bin/Debug/netcoreapp2.1/",
             "");
-
-        protected static Basin Config => Basin.FromJson($"{ProjectPath}/DuckDuckGo.json");
 
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            Driver.Init(Config.Driver.Browser, Config.Driver.Timeout);
+            BSN.SetConfig($"{ConfigPath}/DuckDuckGo.json");
+        }
+        
+        [BeforeScenario]
+        public static void BeforeScenarioHook()
+        {
+            Driver.Init();
             Pages.Init();
         }
 
-        [AfterFeature]
-        public static void AfterFeatureHook()
+        [AfterScenario]
+        public static void AfterScenarioHook()
         {
             Driver.Current?.Quit();
         }
