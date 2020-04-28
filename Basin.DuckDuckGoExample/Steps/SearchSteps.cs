@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Basin;
 using Basin.Selenium;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -10,27 +10,29 @@ namespace Basin.DuckDuckGoExample.Steps
     {
         private static string _query;
 
-        [Given(@"I want to know the definition of the word ""(\w+)""")]
-        public void GivenIWantToKnowTheDefinitionOfAWord(string word)
+        [Given(@"I am on the home page")]
+        public static void OnTheHomePage()
+        {
+            Driver.Goto(BSN.Config.Site.Url);
+        }
+        
+        [StepDefinition(@"I want to know the definition of the word ""(\w+)""")]
+        public void WantToKnowTheDefinitionOfAWord(string word)
         {
             _query = $"define {word}";
         }
 
-        [StepDefinition(@"I am on the home page")]
-        public static void GivenIAmOnTheHomePage()
-        {
-            Driver.Goto(Config.GetSite(Config.CurrentSite).Url);
-        }
+        
 
-        [StepDefinition(@"I perform a search")]
-        public static void WhenIPerformASearchFor()
+        [When(@"I perform a search")]
+        public static void PerformASearchFor()
         {
             Pages.Home.PerformSearch(_query);
         }
         
         [Then(@"I should see the word ""(?:.*)"" defined as")]
         [Then(@"I should see the following definition")]
-        public static void ThenISeeRelevantResultsFor(string definition)
+        public static void ShouldSeeRelevantResultsFor(string definition)
         {
             Assert.That(Pages.Results.WordDefinitionDisplayed(definition));
         }

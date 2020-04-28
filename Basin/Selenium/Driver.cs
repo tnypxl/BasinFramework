@@ -1,5 +1,6 @@
 using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace Basin.Selenium
 {
@@ -15,14 +16,10 @@ namespace Basin.Selenium
 
         public static string Title => Current.Title;
 
-        public static void Init(string browserName, int waitSeconds = 10)
+        public static void Init(object driverService = null, object driverOptions = null)
         {
-            if (string.IsNullOrEmpty(browserName))
-                throw new ArgumentException(
-                    "Expected value to be 'chrome', 'firefox', or 'internet explorer'", nameof(browserName));
-
-            _driver = DriverFactory.Build(browserName);
-            Wait = new Wait(waitSeconds);
+            _driver = DriverFactory.Build(BSN.Config.Driver.Browser, driverService, driverOptions);
+            Wait = new Wait(BSN.Config.Driver.Timeout);
             Window = new Window();
             Window.Maximize();
         }

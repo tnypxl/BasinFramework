@@ -1,15 +1,15 @@
-using Basin.Config.Interfaces;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using Basin.Config.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace Basin
+namespace Basin.Config
 {
-    public partial class Basin
+    public partial class Configuration
     {
-        [JsonProperty("CurrentSite")] public string CurrentSite { get; set; }
+        [JsonProperty("DefaultSite")] public string DefaultSite { get; set; }
 
         [JsonProperty("Sites")] public List<SiteConfig> Sites { get; set; }
 
@@ -23,6 +23,8 @@ namespace Basin
         [JsonProperty("Timeout")] public int Timeout { get; set; }
 
         [JsonProperty("Browser")] public string Browser { get; set; }
+
+        [JsonProperty("PathToDrivers")] public string PathToDrivers { get; set; }
     }
 
     public class LoginConfig : ILoginConfig
@@ -43,29 +45,29 @@ namespace Basin
         [JsonProperty("Url")] public string Url { get; set; }
     }
 
-    public partial class Basin
+    public partial class Configuration
     {
-        public static Basin FromJson(string filePath)
+        private static Configuration _config;
+        public static Configuration FromJson(string filePath)
         {
             var json = File.ReadAllText(filePath);
 
-            return JsonConvert.DeserializeObject<Basin>(json, Converter.Settings);
+            _config = JsonConvert.DeserializeObject<Configuration>(json, Converter.Settings);
+
+            return _config;
         }
 
-        public SiteConfig GetSite(string name)
-        {
-            return Sites.Find(site => site.Name == name);
-        }
+        public SiteConfig Site => _config.Sites.Find(site => site.Name == _config.DefaultSite);
 
-        public LoginConfig GetLogin(string role)
+        public LoginConfig Login(string role)
         {
-            return Logins.Find(login => login.Role == role);
+            return _config.Logins.Find(login => login.Role == role);
         }
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Basin self)
+        public static string ToJson(this Configuration self)
         {
             return JsonConvert.SerializeObject(self, Converter.Settings);
         }

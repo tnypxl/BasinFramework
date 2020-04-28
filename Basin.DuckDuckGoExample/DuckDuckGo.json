@@ -1,5 +1,5 @@
 {
-  "CurrentSite": "DuckDuckGo",
+  "DefaultSite": "DuckDuckGo",
   "Sites": [
     {
       "Name": "DuckDuckGo",
@@ -7,7 +7,7 @@
     }
   ],
   "Driver": {
-    "Browser": "Chrome",
+    "Browser": "chrome",
     "Timeout": 10
   }
 }
