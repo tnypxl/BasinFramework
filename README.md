@@ -18,7 +18,7 @@ Thanks to [ElSnoMan](https://github.com/ElSnoMan) and
 [Test Automation University](https://testautomationu.applitools.com/)
 from Applitools for this [Course](https://testautomationu.applitools.com/test-automation-framework-csharp/)
 
-Basin is heavily inspired by the code here => https://github.com/ElSnoMan/from-scripting-to-framework
+Basin is based on and heavily inspired by the source code from [this repo](https://github.com/ElSnoMan/from-scripting-to-framework)
 
 
 
