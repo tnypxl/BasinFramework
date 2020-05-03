@@ -1,61 +1,24 @@
 # Basin Framework
-An opinionated browser test framework for Selenium WebDriver
 
-Selenium Webdriver's API is decent, but limiting. It's not really designed to be a standalone framework unto itself. It begs to be extended. This framework is one such attempt to do that.
-
-Also 98% of the credit for this framework goes to [ElSnoMan](github.com/ElSnoMan) and [Test Automation University](https://testautomationu.applitools.com/) from Applitools.
-
-Source Code:
-https://github.com/ElSnoMan/from-scripting-to-framework
-
-Course:
-https://testautomationu.applitools.com/test-automation-framework-csharp/
+An opinionated browser test framework for Selenium WebDriver. There are many like this one. The goal here was to build something that was easy to implement while still providing flexibility for more complex setups.
 
 ## Install 
 
 ```
-dotnet add package BasinFramework.Selenium
+dotnet add package BasinFramework
 ```
 
-## Usage
+### Documentation
 
-### Add the `using`
+(WORK IN PROGRESS)
 
-```csharp
-// SomePage.cs
+### Credit
 
-using Basin.Selenium;
+Thanks to [ElSnoMan](https://github.com/ElSnoMan) and
+[Test Automation University](https://testautomationu.applitools.com/)
+from Applitools for this [Course](https://testautomationu.applitools.com/test-automation-framework-csharp/)
 
-// <Your well-organized, cleanly coded, page object code>
-```
+Basin is heavily inspired by the code here => https://github.com/ElSnoMan/from-scripting-to-framework
 
-### Create a browser instance
-
-```csharp
-// Initialize instance chromedriver
-Driver.Init("chrome"); 
-
-// Open chrome browser with a provided url
-Driver.Goto("https://google.com");
-
-// Return the current instance of the driver
-Driver.Current;
-```
-
-### Define elements
-
-```csharp
-public Element Username => Driver.Locate(By.Id("loginUsername"));
-public Element Password => Driver.Locate(By.Id("loginPassword"));
-public Element Submit => Driver.Locate(By.CssSelector("button[name='submitLogin']"));
-public Elements CategoryList => Driver.LocateAll(By.CssSelector("ul li.productCategory"));
-```
-
-### Wait on elements
-
-```csharp
-Driver.Wait.Until(WaitConditions.ElementDisplayed(Username));
-Driver.Wait.Until(WaitConditions.ElementsNotEmpty(CategoryList));
-```
 
 
