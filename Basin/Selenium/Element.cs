@@ -72,6 +72,21 @@ namespace Basin.Selenium
             }
         }
 
+        public bool Exists
+        {
+            get
+            {
+                try
+                {
+                    return Current.Displayed;
+                }
+                catch (WebDriverTimeoutException)
+                {
+                    return false;
+                }
+            }
+        }
+
         private IWebElement Current => Locate ?? throw new NullReferenceException("Element could not located because it was null");
 
         private IWebElement CurrentParent => _parentElement ?? throw new NullReferenceException("Parent element could not be located because it was null");
