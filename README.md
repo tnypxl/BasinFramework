@@ -101,9 +101,9 @@ Now Basin will use this throughout the rest of the framework.
 Basin provides classes and interfaces to ease the pain of building page object frameworks. Let's say I'm defining a login page.
 
 ```csharp
-using Basin.Selenium
-using Basin.Pages
-using OpenQA.Selenium
+using Basin.Selenium;
+using Basin.Pages;
+using OpenQA.Selenium;
 
 namespace Example
 {
@@ -146,9 +146,9 @@ LocateAllInside(By by, By parentBy, [int timeout])
 Page object classes can grow very large over time. I've found it incredibly difficult to retain readability and clarity with a single class. So instead of keeping everything in a single massive class, I break it down into to 2 classes. A page class for behaviors and a page map class for storing the element locators. Below its how its accomplished:
 
 ```csharp
-using Basin.Selenium
-using Basin.Pages
-using OpenQA.Selenium
+using Basin.Selenium;
+using Basin.Pages;
+using OpenQA.Selenium;
 
 namespace Example
 {
