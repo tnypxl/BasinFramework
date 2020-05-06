@@ -1,9 +1,5 @@
 ﻿using System;
-using System.IO;
 using Basin.Selenium;
-using Basin.Selenium.Builders;
-using Basin.Selenium.Interfaces;
-using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace Basin.DuckDuckGoExample.Steps
