@@ -11,6 +11,7 @@ to implement while still providing flexibility without over abstracting.
 ```
 $ dotnet add package BasinFramework
 ```
+
 ### Configuration
 
 Create a JSON file at the root of your project
@@ -107,21 +108,21 @@ using OpenQA.Selenium;
 
 namespace Example
 {
-	public class LoginPage : Page
-	{	
-		// Page elements
-		public Element UsernameField => Locate(By.Id("userName"));
-		public Element PasswordField => Locate(By.Id("password"));
-		public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
-		
-		// Page behavior
-		public void Login(string username, string password)
-		{
-			UsernameField.SendKeys(username);
-			PasswordField.SendKeys(password);
-			Submit.Click();
-		}
-	}
+    public class LoginPage : Page
+    {	
+        // Page elements
+        public Element UsernameField => Locate(By.Id("userName"));
+        public Element PasswordField => Locate(By.Id("password"));
+        public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
+
+        // Page behavior
+        public void Login(string username, string password)
+        {
+            UsernameField.SendKeys(username);
+            PasswordField.SendKeys(password);
+            Submit.Click();
+        }
+    }
 }
 ```
 
@@ -152,32 +153,32 @@ using OpenQA.Selenium;
 
 namespace Example
 {
-	// This class no longer includes locator methods.
-	// The goal is to only put behavior methods in this class.
-	
-	public class LoginPage : Page<LoginPageMap>
-	{
-		public LoginPage() 
-		{
-			Map = new LoginPageMap();
-		}
-		// Page behavior
-		public void LoginWith(string username, string password)
-		{
-			Map.UsernameField.SendKeys(username);
-			Map.PasswordField.SendKeys(password);
-			Map.Submit.Click();
-		}
-	}
-	
-	// PageMap provides the locator methods.
-	// The goal is to only put Element definitions in this class.
-	public class LoginPageMap : PageMap
-	{
-		public Element UsernameField => Locate(By.Id("userName"));
-		public Element PasswordField => Locate(By.Id("password"));
-		public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
-	}
+// This class no longer includes locator methods.
+// The goal is to only put behavior methods in this class.
+
+public class LoginPage : Page<LoginPageMap>
+{
+    public LoginPage() 
+    {
+        Map = new LoginPageMap();
+    }
+    
+    public void LoginWith(string username, string password)
+    {
+        Map.UsernameField.SendKeys(username);
+        Map.PasswordField.SendKeys(password);
+        Map.Submit.Click();
+    }
+}
+
+    // PageMap provides the locator methods.
+    // The goal is to only put Element definitions in this class.
+    public class LoginPageMap : PageMap
+    {
+        public Element UsernameField => Locate(By.Id("userName"));
+        public Element PasswordField => Locate(By.Id("password"));
+        public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
+    }
 }
 ```
 
