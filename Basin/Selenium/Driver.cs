@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -16,12 +17,10 @@ namespace Basin.Selenium
 
         public static string Title => Current.Title;
 
-        public static void Init(object driverService = null, object driverOptions = null)
+        public static void Init([Optional] IWebDriver driver)
         {
-            _driver = DriverFactory.Build(BSN.Config.Driver.Browser, driverService, driverOptions);
-            Wait = new Wait(BSN.Config.Driver.Timeout);
-            Window = new Window();
-            Window.Maximize();
+            _driver = driver ?? DriverFactory.Build(BSN.Config.Driver.Browser);
+            FinishSetup();
         }
 
         public static void Goto(string url)
@@ -34,6 +33,13 @@ namespace Basin.Selenium
         public static void Quit()
         {
             Current.Quit();
+        }
+
+        private static void FinishSetup()
+        {
+            Wait = new Wait(BSN.Config.Driver.Timeout);
+            Window = new Window();
+            Window.Maximize();
         }
     }
 }
