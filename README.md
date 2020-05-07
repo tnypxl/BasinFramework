@@ -1,8 +1,6 @@
 # Basin Framework
 
-An opinionated browser test framework for Selenium WebDriver. There are
-many like this one. The goal here was to build something that was easy
-to implement while still providing flexibility without over abstracting.
+An opinionated browser test framework for Selenium WebDriver. There are many like this one. The goal here was to build something that was easy to implement while still providing flexibility without over abstracting.
 
 ## Getting stared
 
@@ -74,7 +72,7 @@ BSN.Config.Login("Admin").Username; // Gets a login by Role
 
 By default, all the drivers are configured with a clean slate. That just means there are no browser flags or custom binary paths being set initially. Starting up a browser and going to a url is 2 lines of code.
 
-```csharp
+```c#
 // Uses the values defined in `Drivers` from the json config file.
 // It also maximizes the window automatically.
 Driver.Init(); 
@@ -87,10 +85,10 @@ For the most part, nothing else is needed. But if you need to access the `IWebDr
 
 ### Use your own `IWebDriver` instance
 
-Maybe you already have code written to manage driver instances. Just don't call `Driver.Init()`. Instead just set the instance like this with your own instance of `IWebDriver`.
+Maybe I already have code written to manage driver instances. Just pass in an instance of IWebDriver.
 
-```csharp
-Driver.Current = new FirefoxDriver();
+```c#
+Driver.Init(FirefoxDriver());
 Driver.Goto("http://someurl");
 ```
 
@@ -101,7 +99,7 @@ Now Basin will use this throughout the rest of the framework.
 
 Basin provides classes and interfaces to ease the pain of building page object frameworks. Let's say I'm defining a login page.
 
-```csharp
+```c#
 using Basin.Selenium;
 using Basin.Pages;
 using OpenQA.Selenium;
@@ -128,25 +126,25 @@ namespace Example
 
 Let's start with the `Page` class that `LoginPage` inherits from. `Page` is an abstract class that provides a handful of locator methods with some overloads. There are 4 locator methods, each with an overload to allow setting an optional timeout.
 
-```csharp
+```c#
 // Gets a single IWebElement
-Locate(By by, [int timeout]);
+Locate(By by, int timeout);
 
 // Gets a single IWebElement inside a parent IWebElement
-LocateInside(By by, By parentBy, [int timeout]) 
+LocateInside(By by, By parentBy, int timeout) 
 
 // Gets multiple IWebElement(s)
-LocateAll(By by, [int timeout]) 
+LocateAll(By by, int timeout) 
 
 // Gets multiple IWebElement(s) inside a parent IWebElement
-LocateAllInside(By by, By parentBy, [int timeout]) 
+LocateAllInside(By by, By parentBy, int timeout) 
 ```
 
 ### Creating a page object map
 
 Page object classes can grow very large over time. I've found it incredibly difficult to retain readability and clarity with a single class. So instead of keeping everything in a single massive class, I break it down into to 2 classes. A page class for behaviors and a page map class for storing the element locators. Below its how its accomplished:
 
-```csharp
+```c#
 using Basin.Selenium;
 using Basin.Pages;
 using OpenQA.Selenium;
