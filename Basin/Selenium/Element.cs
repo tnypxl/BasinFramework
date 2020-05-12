@@ -1,9 +1,9 @@
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace Basin.Selenium
 {
@@ -12,7 +12,7 @@ namespace Basin.Selenium
         private readonly IWebElement _element;
         private readonly IWebElement _parentElement;
         private readonly int _timeout;
-        
+
         public Element(IWebElement element)
         {
             _element = element;
@@ -30,7 +30,6 @@ namespace Basin.Selenium
             ParentFoundBy = parentBy;
             _parentElement = new Element(parentBy, timeout);
             _timeout = timeout;
-
         }
 
         public By FoundBy { get; set; }
@@ -51,9 +50,9 @@ namespace Basin.Selenium
                 return wait;
             }
         }
-        
+
         /// <summary>
-        /// Locates and returns an <see cref="IWebElement"/>, will return null if its
+        ///     Locates and returns an <see cref="IWebElement" />, will return null if its
         /// </summary>
         private IWebElement Locate
         {
@@ -66,7 +65,7 @@ namespace Basin.Selenium
                         : driver.FindElement(FoundBy);
 
                     return element.Displayed
-                        ? element 
+                        ? element
                         : null;
                 });
             }
