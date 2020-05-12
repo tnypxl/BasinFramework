@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Basin.Selenium.Interfaces;
@@ -9,7 +8,7 @@ namespace Basin.Selenium
     internal class Locator : ILocator
     {
         private static string _selector;
-        
+
         // TODO: Beginnings of a more robust locator class
         // private readonly string cssAttrs = @"\[\w*([\~\!\|\^\$\*]?\]?)\=?(?:\'|\"")?(\w+)(?:\'|\"")?\]";
 
@@ -33,6 +32,5 @@ namespace Basin.Selenium
         {
             By = Locators.Find(loc => Regex.IsMatch(_selector, loc.Pattern)).By;
         }
-
     }
 }

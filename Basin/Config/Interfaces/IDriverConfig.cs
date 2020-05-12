@@ -1,3 +1,5 @@
+using System;
+
 namespace Basin.Config.Interfaces
 {
     public interface IDriverConfig
@@ -5,5 +7,6 @@ namespace Basin.Config.Interfaces
         int Timeout { get; set; }
         string Browser { get; set; }
         string PathToDrivers { get; set; } 
+        Uri GridUrl { get; set; }
     }
 }

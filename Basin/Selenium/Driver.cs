@@ -1,7 +1,6 @@
 using System;
-using System.Runtime.InteropServices;
+using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Basin.Selenium
 {
@@ -17,9 +16,24 @@ namespace Basin.Selenium
 
         public static string Title => Current.Title;
 
-        public static void Init([Optional] IWebDriver driver)
+        public static void Init()
         {
-            _driver = driver ?? DriverFactory.Build(BSN.Config.Driver.Browser);
+            _driver = BSN.Config.Driver.GridUrl == null
+                ? DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetDriver
+                : DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetRemoteDriver(BSN.Config.Driver.GridUrl);
+        }
+
+        public static void Init(Func<IDriverBuilder> builder)
+        {
+            _driver = BSN.Config.Driver.GridUrl == null
+                ? builder.Invoke().GetDriver
+                : builder.Invoke().GetRemoteDriver(BSN.Config.Driver.GridUrl);
+        }
+
+        public static void Init(IWebDriver driver)
+        {
+            _driver = driver;
+
             FinishSetup();
         }
 

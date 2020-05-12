@@ -1,27 +1,62 @@
+using System;
 using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 
 namespace Basin.Selenium.Builders
 {
-    public class ChromeBuilder : IDriverBuilder
+    /// <summary>
+    ///     Concrete Driver Builder for Chrome
+    /// </summary>
+    public class ChromeBuilder : IChromeBuilder
     {
-        private ChromeDriverService _service;
-        private ChromeOptions _options;
-        
-        public void CreateService(object customDriverService = null)
+        private ChromeOptions _driverOptions;
+        private Proxy _driverProxy;
+        private ChromeDriverService _driverService;
+
+        /// <inheritdoc />
+        public void CreateService()
         {
-            _service = (ChromeDriverService) customDriverService ?? ChromeDriverService.CreateDefaultService(BSN.DriverPath);
+            _driverService = ChromeDriverService.CreateDefaultService(BSN.DriverPath);
         }
 
-        public void CreateOptions(object customDriverOptions = null)
+        /// <inheritdoc />
+        public void CreateOptions()
         {
-            _options = (ChromeOptions) customDriverOptions ?? new ChromeOptions();
+            _driverOptions = new ChromeOptions();
         }
 
-        public IWebDriver GetDriver()
+        /// <inheritdoc />
+        public void CreateProxy(Proxy proxy)
         {
-            return new ChromeDriver(_service, _options);
+            _driverProxy = proxy;
+        }
+
+
+        /// <inheritdoc />
+        public IWebDriver GetDriver => new ChromeDriver(DriverService, DriverOptions, TimeSpan.FromSeconds(BSN.Config.Driver.Timeout));
+
+
+        /// <inheritdoc />
+        public IWebDriver GetRemoteDriver(Uri uri)
+        {
+            return new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
+        }
+
+        /// <inheritdoc />
+        public Proxy DriverProxy => _driverProxy ?? throw new NullReferenceException("_driverProxy is null. Call CreateProxy().");
+
+        /// <inheritdoc />
+        public ChromeDriverService DriverService => _driverService ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
+
+        /// <inheritdoc />
+        public ChromeOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
+
+        /// <inheritdoc cref="CreateProxy(Proxy)" />
+        public void CreateProxy()
+        {
+            CreateProxy(new Proxy());
         }
     }
 }
