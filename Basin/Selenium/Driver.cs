@@ -21,6 +21,8 @@ namespace Basin.Selenium
             _driver = BSN.Config.Driver.Host == null
                 ? DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetDriver
                 : DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetRemoteDriver(BSN.Config.Driver.Host);
+            
+            FinishSetup();
         }
 
         public static void Init(Func<IDriverBuilder> builder)
@@ -28,13 +30,13 @@ namespace Basin.Selenium
             _driver = BSN.Config.Driver.Host == null
                 ? builder.Invoke().GetDriver
                 : builder.Invoke().GetRemoteDriver(BSN.Config.Driver.Host);
+            
+            FinishSetup();
         }
 
         public static void Init(IWebDriver driver)
         {
             _driver = driver;
-
-            FinishSetup();
         }
 
         public static void Goto(string url)
