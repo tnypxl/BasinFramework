@@ -12,7 +12,7 @@ namespace Basin.DuckDuckGoExample.Steps
     public class StepsBase
     {
         private static readonly string ConfigPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
-            "/bin/Debug/netcoreapp2.1/",
+            "/bin/Debug/netcoreapp3.1/",
             "");
 
         [BeforeFeature]
