@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Basin.Selenium;
 using Basin.Selenium.Builders;
 using Basin.Selenium.Drivers;
@@ -11,9 +12,7 @@ namespace Basin.DuckDuckGoExample.Steps
     [Binding]
     public class StepsBase
     {
-        private static readonly string ConfigPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
-            "/bin/Debug/netcoreapp3.1/",
-            "");
+        private static readonly string ConfigPath = Path.GetFullPath("../../../");
 
         [BeforeFeature]
         public static void BeforeFeatureHook()

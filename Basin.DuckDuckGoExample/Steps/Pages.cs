@@ -3,7 +3,7 @@ using Basin.DuckDuckGoExample.Pages;
 
 namespace Basin.DuckDuckGoExample.Steps
 {
-    public class Pages
+    public static class Pages
     {
         [ThreadStatic] public static HomePage Home;
         [ThreadStatic] public static ResultsPage Results;
@@ -12,6 +12,7 @@ namespace Basin.DuckDuckGoExample.Steps
         {
             Home = new HomePage();
             Results = new ResultsPage();
+            // Results.OtherPages.Add<HomePage>();
         }
     }
 }

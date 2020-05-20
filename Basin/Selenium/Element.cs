@@ -18,13 +18,13 @@ namespace Basin.Selenium
             _element = element;
         }
 
-        public Element(By by, int timeout = 2)
+        public Element(By by, int timeout = 5)
         {
             FoundBy = by;
             _timeout = timeout;
         }
 
-        public Element(By by, By parentBy, int timeout = 2)
+        public Element(By by, By parentBy, int timeout = 5)
         {
             FoundBy = by;
             ParentFoundBy = parentBy;
