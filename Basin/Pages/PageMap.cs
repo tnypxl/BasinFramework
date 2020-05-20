@@ -6,9 +6,6 @@ namespace Basin.Pages
 {
     public abstract class PageMap : IPageMap
     {
-        private readonly IWebDriver _driver = Driver.Current;
-
-
         public Element Locate(By by) => new Element(by);
         
         public Element Locate(By by, int timeout) => new Element(by, timeout);
@@ -17,7 +14,7 @@ namespace Basin.Pages
         
         public Element LocateInside(By by, By parentBy, int timeout) => new Element(by, parentBy, timeout);
 
-        public Elements LocateAll(By by) => new Elements(_driver.FindElements(by));
+        public Elements LocateAll(By by) => new Elements(by);
 
         public Elements LocateAllInside(By by, By parentBy) => new Elements(Locate(parentBy).FindElements(by));
         

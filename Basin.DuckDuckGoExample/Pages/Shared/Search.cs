@@ -6,9 +6,11 @@ namespace Basin.DuckDuckGoExample.Pages.Shared
 {
     public class SearchField : Page<SearchFieldMap>
     {
-        public SearchField()
+        public PageCollection SomePageCollection;
+
+        public SearchField(PageCollection someSection)
         {
-            Map = new SearchFieldMap();
+            SomePageCollection = someSection;
         }
     }
 

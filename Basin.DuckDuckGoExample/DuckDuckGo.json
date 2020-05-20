@@ -7,7 +7,7 @@
     }
   ],
   "Driver": {
-    "Browser": "chrome",
-    "Timeout": 10
+    "Browser": "fast firefox",
+    "Timeout": 5
   }
 }

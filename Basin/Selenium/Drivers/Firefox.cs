@@ -6,7 +6,7 @@ namespace Basin.Selenium.Drivers
 {
     public static class Firefox
     {
-        public static Func<IDriverBuilder> Default
+        public static Func<FirefoxBuilder> Default
         {
             get
             {

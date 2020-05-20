@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using Basin.Selenium;
 using Basin.Selenium.Builders;
 using Basin.Selenium.Drivers;
 using Basin.Selenium.Interfaces;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
@@ -11,9 +13,7 @@ namespace Basin.DuckDuckGoExample.Steps
     [Binding]
     public class StepsBase
     {
-        private static readonly string ConfigPath = AppDomain.CurrentDomain.BaseDirectory.Replace(
-            "/bin/Debug/netcoreapp2.1/",
-            "");
+        private static readonly string ConfigPath = Path.GetFullPath("../../../");
 
         [BeforeFeature]
         public static void BeforeFeatureHook()
@@ -24,6 +24,21 @@ namespace Basin.DuckDuckGoExample.Steps
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
+            DriverFactory.Builders.Add("fast firefox", () =>
+            {
+                static FirefoxBuilder Builder()
+                {
+                    var builder = new FirefoxBuilder();
+                    builder.CreateService();
+                    builder.CreateOptions();
+                    builder.DriverOptions.PageLoadStrategy = PageLoadStrategy.Eager;
+
+                    return builder;
+                }
+
+                return Builder();
+            });
+            
             Driver.Init();
             Pages.Init();
         }

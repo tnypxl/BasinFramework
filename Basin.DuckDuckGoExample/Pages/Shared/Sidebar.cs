@@ -6,10 +6,6 @@ namespace Basin.DuckDuckGoExample.Pages.Shared
 {
     public class Sidebar : Page<SidebarMap>
     {
-        public Sidebar()
-        {
-            Map = new SidebarMap();
-        }
         
         public Sidebar SlideOpen()
         {
