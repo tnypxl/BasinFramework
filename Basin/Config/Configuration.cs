@@ -26,7 +26,8 @@ namespace Basin.Config
         [JsonProperty("Browser")] public string Browser { get; set; }
 
         [JsonProperty("PathToDrivers")] public string PathToDrivers { get; set; }
-        [JsonProperty("GridUrl")]  public Uri GridUrl { get; set; }
+        
+        [JsonProperty("Host")]  public Uri Host { get; set; }
     }
 
     public class LoginConfig : ILoginConfig
