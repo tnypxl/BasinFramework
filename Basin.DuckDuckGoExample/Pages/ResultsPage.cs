@@ -7,7 +7,7 @@ namespace Basin.DuckDuckGoExample.Pages
 {
     public class ResultsPage : Page<ResultsPageMap>
     {
-        public readonly PageCollection OtherPages = new TestPageCollection();
+        public readonly PageCollection OtherPages = new PageCollection();
         
         public bool WordDefinitionDisplayed(string definition)
         {
@@ -25,14 +25,5 @@ namespace Basin.DuckDuckGoExample.Pages
     
     public class TestPageCollection : PageCollection
     {
-        public TestPageCollection()
-        {
-            Add<ResultsPage>();
-            Add<HomePage>();
-        }
-
-        public HomePage HomePage => Get<HomePage>();
-        
-        public ResultsPage ResultsPage => Get<ResultsPage>();
     }
 }

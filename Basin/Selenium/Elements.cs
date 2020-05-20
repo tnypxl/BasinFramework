@@ -15,7 +15,7 @@ namespace Basin.Selenium
 
         public Elements(By by) : base(Driver.Current.FindElements(by))
         {
-            ;
+            _elements = Driver.Current.FindElements(by);
         }
 
         public By FoundBy { get; set; }

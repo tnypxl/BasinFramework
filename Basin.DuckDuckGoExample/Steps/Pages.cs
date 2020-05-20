@@ -12,7 +12,7 @@ namespace Basin.DuckDuckGoExample.Steps
         {
             Home = new HomePage();
             Results = new ResultsPage();
-            // Results.OtherPages.Add<HomePage>();
+            Results.OtherPages.Add<HomePage>();
         }
     }
 }
