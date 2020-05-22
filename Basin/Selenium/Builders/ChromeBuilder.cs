@@ -12,7 +12,6 @@ namespace Basin.Selenium.Builders
     public class ChromeBuilder : IChromeBuilder
     {
         private ChromeOptions _driverOptions;
-        private Proxy _driverProxy;
         private ChromeDriverService _driverService;
 
         /// <inheritdoc />
@@ -28,24 +27,10 @@ namespace Basin.Selenium.Builders
         }
 
         /// <inheritdoc />
-        public void CreateProxy(Proxy proxy)
-        {
-            _driverProxy = proxy;
-        }
-
-
-        /// <inheritdoc />
         public IWebDriver GetDriver => new ChromeDriver(DriverService, DriverOptions, TimeSpan.FromSeconds(BSN.Config.Driver.Timeout));
 
-
         /// <inheritdoc />
-        public IWebDriver GetRemoteDriver(Uri uri)
-        {
-            return new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
-        }
-
-        /// <inheritdoc />
-        public Proxy DriverProxy => _driverProxy ?? throw new NullReferenceException("_driverProxy is null. Call CreateProxy().");
+        public IWebDriver GetRemoteDriver(Uri uri) => new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
 
         /// <inheritdoc />
         public ChromeDriverService DriverService => _driverService ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
@@ -53,10 +38,5 @@ namespace Basin.Selenium.Builders
         /// <inheritdoc />
         public ChromeOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
 
-        /// <inheritdoc cref="CreateProxy(Proxy)" />
-        public void CreateProxy()
-        {
-            CreateProxy(new Proxy());
-        }
     }
 }

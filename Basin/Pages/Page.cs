@@ -1,3 +1,4 @@
+using System;
 using Basin.Pages.Interfaces;
 using Basin.Selenium;
 
@@ -5,22 +6,24 @@ namespace Basin.Pages
 {
     public abstract class Page : PageMap, IPageBase
     {
-        public Wait Wait { get; } = Driver.Wait;
-
+        public Wait Wait => Driver.Wait;
+        
         public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
-    public abstract class Page<TPageMap> : IPageBase
+    public abstract class Page<TPageMap> : IPageBase where TPageMap : new()
     {
-        public Wait Wait { get; } = Driver.Wait;
+        private TPageMap _map;
+        public Wait Wait => Driver.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();
 
-        protected TPageMap Map { get; set; }
+        public TPageMap Map => _map = new TPageMap();
     }
 
     public abstract class PageComponent : Page { }
 
-    public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> { }
+    public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> where TPageComponentMap : new()
+    { }
 
 }

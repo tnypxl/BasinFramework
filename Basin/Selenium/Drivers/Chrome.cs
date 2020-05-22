@@ -5,13 +5,13 @@ namespace Basin.Selenium.Drivers
 {
     public static class Chrome
     {
-        public static Func<FirefoxBuilder> Default
+        public static Func<ChromeBuilder> Default
         {
             get
             {
-                static FirefoxBuilder Builder()
+                static ChromeBuilder Builder()
                 {
-                    var builder = new FirefoxBuilder();
+                    var builder = new ChromeBuilder();
 
                     builder.CreateService();
                     builder.CreateOptions();

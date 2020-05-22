@@ -12,8 +12,6 @@ namespace Basin.Selenium.Interfaces
     /// </summary>
     public interface IDriverBuilder
     {
-        Proxy DriverProxy { get; }
-
         /// <summary>
         ///     Method to returns a newly created <seealso cref="IWebDriver" /> instance
         /// </summary>
@@ -48,12 +46,7 @@ namespace Basin.Selenium.Interfaces
         ///     </example>
         /// </summary>
         void CreateOptions();
-
-        /// <summary>
-        ///     Method to configure driver to use a proxy
-        /// </summary>
-        void CreateProxy(Proxy proxy);
-
+        
         /// <summary>
         ///     Method to return a newly created <seealso cref="RemoteWebDriver" /> instance
         /// </summary>
