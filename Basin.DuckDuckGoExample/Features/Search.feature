@@ -1,6 +1,6 @@
 ﻿Feature: Search
 
-A short summary of the feature
+I must know about cats. I MUST!
 
 Scenario: Searching for cats returns relevant results
 	Given I am on the home page

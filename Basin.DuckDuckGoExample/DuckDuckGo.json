@@ -8,6 +8,6 @@
   ],
   "Driver": {
     "Browser": "fast firefox",
-    "Timeout": 5
+    "Timeout": 10
   }
 }
