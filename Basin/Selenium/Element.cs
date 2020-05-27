@@ -1,18 +1,23 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Runtime.CompilerServices;
+using Basin.Core.Locators;
+using Basin.Core.Locators.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace Basin.Selenium
 {
-    public class Element : IWebElement
+    public sealed class Element : IWebElement
     {
         private readonly IWebElement _element;
         private readonly IWebElement _parentElement;
         private readonly int _timeout;
-
+        private readonly ILocatorBuilder _locator;
+        
         public Element(IWebElement element)
         {
             _element = element;
@@ -30,6 +35,13 @@ namespace Basin.Selenium
             ParentFoundBy = parentBy;
             _parentElement = new Element(parentBy, timeout);
             _timeout = timeout;
+        }
+
+        public Element(string tagName, int timeout = 5)
+        {
+            _locator = new Locator(tagName);
+            _timeout = timeout;
+            FoundBy = _locator.By;
         }
 
         public By FoundBy { get; set; }
@@ -158,5 +170,48 @@ namespace Basin.Selenium
             var actions = new Actions(Driver.Current);
             actions.MoveToElement(Current).Perform();
         }
+        
+        public Element Inside(Element parent)
+        {
+            _locator.Inside(parent._locator);
+            return this;
+        }
+        
+        public Element WithText(string text)
+        {
+            _locator.WithText(text);
+            FoundBy = _locator.By;
+            return this;
+        }
+        
+        public Element WithClass(string className)
+        {
+            _locator.WithClass(className);
+            FoundBy = _locator.By;
+            return this;                                                                          
+        }
+        
+        public Element WithId(string id)
+        {
+            _locator.WithId(id);
+            FoundBy = _locator.By;
+            return this;
+        }
+        
+        public Element WithAttr(string name, string value)
+        {
+            _locator.WithAttr(name, value);
+            FoundBy = _locator.By;
+            return this;                           
+        }
+        
+        public Element WithChild(Element child)
+        {
+            _locator.WithChild(child._locator);
+            FoundBy = _locator.By;
+            return this;                          
+        }
+
+        public Elements All => new Elements(FoundBy);
     }
 }

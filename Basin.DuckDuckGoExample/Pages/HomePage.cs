@@ -22,7 +22,7 @@ namespace Basin.DuckDuckGoExample.Pages
         
         private readonly SearchFieldMap _searchField = new SearchFieldMap();
 
-        public Element SearchField => _searchField.HomePage;
+        public Element SearchField => _searchField.FromHomepage;
 
         public Element SearchButton => Locate(By.Id("search_button_homepage"));
         

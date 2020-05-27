@@ -18,12 +18,9 @@ namespace Basin.DuckDuckGoExample.Pages
 
     public class ResultsPageMap : PageMap
     {
-        public Element WordDefinition(string definition) => LocateInside(
-            By.XPath($".//div[{CssClassXPath("zci__def__definition")} and {TextXPath(definition)}]"), 
-            By.Id("zci-dictionary_definition"));
-    }
-    
-    public class TestPageCollection : PageCollection
-    {
+        public Element WordDefinition(string definition) => Div
+            .WithClass("zci__def__definition")
+            .WithText(definition)
+            .Inside(Div.WithId("zci-dictionary_definition"));
     }
 }

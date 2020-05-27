@@ -25,6 +25,7 @@
     <ItemGroup>
       <Folder Include="Pages\Shared\" />
       <Folder Include="Features\" />
+      <Folder Include="Support" />
     </ItemGroup>
 
 </Project>
