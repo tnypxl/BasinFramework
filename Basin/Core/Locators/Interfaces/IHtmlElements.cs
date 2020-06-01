@@ -1,100 +1,105 @@
 using Basin.Selenium;
 
-namespace Basin.Core.Locators.Interfaces
-{
-    public interface IHtmlElements
-    {
-        Element Article { get; }
-        
-        Element Aside { get; }
-        
-        Element Area { get; }
-        
-        Element Button { get; }
-        
-        Element CheckboxField { get; }
-        
-        Element Div { get; }
-        
-        Element DateField { get; }
-        
-        Element DateTimeField { get; }
-        
-        Element DefinitionList { get; }
-        
-        Element DefinitionTerm { get; }
-        
-        Element Definition { get; }
-        
-        Element FileField { get; }
-        
-        Element Font { get; }
-        
-        Element Footer { get; }
-        
-        Element Form { get; }
-        
-        Element HiddenField { get; }
-        
-        Element HeadingOne { get; }
-        
-        Element HeadingTwo { get; }
-        
-        Element HeadingThree { get; }
-        
-        Element HeadingFour { get; }
-        
-        Element HeadingFive { get; }
-        
-        Element HeadingSix { get; }
-        
-        Element InlineFrame { get; }
-        
-        Element Img { get; }
-        
-        Element Link { get; }
-        
-        Element ListItem { get; }
-        
-        Element Main { get; }
-        
-        Element Nav { get; }
-        
-        Element Paragraph { get; }
-        
-        Element OrderedList { get; }
-        
-        Element UnorderedList { get; }
-        
-        Element Option { get; }
-        
-        Element Radio { get; }
-        
-        Element SelectList { get; }
-        
-        Element Section { get; }
-        
-        Element Span { get; }
-        
-        Element Table { get; }
-        
-        Element TableHeader { get; }
-        
-        Element TableBody { get; }
-        
-        Element TableCell { get; }
-        
-        Element TableColumn { get; }
-        
-        Element TableColumGroup { get; }
-        
-        Element TableRow { get; }
-        
-        Element TableFooter { get; }
-        
-        Element TextAreaField { get; }
-        
-        Element TextField { get; }
+namespace Basin.Core.Locators.Interfaces {
+    public interface IHtmlElements {
+
+        Element Tag (string tagName);
+
+        Element AnyTag { get; }
+
+        Element ArticleTag { get; }
+
+        Element AsideTag { get; }
+
+        Element AreaTag { get; }
+
+        Element ButtonTag { get; }
+
+        Element CheckboxInputTag { get; }
+
+        Element DivTag { get; }
+
+        Element DateInputTag { get; }
+
+        Element DateTimeInputTag { get; }
+
+        Element DefinitionListTag { get; }
+
+        Element DefinitionTermTag { get; }
+
+        Element DefinitionTag { get; }
+
+        Element FileInputTag { get; }
+
+        Element FontTag { get; }
+
+        Element FooterTag { get; }
+
+        Element FormTag { get; }
+
+        Element HiddenInputTag { get; }
+
+        Element HeadingOneTag { get; }
+
+        Element HeadingTwoTag { get; }
+
+        Element HeadingThreeTag { get; }
+
+        Element HeadingFourTag { get; }
+
+        Element HeadingFiveTag { get; }
+
+        Element HeadingSixTag { get; }
+
+        Element InlineFrameTag { get; }
+
+        Element ImgTag { get; }
+
+        Element LinkTag { get; }
+
+        Element ListItemTag { get; }
+
+        Element MainTag { get; }
+
+        Element NavTag { get; }
+
+        Element ParagraphTag { get; }
+
+        Element OrderedListTag { get; }
+
+        Element UnorderedListTag { get; }
+
+        Element OptionTag { get; }
+
+        Element RadioInputTag { get; }
+
+        Element SelectTag { get; }
+
+        Element SelectListTag { get; }
+
+        Element SectionTag { get; }
+
+        Element SpanTag { get; }
+
+        Element TableTag { get; }
+
+        Element TableHeaderTag { get; }
+
+        Element TableBodyTag { get; }
+
+        Element TableCellTag { get; }
+
+        Element TableColumnTag { get; }
+
+        Element TableColumGroupTag { get; }
+
+        Element TableRowTag { get; }
+
+        Element TableFooterTag { get; }
+
+        Element TextAreaTag { get; }
+
+        Element TextInputTag { get; }
     }
-    
+
 }
