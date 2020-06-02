@@ -6,8 +6,8 @@ namespace Basin.DuckDuckGoExample.Pages.Shared
 {
     public class SearchFieldMap : PageMap
     {
-        public Element FromHomepage => TextField.WithId("search_form_input_homepage");
-        
-        public Element FromResults => TextField.WithId("search_form_input");
+        public Element FromHomepage => TextInputTag.WithId("search_form_input_homepage");
+
+        public Element FromResults => TextInputTag.WithId("search_form_input");
     }
 }
