@@ -8,19 +8,19 @@ namespace Basin.DuckDuckGoExample.Pages
     public class ResultsPage : Page<ResultsPageMap>
     {
         public readonly PageCollection OtherPages = new PageCollection();
-        
+
         public bool WordDefinitionDisplayed(string definition)
         {
             return Map.WordDefinition(definition).Displayed;
-            
+
         }
     }
 
     public class ResultsPageMap : PageMap
     {
-        public Element WordDefinition(string definition) => Div
+        public Element WordDefinition(string definition) => DivTag
             .WithClass("zci__def__definition")
             .WithText(definition)
-            .Inside(Div.WithId("zci-dictionary_definition"));
+            .Inside(DivTag.WithId("zci-dictionary_definition"));
     }
 }
