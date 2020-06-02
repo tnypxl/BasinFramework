@@ -1,8 +1,6 @@
-using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using Basin.Core.Locators.Interfaces;
-using Basin.Selenium;
 using OpenQA.Selenium;
 
 namespace Basin.Core.Locators
@@ -72,8 +70,7 @@ namespace Basin.Core.Locators
 
         private static string GetXPathAttribute(string attr, string str)
         {
-
-            var xPathAttr = string.Empty;
+            string xPathAttr = "";
 
             if (StartsWithOperator(str))
             {
@@ -86,7 +83,9 @@ namespace Basin.Core.Locators
                         xPathAttr = $"[starts-with(@{attr}, '{newStr}')]";
                         break;
                     case "$":
-                        xPathAttr = $"[ends-with(@{attr}, '{newStr}')]";
+                        // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
+                        // So we have to make this unholy mess to get the same behavior in XPath 1.0
+                        xPathAttr = $"[substring(@{attr}, string-length(@{attr}) - string-length('{newStr}') +1)]";
                         break;
                     case "*":
                         xPathAttr = $"[contains(@{attr}, '{newStr}')]";
