@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using Basin.Core.Locators.Interfaces;
@@ -39,18 +40,13 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithId(string id)
         {
-            var op = string.Empty;
-
-            if (IdHasOperator(id))
-                op = Regex.Match(id, @"^(\^|\~|\$|\||\*){1}").Value;
-
-            XPath.Append($"[@id{op}='{id}']");
+            XPath.Append(GetXPathAttribute("id", id));
             return this;
         }
 
         public ILocatorBuilder WithAttr(string name, string value)
         {
-            XPath.Append($"[@{name}='{value}']");
+            XPath.Append(GetXPathAttribute(name, value));
             return this;
         }
 
@@ -72,6 +68,36 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        private static bool IdHasOperator(string id) => Regex.IsMatch(id, @"^(\^|\~|\$|\||\*){1}");
+        private static bool StartsWithOperator(string str) => Regex.IsMatch(str, @"^^(\^|\$|\*){1}");
+
+        private static string GetXPathAttribute(string attr, string str)
+        {
+
+            var xPathAttr = string.Empty;
+
+            if (StartsWithOperator(str))
+            {
+                var op = Regex.Match(str, @"^(\^|\$|\*){1}").Value;
+                var newStr = str.Remove(0, 1); // Remove operator
+
+                switch (op)
+                {
+                    case "^":
+                        xPathAttr = $"[starts-with(@{attr}, '{newStr}')]";
+                        break;
+                    case "$":
+                        xPathAttr = $"[ends-with(@{attr}, '{newStr}')]";
+                        break;
+                    case "*":
+                        xPathAttr = $"[contains(@{attr}, '{newStr}')]";
+                        break;
+                    default:
+                        xPathAttr = $"[@{attr}='{newStr}']";
+                        break;
+                }
+            }
+
+            return xPathAttr;
+        }
     }
 }
