@@ -41,7 +41,7 @@ namespace Basin.Selenium
         {
             _locator = new Locator(tagName);
             _timeout = timeout;
-            FoundBy = _locator.By;
+            // FoundBy = _locator.By;
         }
 
         public By FoundBy { get; set; }
@@ -70,6 +70,12 @@ namespace Basin.Selenium
         {
             get
             {
+                if (_locator != null) 
+                {
+                    Console.WriteLine(_locator.By.ToString());
+                    FoundBy = _locator.By;
+                }
+
                 return Wait.Until(driver =>
                 {
                     var element = ParentFoundBy != null ?
@@ -196,28 +202,24 @@ namespace Basin.Selenium
         public Element WithId(string id)
         {
             _locator.WithId(id);
-            FoundBy = _locator.By;
             return this;
         }
 
         public Element WithAttr(string name, string value)
         {
             _locator.WithAttr(name, value);
-            FoundBy = _locator.By;
             return this;
         }
 
         public Element WithChild(Element child)
         {
             _locator.WithChild(child._locator);
-            FoundBy = _locator.By;
             return this;
         }
 
         public Element WithDescendant(Element descendant)
         {
             _locator.WithDescendant(descendant._locator);
-            FoundBy = _locator.By;
             return this;
         }
 
