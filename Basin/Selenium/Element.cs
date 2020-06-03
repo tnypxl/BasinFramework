@@ -187,14 +187,12 @@ namespace Basin.Selenium
         public Element WithText(string text)
         {
             _locator.WithText(text);
-            FoundBy = _locator.By;
             return this;
         }
 
         public Element WithClass(string className)
         {
             _locator.WithClass(className);
-            FoundBy = _locator.By;
             return this;
         }
 

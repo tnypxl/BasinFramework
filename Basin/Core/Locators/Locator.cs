@@ -66,37 +66,35 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        private static bool StartsWithOperator(string str) => Regex.IsMatch(str, @"^^(\^|\$|\*){1}");
+        private static bool StartsWithOperator(string str) => Regex.IsMatch(str, @"^(\^|\$|\*){1}");
 
-        private static string GetXPathAttribute(string attr, string str)
+        private static string GetXPathAttribute(string attrName, string attrValue)
         {
-            string xPathAttr = "";
+            string xPath;
+            string modAttrValue;
+            var op = Regex.Match(attrValue, @"^(\^|\$|\*){1}").Value;
+            
+            modAttrValue = string.IsNullOrEmpty(op) ? attrValue : attrValue.Remove(0, 1); // Remove operator if present
 
-            if (StartsWithOperator(str))
+            switch (op)
             {
-                var op = Regex.Match(str, @"^(\^|\$|\*){1}").Value;
-                var newStr = str.Remove(0, 1); // Remove operator
-
-                switch (op)
-                {
-                    case "^":
-                        xPathAttr = $"[starts-with(@{attr}, '{newStr}')]";
-                        break;
-                    case "$":
-                        // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
-                        // So we have to make this unholy mess to get the same behavior in XPath 1.0
-                        xPathAttr = $"[substring(@{attr}, string-length(@{attr}) - string-length('{newStr}') +1)]";
-                        break;
-                    case "*":
-                        xPathAttr = $"[contains(@{attr}, '{newStr}')]";
-                        break;
-                    default:
-                        xPathAttr = $"[@{attr}='{newStr}']";
-                        break;
-                }
+                case "^":
+                    xPath = $"[starts-with(@{attrName}, '{modAttrValue}')]";
+                    break;
+                case "$":
+                    // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
+                    // So we have to make this unholy mess to get the same behavior in XPath 1.0
+                    xPath = $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]";
+                    break;
+                case "*":
+                    xPath = $"[contains(@{attrName}, '{modAttrValue}')]";
+                    break;
+                default:
+                    xPath = $"[@{attrName}='{modAttrValue}']";
+                    break;
             }
 
-            return xPathAttr;
+            return xPath;
         }
     }
 }
