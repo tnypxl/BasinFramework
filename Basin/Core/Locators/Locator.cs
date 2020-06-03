@@ -62,7 +62,7 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithDescendant(ILocatorBuilder descendant)
         {
-            XPath.Append($"[{descendant.XPath}]");
+            XPath.Append($"[.{descendant.XPath}]");
             return this;
         }
 
