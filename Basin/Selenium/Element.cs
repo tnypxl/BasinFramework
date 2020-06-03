@@ -72,7 +72,6 @@ namespace Basin.Selenium
             {
                 if (_locator != null) 
                 {
-                    Console.WriteLine(_locator.By.ToString());
                     FoundBy = _locator.By;
                 }
 
