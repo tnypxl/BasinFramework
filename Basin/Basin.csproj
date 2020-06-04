@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <PackageId>BasinFramework</PackageId>
-        <PackageVersion>0.0.88</PackageVersion>
+        <PackageVersion></PackageVersion>
         <Title>Basin Framework</Title>
         <Authors>Arik Jones</Authors>
         <LangVersion>8</LangVersion>
@@ -13,7 +13,7 @@
         <PackageTags>selenium, browser, automation, framework</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageReleaseNotes>See the CHANGELOG.</PackageReleaseNotes>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <OutputType>Library</OutputType>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <Description>A .NET browser automation framework based on Selenium WebDriver</Description>
