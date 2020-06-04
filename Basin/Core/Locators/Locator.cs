@@ -70,31 +70,20 @@ namespace Basin.Core.Locators
 
         private static string GetXPathAttribute(string attrName, string attrValue)
         {
-            string xPath;
             string modAttrValue;
             var op = Regex.Match(attrValue, @"^(\^|\$|\*){1}").Value;
-            
+
             modAttrValue = string.IsNullOrEmpty(op) ? attrValue : attrValue.Remove(0, 1); // Remove operator if present
 
-            switch (op)
+            return op
+            switch
             {
-                case "^":
-                    xPath = $"[starts-with(@{attrName}, '{modAttrValue}')]";
-                    break;
-                case "$":
-                    // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
-                    // So we have to make this unholy mess to get the same behavior in XPath 1.0
-                    xPath = $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]";
-                    break;
-                case "*":
-                    xPath = $"[contains(@{attrName}, '{modAttrValue}')]";
-                    break;
-                default:
-                    xPath = $"[@{attrName}='{modAttrValue}']";
-                    break;
-            }
-
-            return xPath;
+                "^" => $"[starts-with(@{attrName}, '{modAttrValue}')]",
+                "$" => $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]", // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
+                // So we have to make this unholy mess to get the same behavior in XPath 1.0
+                "*" => $"[contains(@{attrName}, '{modAttrValue}')]",
+                _ => $"[@{attrName}='{modAttrValue}']",
+            };
         }
     }
 }
