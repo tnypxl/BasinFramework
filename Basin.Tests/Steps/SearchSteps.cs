@@ -6,7 +6,7 @@ using TechTalk.SpecFlow;
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public class SearchSteps : StepsBase
+    public class SearchSteps
     {
         private static string _query;
 

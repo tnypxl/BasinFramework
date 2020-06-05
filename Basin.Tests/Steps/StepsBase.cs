@@ -11,7 +11,7 @@ using TechTalk.SpecFlow;
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public class StepsBase
+    public static class StepsBase
     {
         private static readonly string ConfigPath = Path.GetFullPath("../../../");
 
