@@ -10,4 +10,3 @@ Scenario: Searching for cats returns relevant results
 	"""
 A small domesticated carnivorous mammal (Felis catus), kept as a pet and as catcher of vermin, and existing in a variety of breeds.
 	"""
-	

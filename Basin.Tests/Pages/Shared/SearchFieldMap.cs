@@ -2,7 +2,7 @@ using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.DuckDuckGoExample.Pages.Shared
+namespace Basin.Tests.Pages.Shared
 {
     public class SearchFieldMap : PageMap
     {

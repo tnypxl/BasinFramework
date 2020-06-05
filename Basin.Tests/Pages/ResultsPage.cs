@@ -3,7 +3,7 @@ using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.DuckDuckGoExample.Pages
+namespace Basin.Tests.Pages
 {
     public class ResultsPage : Page<ResultsPageMap>
     {

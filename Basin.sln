@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.DuckDuckGoExample", "Basin.DuckDuckGoExample\Basin.DuckDuckGoExample.csproj", "{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Tests", "Basin.Tests\Basin.Tests.csproj", "{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin", "Basin\Basin.csproj", "{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}"
 EndProject

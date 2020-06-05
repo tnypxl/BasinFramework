@@ -2,11 +2,11 @@ using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.DuckDuckGoExample.Pages.Shared
+namespace Basin.Tests.Pages.Shared
 {
     public class Sidebar : Page<SidebarMap>
     {
-        
+
         public Sidebar SlideOpen()
         {
             Map.HamburgerMenu.Click();
@@ -70,8 +70,6 @@ namespace Basin.DuckDuckGoExample.Pages.Shared
 
     public class FooClass
     {
-        public void Foo()
-        {
-        }
+        public void Foo() { }
     }
 }

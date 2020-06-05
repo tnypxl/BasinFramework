@@ -1,7 +1,7 @@
-﻿using System;
-using Basin.DuckDuckGoExample.Pages;
+using System;
+using Basin.Tests.Pages;
 
-namespace Basin.DuckDuckGoExample.Steps
+namespace Basin.Tests.Steps
 {
     public static class Pages
     {

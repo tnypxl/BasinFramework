@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Basin.DuckDuckGoExample.Features
+namespace Basin.Tests.Features
 {
     using TechTalk.SpecFlow;
     using System;

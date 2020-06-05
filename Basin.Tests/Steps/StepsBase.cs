@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Basin.Selenium;
 using Basin.Selenium.Builders;
@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
-namespace Basin.DuckDuckGoExample.Steps
+namespace Basin.Tests.Steps
 {
     [Binding]
     public class StepsBase
@@ -20,7 +20,7 @@ namespace Basin.DuckDuckGoExample.Steps
         {
             BSN.SetConfig($"{ConfigPath}/DuckDuckGo.json");
         }
-        
+
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
@@ -38,7 +38,7 @@ namespace Basin.DuckDuckGoExample.Steps
 
                 return Builder();
             });
-            
+
             Driver.Init();
             Pages.Init();
         }
