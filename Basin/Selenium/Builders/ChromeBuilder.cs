@@ -37,6 +37,5 @@ namespace Basin.Selenium.Builders
 
         /// <inheritdoc />
         public ChromeOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
-
     }
 }

@@ -22,7 +22,7 @@ namespace Basin.Selenium.Interfaces
         ///     <example>
         ///         <code>
         /// private FirefoxDriverService _driverService;
-        /// 
+        ///
         /// public void CreateService()
         /// {
         ///     _driverService = FirefoxDriverService.CreateDefaultService("path/to/driver/binary")
@@ -37,7 +37,7 @@ namespace Basin.Selenium.Interfaces
         ///     <example>
         ///         <code>
         /// private FirefoxOptions _driverOptions;
-        /// 
+        ///
         /// public void CreateOptions()
         /// {
         ///     _driverOptions = new FirefoxOptions();
@@ -46,7 +46,7 @@ namespace Basin.Selenium.Interfaces
         ///     </example>
         /// </summary>
         void CreateOptions();
-        
+
         /// <summary>
         ///     Method to return a newly created <seealso cref="RemoteWebDriver" /> instance
         /// </summary>

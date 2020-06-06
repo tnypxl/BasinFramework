@@ -13,7 +13,7 @@ namespace Basin.Selenium
         {
             get
             {
-                var javascript = "return [window.screen.availWidth, window.screen.availHeight];";
+                const string javascript = "return [window.screen.availWidth, window.screen.availHeight];";
                 var javaScriptExecutor = (IJavaScriptExecutor) Driver.Current;
 
                 dynamic dimensions = javaScriptExecutor.ExecuteScript(javascript, null);

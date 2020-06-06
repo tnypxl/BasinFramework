@@ -20,6 +20,5 @@ namespace Basin.Core.Locators.Interfaces {
         ILocatorBuilder WithChild (ILocatorBuilder child);
 
         ILocatorBuilder WithDescendant (ILocatorBuilder descendant);
-
     }
 }

@@ -70,7 +70,7 @@ namespace Basin.Selenium
         {
             get
             {
-                if (_locator != null) 
+                if (_locator != null)
                 {
                     FoundBy = _locator.By;
                 }

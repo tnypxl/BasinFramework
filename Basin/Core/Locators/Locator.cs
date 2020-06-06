@@ -43,7 +43,7 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithId(string id)
         {
-            XPath.Append(GetXPathAttribute("id", id));
+            WithAttr("id", id);
             return this;
         }
 

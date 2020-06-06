@@ -6,7 +6,6 @@ namespace Basin.Tests.Pages.Shared
 {
     public class Sidebar : Page<SidebarMap>
     {
-
         public Sidebar SlideOpen()
         {
             Map.HamburgerMenu.Click();

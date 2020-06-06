@@ -8,7 +8,7 @@ namespace Basin.Pages.Interfaces
         /// Property for implementing an instance of the <see cref="Wait"/> class
         /// </summary>
         Wait Wait { get; }
-        
+
         /// <summary>
         /// Instantiates a page object class for use with other fluent page object classes
         /// </summary>

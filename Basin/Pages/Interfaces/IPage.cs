@@ -6,7 +6,7 @@ namespace Basin.Pages.Interfaces
     public interface IPage
     {
     }
-    
+
     public interface IPage<in TPageMap>
     {
         /// <summary>

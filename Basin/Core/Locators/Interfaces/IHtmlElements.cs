@@ -1,9 +1,10 @@
 using Basin.Selenium;
 
-namespace Basin.Core.Locators.Interfaces {
-    public interface IHtmlElements {
-
-        Element Tag (string tagName);
+namespace Basin.Core.Locators.Interfaces
+{
+    public interface IHtmlElements
+    {
+        Element Tag(string tagName);
 
         Element AnyTag { get; }
 
@@ -101,5 +102,4 @@ namespace Basin.Core.Locators.Interfaces {
 
         Element TextInputTag { get; }
     }
-
 }

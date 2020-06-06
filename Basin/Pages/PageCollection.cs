@@ -18,9 +18,9 @@ namespace Basin.Pages
         public void Add<TPage>() where TPage : new()
         {
             var page = new TPage();
-            
+
             if (_pages.ContainsKey(typeof(TPage))) return;
-           
+
             _pages.Add(typeof(TPage), page);
         }
 

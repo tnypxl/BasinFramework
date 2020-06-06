@@ -12,7 +12,6 @@ namespace Basin.Tests.Pages
         public bool WordDefinitionDisplayed(string definition)
         {
             return Map.WordDefinition(definition).Displayed;
-
         }
     }
 
