@@ -53,10 +53,10 @@ namespace Basin.Core.Locators
             // XPath axis is descendant (e.g, "//") by default
             // We need to remove one axis to make it a child
             // "//div" becomes "/div"
-            var childXPath = child.XPath;
-            childXPath.Remove(0, 1);
+            var newChildXPath = child.XPath;
+            newChildXPath.Remove(0, 1);
 
-            XPath.Append($"[.{childXPath}]");
+            XPath.Append($"[.{newChildXPath}]");
             return this;
         }
 
@@ -65,8 +65,6 @@ namespace Basin.Core.Locators
             XPath.Append($"[.{descendant.XPath}]");
             return this;
         }
-
-        private static bool StartsWithOperator(string str) => Regex.IsMatch(str, @"^(\^|\$|\*){1}");
 
         private static string GetXPathAttribute(string attrName, string attrValue)
         {
