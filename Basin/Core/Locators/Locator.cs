@@ -26,13 +26,18 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithText(string text)
         {
-            XPath.Append($"[contains(.,'{text}')]");
+            XPath.Append("[contains(.,'")
+                 .Append(text)
+                 .Append("')]");
+
             return this;
         }
 
         public ILocatorBuilder WithClass(string className)
         {
-            XPath.Append($"[contains(concat(' ',normalize-space(@class),' '),' {className} ')]");
+            XPath.Append("[contains(concat(' ',normalize-space(@class),' '),' ")
+                 .Append(className)
+                 .Append(" ')]");
             return this;
         }
 
@@ -56,13 +61,19 @@ namespace Basin.Core.Locators
             var newChildXPath = child.XPath;
             newChildXPath.Remove(0, 1);
 
-            XPath.Append($"[.{newChildXPath}]");
+            XPath.Append("[.")
+                 .Append(newChildXPath)
+                 .Append(']');
+
             return this;
         }
 
         public ILocatorBuilder WithDescendant(ILocatorBuilder descendant)
         {
-            XPath.Append($"[.{descendant.XPath}]");
+            XPath.Append("[.")
+                 .Append(descendant.XPath)
+                 .Append(']');
+
             return this;
         }
 
