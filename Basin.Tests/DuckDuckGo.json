@@ -1,13 +1,12 @@
 {
   "DefaultSite": "DuckDuckGo",
-  "Sites": [
-    {
-      "Name": "DuckDuckGo",
-      "Url": "https://duckduckgo.com"
-    }
-  ],
+  "Sites": [{
+    "Name": "DuckDuckGo",
+    "Url": "https://duckduckgo.com"
+  }],
   "Driver": {
     "Browser": "fast firefox",
-    "Timeout": 10
+    "Timeout": 10,
+    "Host": "http://localhost:4444/wd/hub"
   }
 }

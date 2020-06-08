@@ -1,11 +1,7 @@
-using System;
 using System.IO;
 using Basin.Selenium;
 using Basin.Selenium.Builders;
-using Basin.Selenium.Drivers;
-using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 
 namespace Basin.Tests.Steps
@@ -31,6 +27,7 @@ namespace Basin.Tests.Steps
                     var builder = new FirefoxBuilder();
                     builder.CreateService();
                     builder.CreateOptions();
+                    builder.DriverOptions.BrowserVersion = "76.0";
                     builder.DriverOptions.PageLoadStrategy = PageLoadStrategy.Eager;
 
                     return builder;

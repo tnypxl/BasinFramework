@@ -2,24 +2,27 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.5.0
-      with:
-        dotnet-version: 3.1.300
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      - uses: actions/checkout@v2
+      - name: Start Selenoid
+        run: docker-compose up -d
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.300
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: dotnet test --no-restore
