@@ -1,6 +1,6 @@
-using Microsoft.Edge.SeleniumTools;
 using System;
 using Basin.Selenium.Interfaces;
+using Microsoft.Edge.SeleniumTools;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
@@ -24,15 +24,27 @@ namespace Basin.Selenium.Builders
         }
 
         /// <inheritdoc />
-        public IWebDriver GetDriver => new EdgeDriver(DriverService, DriverOptions, TimeSpan.FromSeconds(BSN.Config.Driver.Timeout));
+        public IWebDriver GetDriver
+        {
+            get
+            {
+                return _driverService == null
+                    ? new EdgeDriver(DriverOptions)
+                    : new EdgeDriver(DriverService, DriverOptions);
+            }
+        }
 
         /// <inheritdoc />
         public IWebDriver GetRemoteDriver(Uri uri) => new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
 
         /// <inheritdoc />
-        public EdgeDriverService DriverService => _driverService ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
+        public EdgeDriverService DriverService => _driverService
+            ??
+            throw new NullReferenceException("_driverService is null. Call CreateService().");
 
         /// <inheritdoc />
-        public EdgeOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
+        public EdgeOptions DriverOptions => _driverOptions
+            ??
+            throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
     }
 }

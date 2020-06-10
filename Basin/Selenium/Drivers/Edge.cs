@@ -16,10 +16,11 @@ namespace Basin.Selenium.Drivers
                     builder.CreateService();
                     builder.CreateOptions();
 
-                    if (Environment.OSVersion.Platform != PlatformID.Win32NT) return builder;
-                    
+                    if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+                        return builder;
+
                     builder.DriverService.HideCommandPromptWindow = true;
-                    
+
                     return builder;
                 }
 
