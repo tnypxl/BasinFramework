@@ -1,9 +1,9 @@
 using System;
+using Microsoft.Edge.SeleniumTools;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Remote;
 
 namespace Basin.Selenium.Interfaces

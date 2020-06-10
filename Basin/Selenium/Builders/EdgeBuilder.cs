@@ -1,7 +1,7 @@
+using Microsoft.Edge.SeleniumTools;
 using System;
 using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Remote;
 
 namespace Basin.Selenium.Builders
