@@ -11,7 +11,8 @@ namespace Basin.Selenium
         {
             {"chrome", Chrome.Default},
             {"firefox", Firefox.Default},
-            {"internet explorer", InternetExplorer.Default}
+            {"internet explorer", InternetExplorer.Default},
+            {"edge", Edge.Default},
         };
     }
 }

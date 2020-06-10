@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Remote;
 
 namespace Basin.Selenium.Interfaces
@@ -57,14 +58,12 @@ namespace Basin.Selenium.Interfaces
     public interface IChromeBuilder : IDriverBuilder
     {
         /// <summary>
-        ///     Gets ChromeDriverService object.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateOptions()" /> first.
+        ///     Gets ChromeDriverService object.  <seealso cref="IDriverBuilder.CreateOptions()" />
         /// </summary>
         ChromeDriverService DriverService { get; }
 
         /// <summary>
-        ///     Gets <see cref="ChromeOptions" />.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateService()" /> first.
+        ///     Gets <see cref="ChromeOptions" />. <seealso cref="IDriverBuilder.CreateService()" />
         /// </summary>
         ChromeOptions DriverOptions { get; }
     }
@@ -72,14 +71,12 @@ namespace Basin.Selenium.Interfaces
     public interface IFirefoxBuilder : IDriverBuilder
     {
         /// <summary>
-        ///     Gets <see cref="FirefoxDriverService" /> object.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateService()" /> first.
+        ///     Gets <see cref="FirefoxDriverService" /> object. <seealso cref="IDriverBuilder.CreateService()" />
         /// </summary>
         FirefoxDriverService DriverService { get; }
 
         /// <summary>
-        ///     Gets <see cref="FirefoxOptions" />.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateOptions()" /> first.
+        ///     Gets <see cref="FirefoxOptions" />. <seealso cref="IDriverBuilder.CreateOptions()" />
         /// </summary>
         FirefoxOptions DriverOptions { get; }
     }
@@ -87,15 +84,27 @@ namespace Basin.Selenium.Interfaces
     public interface IInternetExplorerBuilder : IDriverBuilder
     {
         /// <summary>
-        ///     Gets <see cref="InternetExplorerDriverService" /> object.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateService()" /> first.
+        ///     Gets <see cref="InternetExplorerDriverService" /> object. <seealso cref="IDriverBuilder.CreateService()" />
         /// </summary>
         InternetExplorerDriverService DriverService { get; }
 
         /// <summary>
-        ///     Gets <see cref="InternetExplorerOptions" />.
-        ///     Requires calling <seealso cref="IDriverBuilder.CreateOptions()" /> first.
+        ///     Gets <see cref="InternetExplorerOptions" />. <seealso cref="IDriverBuilder.CreateOptions()" /> first.
         /// </summary>
         InternetExplorerOptions DriverOptions { get; }
+    }
+
+    public interface IEdgeBuilder : IDriverBuilder
+    {
+        /// <summary>
+        ///     Gets <see cref="EdgeDriverService" /> object. <seealso cref="CreateService()" />
+        ///     
+        /// </summary>
+         EdgeDriverService DriverService { get; }
+
+        /// <summary>
+        ///     Gets <see cref="EdgeOptions" /> object. <seealso cref="IDriverBuilder.CreateOptions()" />
+        /// </summary>
+        EdgeOptions DriverOptions { get; }
     }
 }
