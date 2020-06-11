@@ -13,13 +13,8 @@ namespace Basin.Selenium.Drivers
                 {
                     var builder = new EdgeBuilder();
 
-                    builder.CreateService();
                     builder.CreateOptions();
-
-                    if (Environment.OSVersion.Platform != PlatformID.Win32NT)
-                        return builder;
-
-                    builder.DriverService.HideCommandPromptWindow = true;
+                    builder.DriverOptions.UseChromium = true;
 
                     return builder;
                 }
