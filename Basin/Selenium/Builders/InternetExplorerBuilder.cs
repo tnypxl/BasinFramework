@@ -1,4 +1,5 @@
 using System;
+using Basin.Config.Interfaces;
 using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
@@ -12,12 +13,25 @@ namespace Basin.Selenium.Builders
     public class InternetExplorerBuilder : IInternetExplorerBuilder
     {
         private InternetExplorerOptions _driverOptions;
+
         private InternetExplorerDriverService _driverService;
+
+        private readonly IDriverConfig _config;
+
+        public InternetExplorerBuilder(IDriverConfig config)
+        {
+            _config = config;
+
+            CreateService();
+            CreateOptions();
+            SetPlatformName();
+            SetBrowserVersion();
+        }
 
         /// <inheritdoc />
         public void CreateService()
         {
-            _driverService = InternetExplorerDriverService.CreateDefaultService(BSN.DriverPath);
+            _driverService = InternetExplorerDriverService.CreateDefaultService(_config.PathToDriver);
         }
 
         /// <inheritdoc />
@@ -26,16 +40,38 @@ namespace Basin.Selenium.Builders
             _driverOptions = new InternetExplorerOptions();
         }
 
-        /// <inheritdoc />
-        public IWebDriver GetDriver => new InternetExplorerDriver(DriverService, DriverOptions, TimeSpan.FromSeconds(BSN.Config.Driver.Timeout));
+        public void SetPlatformName()
+        {
+            if (string.IsNullOrEmpty(_config.PlatformName)) return;
+
+            _driverOptions.PlatformName = _config.PlatformName;
+        }
+
+        public void SetBrowserVersion()
+        {
+            if (string.IsNullOrEmpty(_config.BrowserVersion)) return;
+
+            _driverOptions.BrowserVersion = _config.BrowserName;
+        }
+
+        public void SetHost()
+        {
+            if (_config.Host == null) return;
+
+            _driverService.Host = _config.Host.ToString();
+        }
 
         /// <inheritdoc />
-        public IWebDriver GetRemoteDriver(Uri uri) => new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
+        public IWebDriver GetDriver => _config.Host == null
+            ? new InternetExplorerDriver(DriverService, DriverOptions)
+            : new RemoteWebDriver(_config.Host, DriverOptions);
 
         /// <inheritdoc />
-        public InternetExplorerDriverService DriverService => _driverService ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
+        public InternetExplorerDriverService DriverService => _driverService
+            ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
 
         /// <inheritdoc />
-        public InternetExplorerOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
+        public InternetExplorerOptions DriverOptions => _driverOptions
+            ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
     }
 }

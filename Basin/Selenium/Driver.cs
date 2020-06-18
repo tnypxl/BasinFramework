@@ -12,24 +12,20 @@ namespace Basin.Selenium
 
         [ThreadStatic] public static Window Window;
 
-        public static IWebDriver Current => _driver ?? throw new NullReferenceException("_driver is null.");
+        public static IWebDriver Current => _driver ?? throw new NullReferenceException("_driver is null. Call Init().");
 
         public static string Title => Current.Title;
 
         public static void Init()
         {
-            _driver = BSN.Config.Driver.Host == null
-                ? DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetDriver
-                : DriverFactory.Builders[BSN.Config.Driver.Browser].Invoke().GetRemoteDriver(BSN.Config.Driver.Host);
+            _driver = DriverFactory.GetBuilder.Invoke().GetDriver;
 
             FinishSetup();
         }
 
         public static void Init(Func<IDriverBuilder> builder)
         {
-            _driver = BSN.Config.Driver.Host == null
-                ? builder.Invoke().GetDriver
-                : builder.Invoke().GetRemoteDriver(BSN.Config.Driver.Host);
+            _driver = builder.Invoke().GetDriver;
 
             FinishSetup();
         }
@@ -44,7 +40,7 @@ namespace Basin.Selenium
             Current.Navigate().GoToUrl(url);
         }
 
-        //TODO: Implement screenshots
+        //TODO: #24 Implement screenshots
 
         public static void Quit()
         {

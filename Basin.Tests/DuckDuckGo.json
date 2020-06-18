@@ -1,12 +1,29 @@
 {
-  "DefaultSite": "DuckDuckGo",
-  "Sites": [{
-    "Name": "DuckDuckGo",
-    "Url": "https://duckduckgo.com"
-  }],
-  "Driver": {
-    "Browser": "fast firefox",
-    "Timeout": 10,
-    "Host": "http://localhost:4444/wd/hub"
-  }
+  "Environment": {
+    "Site": "The Internet",
+    "Driver": "Firefox on Selenoid",
+    "Login": "tomsmith"
+  },
+  "Sites": [
+    {
+      "Name": "The Internet",
+      "Url": "http://the-internet.herokuapp.com"
+    }
+  ],
+  "Drivers": [
+    {
+      "Name": "Firefox on Selenoid",
+      "BrowserName": "firefox",
+      "Version": "76.0",
+      "Timeout": 45,
+      "Host": "http://localhost:4444/wd/hub",
+    }
+  ],
+  "Logins": [
+    {
+      "Role": "Test User",
+      "Username": "tomsmith",
+      "Password": "SuperSecretPassword!"
+    }
+  ]
 }
