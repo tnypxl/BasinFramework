@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Config.Net;
 
 namespace Basin.Config.Interfaces

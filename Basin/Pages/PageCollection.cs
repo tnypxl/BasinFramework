@@ -26,7 +26,7 @@ namespace Basin.Pages
 
         public TPage Get<TPage>()
         {
-            return (TPage) _pages[typeof(TPage)];
+            return (TPage)_pages[typeof(TPage)];
         }
 
         public Dictionary<Type, object> Pages => _pages;

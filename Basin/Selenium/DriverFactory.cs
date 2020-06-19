@@ -12,7 +12,7 @@ namespace Basin.Selenium
                 { "chrome", () => new ChromeBuilder(BSN.Config.Driver) },
                 { "firefox", () => new FirefoxBuilder(BSN.Config.Driver) },
                 { "edge", () => new EdgeBuilder(BSN.Config.Driver) },
-                { "internet explorer", () => new InternetExplorerBuilder(BSN.Config.Driver) }
+                { "ie", () => new InternetExplorerBuilder(BSN.Config.Driver) }
             };
 
         public static Func<IDriverBuilder> GetBuilder => _builders[BSN.Config.Driver.BrowserName];

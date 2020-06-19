@@ -16,7 +16,7 @@
       "BrowserName": "firefox",
       "Version": "76.0",
       "Timeout": 45,
-      "Host": "http://localhost:4444/wd/hub",
+      "Host": "http://localhost:4444/wd/hub"
     }
   ],
   "Logins": [
@@ -25,5 +25,8 @@
       "Username": "tomsmith",
       "Password": "SuperSecretPassword!"
     }
-  ]
+  ],
+  "Drivers[0]": {
+    "PathToDriver": "C:\\Users\\ZFW2TXW\\RiderProjects\\BasinFrameworkDotNetCore\\Basin.Tests\\bin\\Debug\\netcoreapp3.1\\"
+  }
 }

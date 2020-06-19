@@ -5,11 +5,7 @@ namespace Basin.Config.Interfaces
 {
     public interface IConfig
     {
-        IDriverConfig Driver { get; set; }
 
-        ISiteConfig Site { get; set; }
-
-        ILoginConfig Login { get; set; }
 
         [Option(Alias = "Environment")]
         IEnvironmentConfig Environment { get; }
@@ -22,5 +18,14 @@ namespace Basin.Config.Interfaces
 
         [Option(Alias = "Logins")]
         IEnumerable<ILoginConfig> Logins { get; }
+    }
+
+    public interface ICurrentConfig
+    {
+        IDriverConfig Driver { get; set; }
+
+        ISiteConfig Site { get; set; }
+
+        ILoginConfig Login { get; set; }
     }
 }
