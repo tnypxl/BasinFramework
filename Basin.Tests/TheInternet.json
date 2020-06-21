@@ -1,7 +1,7 @@
 {
   "Environment": {
     "Site": "The Internet",
-    "Driver": "Remote Firefox"
+    "Driver": "Local Chrome"
   },
   "Sites": [
     {
@@ -13,10 +13,7 @@
     {
       "Name": "Local Chrome",
       "BrowserName": "chrome",
-      "Arguments": [
-        "headless",
-        "disable-gpu"
-      ]
+      "Timeout": 5
     },
     {
       "Name": "Remote Firefox",

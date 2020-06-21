@@ -1,7 +1,5 @@
-using Basin.Tests.Pages.Shared;
 using Basin.Pages;
 using Basin.Selenium;
-using OpenQA.Selenium;
 
 namespace Basin.Tests.Pages
 {
