@@ -12,7 +12,7 @@ namespace Basin.Config.Interfaces
         [Option(DefaultValue = "chrome")]
         string BrowserName { get; set; }
 
-        [Option(DefaultValue = 30)]
+        [Option(DefaultValue = 10)]
         int Timeout { get; set; }
 
         string PlatformName { get; set; }
