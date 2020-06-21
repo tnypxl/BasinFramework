@@ -10,13 +10,7 @@ namespace Basin.Selenium
         {
         }
 
-        public Elements(By by) : base(Driver.Current.FindElements(by))
-        {
-        }
-
         public By FoundBy { get; set; }
-
-        public By ParentFoundBy { get; set; }
 
         public bool IsEmpty => Count == 0;
     }
