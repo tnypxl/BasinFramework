@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using Basin.Core.Locators;
 using Basin.Core.Locators.Interfaces;
 using OpenQA.Selenium;
@@ -220,6 +219,6 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Elements All => new Elements(FoundBy);
+        public Elements All => new Elements(Driver.Current?.FindElements(_locator.By));
     }
 }

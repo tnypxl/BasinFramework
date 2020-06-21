@@ -22,11 +22,4 @@
     <ItemGroup>
       <ProjectReference Include="..\Basin\Basin.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Pages\Shared\" />
-      <Folder Include="Features\" />
-      <Folder Include="Support" />
-    </ItemGroup>
-
 </Project>

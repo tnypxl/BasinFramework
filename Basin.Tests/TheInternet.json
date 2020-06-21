@@ -13,10 +13,7 @@
     {
       "Name": "Local Chrome",
       "BrowserName": "chrome",
-      "Arguments": [
-        "headless",
-        "disable-gpu"
-      ]
+      "Timeout": 5
     },
     {
       "Name": "Remote Firefox",
