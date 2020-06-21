@@ -6,22 +6,8 @@ using OpenQA.Selenium;
 
 namespace Basin.Pages
 {
-    public abstract class PageMap : IPageMap, IHtmlElements
+    public abstract class PageMap : IHtmlElements
     {
-        public Element Locate(By by) => new Element(by);
-
-        public Element Locate(By by, int timeout) => new Element(by, timeout);
-
-        public Element LocateInside(By by, By parentBy) => new Element(by, parentBy);
-
-        public Element LocateInside(By by, By parentBy, int timeout) => new Element(by, parentBy, timeout);
-
-        public Elements LocateAll(By by) => new Elements(by);
-
-        public Elements LocateAllInside(By by, By parentBy) => new Elements(Locate(parentBy).FindElements(by));
-
-        public Elements LocateAllInside(By by, By parentBy, int timeout) => new Elements(Locate(parentBy, timeout).FindElements(by));
-
         public Element Tag(string tagName) => new Element(tagName);
 
         public Element AnyTag => new Element("*");
