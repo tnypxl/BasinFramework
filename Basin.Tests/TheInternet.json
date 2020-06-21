@@ -1,7 +1,7 @@
 {
   "Environment": {
     "Site": "The Internet",
-    "Driver": "Local Chrome"
+    "Driver": "Remote Firefox"
   },
   "Sites": [
     {
