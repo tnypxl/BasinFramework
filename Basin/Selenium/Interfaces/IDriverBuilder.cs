@@ -14,45 +14,28 @@ namespace Basin.Selenium.Interfaces
     public interface IDriverBuilder
     {
         /// <summary>
-        ///     Method to returns a newly created <seealso cref="IWebDriver" /> instance
+        ///     Method to returns a newly created WebDriver instance. <seealso cref="IWebDriver" />
         /// </summary>
         IWebDriver GetDriver { get; }
 
         /// <summary>
         ///     Method to create driver service.
-        ///     <example>
-        ///         <code>
-        /// private FirefoxDriverService _driverService;
-        ///
-        /// public void CreateService()
-        /// {
-        ///     _driverService = FirefoxDriverService.CreateDefaultService("path/to/driver/binary")
-        /// }
-        /// </code>
-        ///     </example>
         /// </summary>
         void CreateService();
 
         /// <summary>
         ///     Method to create driver options
-        ///     <example>
-        ///         <code>
-        /// private FirefoxOptions _driverOptions;
-        ///
-        /// public void CreateOptions()
-        /// {
-        ///     _driverOptions = new FirefoxOptions();
-        /// }
-        /// </code>
-        ///     </example>
         /// </summary>
         void CreateOptions();
 
+        void SetPlatformName();
+
+        void SetBrowserVersion();
+
         /// <summary>
-        ///     Method to return a newly created <seealso cref="RemoteWebDriver" /> instance
+        ///     Method to return a newly created RemoteWebDriver instance. <seealso cref="RemoteWebDriver" />
         /// </summary>
         /// <param name="uri"></param>
-        IWebDriver GetRemoteDriver(Uri uri);
     }
 
     public interface IChromeBuilder : IDriverBuilder
@@ -66,6 +49,10 @@ namespace Basin.Selenium.Interfaces
         ///     Gets <see cref="ChromeOptions" />. <seealso cref="IDriverBuilder.CreateService()" />
         /// </summary>
         ChromeOptions DriverOptions { get; }
+
+        void AddArguments();
+
+        void EnableHeadlessMode();
     }
 
     public interface IFirefoxBuilder : IDriverBuilder
@@ -79,6 +66,10 @@ namespace Basin.Selenium.Interfaces
         ///     Gets <see cref="FirefoxOptions" />. <seealso cref="IDriverBuilder.CreateOptions()" />
         /// </summary>
         FirefoxOptions DriverOptions { get; }
+
+        void AddArguments();
+
+        void EnableHeadlessMode();
     }
 
     public interface IInternetExplorerBuilder : IDriverBuilder
@@ -98,13 +89,14 @@ namespace Basin.Selenium.Interfaces
     {
         /// <summary>
         ///     Gets <see cref="EdgeDriverService" /> object. <seealso cref="CreateService()" />
-        ///     
         /// </summary>
-         EdgeDriverService DriverService { get; }
+        EdgeDriverService DriverService { get; }
 
         /// <summary>
         ///     Gets <see cref="EdgeOptions" /> object. <seealso cref="IDriverBuilder.CreateOptions()" />
         /// </summary>
         EdgeOptions DriverOptions { get; }
+
+        void AddArguments();
     }
 }

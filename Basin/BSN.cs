@@ -1,23 +1,18 @@
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.Config;
+using Basin.Config.Interfaces;
+using Config.Net;
 
 namespace Basin
 {
     public static class BSN
     {
-        private static string _driverPath;
+        public static CurrentConfig Config;
 
-        private static Configuration _config;
+        public static ConfigurationBuilder<IConfig> GetConfig => new ConfigurationBuilder<IConfig>();
 
-        public static string DriverPath => _driverPath ?? AppDomain.CurrentDomain.BaseDirectory;
-
-        public static Configuration Config => _config ?? throw new NullReferenceException("Config is null. Call SetConfig() first.");
-
-        public static void SetConfig(string configPath)
-        {
-            _config = Configuration.FromJson(configPath);
-            _driverPath = Config.Driver.PathToDrivers;
-        }
+        public static void SetConfig(string configPath) => Config = new CurrentConfig(GetConfig.UseJsonFile(configPath).Build());
     }
 }

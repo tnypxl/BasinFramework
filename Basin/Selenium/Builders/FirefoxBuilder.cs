@@ -1,4 +1,6 @@
+using System.Linq;
 using System;
+using Basin.Config.Interfaces;
 using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -7,17 +9,32 @@ using OpenQA.Selenium.Remote;
 namespace Basin.Selenium.Builders
 {
     /// <summary>
-    ///     Concrete Driver Builder for Firefox
+    ///     Concrete Builder for Firefox
     /// </summary>
     public class FirefoxBuilder : IFirefoxBuilder
     {
         private FirefoxOptions _driverOptions;
+
         private FirefoxDriverService _driverService;
+
+        private readonly IDriverConfig _config;
+
+        public FirefoxBuilder(IDriverConfig config)
+        {
+            _config = config;
+
+            CreateService();
+            CreateOptions();
+            SetHeadless();
+            SetPlatformName();
+            SetBrowserVersion();
+            AddArguments();
+        }
 
         /// <inheritdoc />
         public void CreateService()
         {
-            _driverService = FirefoxDriverService.CreateDefaultService(BSN.DriverPath);
+            _driverService = FirefoxDriverService.CreateDefaultService();
         }
 
         /// <inheritdoc />
@@ -26,16 +43,59 @@ namespace Basin.Selenium.Builders
             _driverOptions = new FirefoxOptions();
         }
 
-        /// <inheritdoc />
-        public IWebDriver GetDriver => new FirefoxDriver(DriverService, DriverOptions, TimeSpan.FromSeconds(BSN.Config.Driver.Timeout));
+        public void SetHeadless()
+        {
+
+            _driverOptions.AddArgument("--headless");
+        }
+
+        public void SetPlatformName()
+        {
+            if (string.IsNullOrEmpty(_config.PlatformName)) return;
+
+            _driverOptions.PlatformName = _config.PlatformName;
+        }
+
+        public void SetBrowserVersion()
+        {
+            if (string.IsNullOrEmpty(_config.BrowserVersion)) return;
+
+            _driverOptions.BrowserVersion = _config.BrowserVersion;
+        }
+
+        public void AddArguments()
+        {
+            if (_config.Arguments == null) return;
+
+            _driverOptions.AddArguments(_config.Arguments);
+        }
+
+        public void EnableHeadlessMode()
+        {
+            if (!_config.Headless) return;
+
+            _driverOptions.AddArgument("--headless");
+            _driverOptions.AddArgument("--disable-gpu");
+        }
+
+        public void SetHost()
+        {
+            if (_config.Host == null) return;
+
+            _driverService.Host = _config.Host.ToString();
+        }
 
         /// <inheritdoc />
-        public IWebDriver GetRemoteDriver(Uri uri) => new RemoteWebDriver(uri, DriverOptions.ToCapabilities());
+        public IWebDriver GetDriver => _config.Host == null
+            ? new FirefoxDriver(DriverService, DriverOptions)
+            : new RemoteWebDriver(_config.Host, DriverOptions.ToCapabilities());
 
         /// <inheritdoc />
-        public FirefoxDriverService DriverService => _driverService ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
+        public FirefoxDriverService DriverService => _driverService
+            ?? throw new NullReferenceException("_driverService is null. Call CreateService().");
 
         /// <inheritdoc />
-        public FirefoxOptions DriverOptions => _driverOptions ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
+        public FirefoxOptions DriverOptions => _driverOptions
+            ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
     }
 }

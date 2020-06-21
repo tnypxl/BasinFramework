@@ -21,6 +21,5 @@ services:
         "-timeout",
         "5m0s",
       ]
-    
     ports:
       - "4444:4444"

@@ -1,25 +1,26 @@
-  {
-    "firefox": {
-      "versions": {
-        "76.0": {
-          "image": "selenoid/firefox:76.0",
-          "port": "4444",
-          "path": "/wd/hub",
-          "tmpfs": {
-            "/tmp": "size=512m"
-          }
+{
+  "firefox": {
+    "versions": {
+      "latest": {
+        "image": "selenoid/firefox:latest",
+        "port": "4444",
+        "path": "/wd/hub",
+        "tmpfs": {
+          "/tmp": "size=512m"
         }
       }
-    },
-    "chrome": {
-      "versions": {
-        "83.0": {
-          "image": "selenoid/chrome:83.0",
-          "port": "4444",
-          "tmpfs": {
-            "/tmp": "size=512m"
-          }
+    }
+  },
+  "chrome": {
+    "versions": {
+      "latest": {
+        "image": "selenoid/chrome",
+        "port": "4444",
+        "path": "/wd/hub",
+        "tmpfs": {
+          "/tmp": "size=512m"
         }
       }
     }
   }
+}

@@ -1,0 +1,34 @@
+{
+  "Environment": {
+    "Site": "The Internet",
+    "Driver": "Remote Firefox"
+  },
+  "Sites": [
+    {
+      "Name": "The Internet",
+      "Url": "http://the-internet.herokuapp.com"
+    }
+  ],
+  "Drivers": [
+    {
+      "Name": "Local Chrome",
+      "BrowserName": "chrome",
+      "Arguments": [
+        "headless",
+        "disable-gpu"
+      ]
+    },
+    {
+      "Name": "Remote Firefox",
+      "BrowserName": "firefox",
+      "Host": "http://localhost:4444/wd/hub"
+    }
+  ],
+  "Logins": [
+    {
+      "Role": "Test User",
+      "Username": "tomsmith",
+      "Password": "SuperSecretPassword!"
+    }
+  ]
+}

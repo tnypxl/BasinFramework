@@ -14,28 +14,12 @@ namespace Basin.Tests.Steps
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            BSN.SetConfig($"{ConfigPath}/DuckDuckGo.json");
+            BSN.SetConfig($"{ConfigPath}/TheInternet.json");
         }
 
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
-            DriverFactory.Builders.Add("fast firefox", () =>
-            {
-                static FirefoxBuilder Builder()
-                {
-                    var builder = new FirefoxBuilder();
-                    builder.CreateService();
-                    builder.CreateOptions();
-                    builder.DriverOptions.BrowserVersion = "76.0";
-                    builder.DriverOptions.PageLoadStrategy = PageLoadStrategy.Eager;
-
-                    return builder;
-                }
-
-                return Builder();
-            });
-
             Driver.Init();
             Pages.Init();
         }
