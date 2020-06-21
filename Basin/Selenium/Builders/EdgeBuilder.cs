@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Basin.Config.Interfaces;
 using Basin.Selenium.Interfaces;
 using Microsoft.Edge.SeleniumTools;
@@ -32,7 +33,7 @@ namespace Basin.Selenium.Builders
         /// <inheritdoc />
         public void CreateService()
         {
-            _driverService = EdgeDriverService.CreateDefaultService(_config.PathToDriver);
+            _driverService = EdgeDriverService.CreateDefaultService();
         }
 
         /// <inheritdoc />
@@ -60,7 +61,7 @@ namespace Basin.Selenium.Builders
 
         public void AddArguments()
         {
-            if (_config.Arguments == null || _config.Arguments.Length == 0) return;
+            if (_config.Arguments?.Any() != false) return;
 
             _driverOptions.AddArguments(_config.Arguments);
         }

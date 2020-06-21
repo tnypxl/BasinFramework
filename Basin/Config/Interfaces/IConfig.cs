@@ -5,8 +5,6 @@ namespace Basin.Config.Interfaces
 {
     public interface IConfig
     {
-
-
         [Option(Alias = "Environment")]
         IEnvironmentConfig Environment { get; }
 

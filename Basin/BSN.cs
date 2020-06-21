@@ -9,7 +9,7 @@ namespace Basin
 {
     public static class BSN
     {
-        public static ICurrentConfig Config;
+        public static CurrentConfig Config;
 
         public static ConfigurationBuilder<IConfig> GetConfig => new ConfigurationBuilder<IConfig>();
 

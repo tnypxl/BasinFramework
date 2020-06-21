@@ -20,8 +20,6 @@ namespace Basin.Config
             SetSiteConfig();
             SetDriverConfig();
             SetLoginConfig();
-
-            Driver.PathToDriver ??= AppDomain.CurrentDomain.BaseDirectory;
         }
 
         public void SetSiteConfig() => Site = _config.Sites.First(site => site.Name == _config.Environment.Site);

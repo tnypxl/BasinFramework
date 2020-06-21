@@ -51,6 +51,8 @@ namespace Basin.Selenium.Interfaces
         ChromeOptions DriverOptions { get; }
 
         void AddArguments();
+
+        void EnableHeadlessMode();
     }
 
     public interface IFirefoxBuilder : IDriverBuilder
@@ -66,6 +68,8 @@ namespace Basin.Selenium.Interfaces
         FirefoxOptions DriverOptions { get; }
 
         void AddArguments();
+
+        void EnableHeadlessMode();
     }
 
     public interface IInternetExplorerBuilder : IDriverBuilder
@@ -94,6 +98,5 @@ namespace Basin.Selenium.Interfaces
         EdgeOptions DriverOptions { get; }
 
         void AddArguments();
-
     }
 }

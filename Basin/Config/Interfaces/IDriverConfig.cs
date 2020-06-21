@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Config.Net;
 
@@ -18,7 +19,9 @@ namespace Basin.Config.Interfaces
 
         string BrowserVersion { get; set; }
 
-        string[] Arguments { get; set; }
+        IEnumerable<string> Arguments { get; }
+
+        bool Headless { get; set; }
 
         string PathToDriver { get; set; }
 

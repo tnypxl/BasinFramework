@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using Basin.Config.Interfaces;
 using Basin.Selenium.Interfaces;
@@ -26,13 +27,14 @@ namespace Basin.Selenium.Builders
             CreateOptions();
             SetPlatformName();
             SetBrowserVersion();
+            EnableHeadlessMode();
             AddArguments();
         }
 
         /// <inheritdoc />
         public void CreateService()
         {
-            _driverService = ChromeDriverService.CreateDefaultService(_config.PathToDriver);
+            _driverService = ChromeDriverService.CreateDefaultService();
         }
 
         /// <inheritdoc />
@@ -57,9 +59,17 @@ namespace Basin.Selenium.Builders
 
         public void AddArguments()
         {
-            if (_config.Arguments == null || _config.Arguments.Length == 0) return;
+            if (_config.Arguments?.Any() != true) return;
 
             _driverOptions.AddArguments(_config.Arguments);
+        }
+
+        public void EnableHeadlessMode()
+        {
+            if (!_config.Headless) return;
+
+            _driverOptions.AddArgument("--headless");
+            _driverOptions.AddArgument("--disable-gpu");
         }
 
         /// <inheritdoc />

@@ -14,7 +14,7 @@ namespace Basin.Tests.Steps
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            BSN.SetConfig($"{ConfigPath}/DuckDuckGo.json");
+            BSN.SetConfig($"{ConfigPath}/TheInternet.json");
         }
 
         [BeforeScenario]

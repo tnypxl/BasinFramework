@@ -11,7 +11,6 @@ namespace Basin.Selenium
             {
                 { "chrome", () => new ChromeBuilder(BSN.Config.Driver) },
                 { "firefox", () => new FirefoxBuilder(BSN.Config.Driver) },
-                { "edge", () => new EdgeBuilder(BSN.Config.Driver) },
                 { "ie", () => new InternetExplorerBuilder(BSN.Config.Driver) }
             };
 

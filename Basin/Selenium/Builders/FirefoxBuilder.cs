@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using Basin.Config.Interfaces;
 using Basin.Selenium.Interfaces;
@@ -24,6 +25,7 @@ namespace Basin.Selenium.Builders
 
             CreateService();
             CreateOptions();
+            SetHeadless();
             SetPlatformName();
             SetBrowserVersion();
             AddArguments();
@@ -32,13 +34,19 @@ namespace Basin.Selenium.Builders
         /// <inheritdoc />
         public void CreateService()
         {
-            _driverService = FirefoxDriverService.CreateDefaultService(_config.PathToDriver);
+            _driverService = FirefoxDriverService.CreateDefaultService();
         }
 
         /// <inheritdoc />
         public void CreateOptions()
         {
             _driverOptions = new FirefoxOptions();
+        }
+
+        public void SetHeadless()
+        {
+
+            _driverOptions.AddArgument("--headless");
         }
 
         public void SetPlatformName()
@@ -52,7 +60,7 @@ namespace Basin.Selenium.Builders
         {
             if (string.IsNullOrEmpty(_config.BrowserVersion)) return;
 
-            _driverOptions.BrowserVersion = _config.BrowserName;
+            _driverOptions.BrowserVersion = _config.BrowserVersion;
         }
 
         public void AddArguments()
@@ -60,6 +68,14 @@ namespace Basin.Selenium.Builders
             if (_config.Arguments == null) return;
 
             _driverOptions.AddArguments(_config.Arguments);
+        }
+
+        public void EnableHeadlessMode()
+        {
+            if (!_config.Headless) return;
+
+            _driverOptions.AddArgument("--headless");
+            _driverOptions.AddArgument("--disable-gpu");
         }
 
         public void SetHost()
@@ -72,7 +88,7 @@ namespace Basin.Selenium.Builders
         /// <inheritdoc />
         public IWebDriver GetDriver => _config.Host == null
             ? new FirefoxDriver(DriverService, DriverOptions)
-            : new RemoteWebDriver(_config.Host, DriverOptions);
+            : new RemoteWebDriver(_config.Host, DriverOptions.ToCapabilities());
 
         /// <inheritdoc />
         public FirefoxDriverService DriverService => _driverService
