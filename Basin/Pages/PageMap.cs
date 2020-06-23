@@ -78,6 +78,8 @@ namespace Basin.Pages
 
         public Element ParagraphTag => new Element("p");
 
+        public Element PasswordInputTag => InputTag.WithAttr("type", "password");
+
         public Element RadioInputTag => InputTag.WithAttr("type", "radio");
 
         public Element SectionTag => new Element("section");

@@ -1,4 +1,5 @@
 using System.IO;
+using Basin.Config.Interfaces;
 using Basin.Selenium;
 using Basin.Selenium.Builders;
 using OpenQA.Selenium;
@@ -9,12 +10,10 @@ namespace Basin.Tests.Steps
     [Binding]
     public static class StepsBase
     {
-        private static readonly string ConfigPath = Path.GetFullPath("../../../");
-
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            BSN.SetConfig($"{ConfigPath}/TheInternet.json");
+            BSN.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
         }
 
         [BeforeScenario]

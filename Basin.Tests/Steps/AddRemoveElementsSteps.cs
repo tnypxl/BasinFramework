@@ -17,7 +17,7 @@ namespace Basin.Tests.Steps
         {
             Assert.That(
                 Pages.AddRemoveElementsExample.HasNumberOfDeleteButtons(expectedCount),
-                $"Expected {expectedCount} Delete button(s) to be added. Got {Pages.AddRemoveElementsExample.Map.AllDeleteButtons.Count} instead.");
+                $"Expected {expectedCount} Delete button(s) to be displayed. Got {Pages.AddRemoveElementsExample.Map.AllDeleteButtons.Count} instead.");
         }
 
     }

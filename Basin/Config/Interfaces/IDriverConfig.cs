@@ -27,4 +27,17 @@ namespace Basin.Config.Interfaces
 
         Uri Host { get; set; }
     }
+
+    public class DriverConfig : IDriverConfig
+    {
+        public string Name { get; set; }
+        public string BrowserName { get; set; }
+        public int Timeout { get; set; }
+        public string PlatformName { get; set; }
+        public string BrowserVersion { get; set; }
+        public IEnumerable<string> Arguments { get; set; }
+        public bool Headless { get; set; }
+        public string PathToDriver { get; set; }
+        public Uri Host { get; set; }
+    }
 }
