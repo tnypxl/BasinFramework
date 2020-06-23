@@ -16,7 +16,11 @@ Create a JSON file at the root of your project
 
 ```json
 {
-    "DefaultSite": "integration",
+    "Environment": {
+        "Site": "integration",
+        "Driver": "Local Chrome",
+        "Login": "lebronjaymes"
+    }
 
     "Sites": [
         {
@@ -25,11 +29,11 @@ Create a JSON file at the root of your project
         },
         {
             "Name": "integration",
-            "url": "https://integration.coolapp.com"
+            "Url": "https://integration.coolapp.com"
         },
         {
             "Name": "preprod",
-            "url": "http://preprod.coolapp.com"
+            "Url": "http://preprod.coolapp.com"
         }
     ],
 
@@ -46,10 +50,13 @@ Create a JSON file at the root of your project
         }
     ],
 
-    "Driver": {
-        "Browser": "chrome",
-        "Timeout": 10
-    }
+    "Drivers": [
+        {
+            "Name": "Local Chrome",
+            "BrowserName": "chrome",
+            "Timeout": 10
+        }
+    ]
 }
 ```
 
@@ -62,10 +69,10 @@ BSN.SetConfig("path/to/json/config/file.json");
 Then you access config data with `BSN.Config`
 
 ```csharp
-BSN.Config.DefaultSite; // returns "integration"
-BSN.Config.Driver.Browser; // returns "chrome"
-BSN.Config.Site.Url; // Gets a site based on DefaultSite
-BSN.Config.Login("Admin").Username; // Gets a login by Role
+BSN.Config.Site.Name; // returns "integration"
+BSN.Config.Site.Url; // returns "https://integration.coolapp.com"
+BSN.Config.Driver.BrowserName; // returns "chrome"
+BSN.Config.Login.Username; // returns "lebronjaymes"
 ```
 
 ### Start a browser session
@@ -73,11 +80,10 @@ BSN.Config.Login("Admin").Username; // Gets a login by Role
 By default, all the drivers are configured with a clean slate. That just means there are no browser flags or custom binary paths being set initially. Starting up a browser and going to a url is 2 lines of code.
 
 ```c#
-// Uses the values defined in `Drivers` from the json config file.
-// It also maximizes the window automatically.
+// Uses the value defined in `Environment.Driver` to load a listed driver config
 Driver.Init(); 
 
-// Just goes to a given url
+// Goes to a given url
 Driver.Goto("http://someurl");
 ```
 
@@ -88,16 +94,22 @@ For the most part, nothing else is needed. But if you need to access the `IWebDr
 Maybe I already have code written to manage driver instances. Just pass in an instance of IWebDriver.
 
 ```c#
-Driver.Init(FirefoxDriver());
+Driver.Init(new FirefoxDriver());
 Driver.Goto("http://someurl");
 ```
 
-Now Basin will use this throughout the rest of the framework.
+### Use a driver builder
+
+Basin provides builders for situations where you need to customize driver options
+
+```
+WORK IN PROGRESS
+```
 
 
 ### Creating simple page object class
 
-Basin provides classes and interfaces to ease the pain of building page object frameworks. Let's say I'm defining a login page.
+Basin provides classes and interfaces to ease the pain of building page object frameworks. Below is an example login page.
 
 ```c#
 using Basin.Selenium;
@@ -109,9 +121,9 @@ namespace Example
     public class LoginPage : Page
     {	
         // Page elements
-        public Element UsernameField => Locate(By.Id("userName"));
-        public Element PasswordField => Locate(By.Id("password"));
-        public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
+        public Element UsernameField => TextInputTag.WithId("username");
+        public Element PasswordField => InputTag.WithAttr("type", "password").WithId("password");
+        public Element Submit => ButtonTag.WithAttr("name", "submitLogin");
 
         // Page behavior
         public void Login(string username, string password)
@@ -122,23 +134,6 @@ namespace Example
         }
     }
 }
-```
-
-Let's start with the `Page` class that `LoginPage` inherits from. `Page` is an abstract class that provides a handful of locator methods with some overloads. There are 4 locator methods, each with an overload to allow setting an optional timeout.
-
-```c#
-// Gets a single IWebElement
-Locate(By by, int timeout);
-
-// Gets a single IWebElement inside a parent IWebElement
-LocateInside(By by, By parentBy, int timeout) 
-
-// Gets multiple IWebElement(s)
-LocateAll(By by, int timeout) 
-
-// Gets multiple IWebElement(s) inside a parent IWebElement
-LocateAllInside(By by, By parentBy, int timeout) 
-```
 
 ### Creating a page object map
 
@@ -155,11 +150,6 @@ namespace Example
     // The goal is to only put behavior methods in this class.
     public class LoginPage : Page<LoginPageMap>
     {
-        public LoginPage() 
-        {
-            Map = new LoginPageMap();
-        }
-
         public void LoginWith(string username, string password)
         {
             Map.UsernameField.SendKeys(username);
@@ -172,16 +162,16 @@ namespace Example
     // The goal is to only put Element definitions in this class.
     public class LoginPageMap : PageMap
     {
-        public Element UsernameField => Locate(By.Id("userName"));
-        public Element PasswordField => Locate(By.Id("password"));
-        public Element Submit => Locate(By.CssSelector("button[name='submitLogin']"));
+        public Element UsernameField => TextInputTag.WithId("username");
+        public Element PasswordField => InputTag.WithAttr("type", "password").WithId("password");
+        public Element Submit => ButtonTag.WithAttr("name", "submitLogin");
     }
 }
 ```
 
-Now I have clean separate APIs for calling page elements and behaviors. Page map classes can be used by other classes that require the same element locators. 
+Now I have clean separate APIs for calling page elements and behaviors. Page map classes are portable and can be used in other classes that need the same element locators. 
 
-How page objects should be organized is quite subjective, but the goal of these interfaces base abstract classes is to provide a simple foundation.
+How page objects should be organized is quite subjective, but the goal of these interfaces and abstracts classes is to provide some basic structure without getting in the way.
 
 ## Contribute
 
