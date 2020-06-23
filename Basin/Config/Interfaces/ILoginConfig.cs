@@ -7,4 +7,12 @@ namespace Basin.Config.Interfaces
         string Password { get; set; }
         string Token { get; set; }
     }
+
+    public class LoginConfig : ILoginConfig
+    {
+        public string Role { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Token { get; set; }
+    }
 }
