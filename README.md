@@ -20,7 +20,7 @@ Create a JSON file at the root of your project
         "Site": "integration",
         "Driver": "Local Chrome",
         "Login": "lebronjaymes"
-    }
+    },
 
     "Sites": [
         {
