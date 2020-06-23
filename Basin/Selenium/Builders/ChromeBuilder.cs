@@ -19,6 +19,16 @@ namespace Basin.Selenium.Builders
 
         private readonly IDriverConfig _config;
 
+        public ChromeBuilder()
+        {
+            _config = new DriverConfig()
+            {
+                BrowserName = "chrome"
+            };
+
+            CreateService();
+            CreateOptions();
+        }
         public ChromeBuilder(IDriverConfig config)
         {
             _config = config;

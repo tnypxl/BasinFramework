@@ -19,13 +19,24 @@ namespace Basin.Selenium.Builders
 
         private readonly IDriverConfig _config;
 
+        public FirefoxBuilder()
+        {
+            _config = new DriverConfig()
+            {
+                BrowserName = "firefox"
+            };
+
+            CreateService();
+            CreateOptions();
+        }
+
         public FirefoxBuilder(IDriverConfig config)
         {
             _config = config;
 
             CreateService();
             CreateOptions();
-            SetHeadless();
+            EnableHeadlessMode();
             SetPlatformName();
             SetBrowserVersion();
             AddArguments();
@@ -41,12 +52,6 @@ namespace Basin.Selenium.Builders
         public void CreateOptions()
         {
             _driverOptions = new FirefoxOptions();
-        }
-
-        public void SetHeadless()
-        {
-
-            _driverOptions.AddArgument("--headless");
         }
 
         public void SetPlatformName()
@@ -65,7 +70,7 @@ namespace Basin.Selenium.Builders
 
         public void AddArguments()
         {
-            if (_config.Arguments == null) return;
+            if (_config.Arguments?.Any() != true) return;
 
             _driverOptions.AddArguments(_config.Arguments);
         }
@@ -74,8 +79,7 @@ namespace Basin.Selenium.Builders
         {
             if (!_config.Headless) return;
 
-            _driverOptions.AddArgument("--headless");
-            _driverOptions.AddArgument("--disable-gpu");
+            _driverOptions.AddArgument("-headless");
         }
 
         public void SetHost()

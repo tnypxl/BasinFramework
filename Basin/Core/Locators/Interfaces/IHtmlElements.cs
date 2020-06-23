@@ -101,5 +101,7 @@ namespace Basin.Core.Locators.Interfaces
         Element TextAreaTag { get; }
 
         Element TextInputTag { get; }
+
+        Element PasswordInputTag { get; }
     }
 }
