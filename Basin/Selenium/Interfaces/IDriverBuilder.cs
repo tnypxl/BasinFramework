@@ -32,10 +32,7 @@ namespace Basin.Selenium.Interfaces
 
         void SetBrowserVersion();
 
-        /// <summary>
-        ///     Method to return a newly created RemoteWebDriver instance. <seealso cref="RemoteWebDriver" />
-        /// </summary>
-        /// <param name="uri"></param>
+        void SetPageLoadStrategy();
     }
 
     public interface IChromeBuilder : IDriverBuilder

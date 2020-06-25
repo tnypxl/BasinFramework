@@ -25,6 +25,7 @@ namespace Basin.Selenium.Builders
             CreateService();
             CreateOptions();
             SetPlatformName();
+            SetPageLoadStrategy();
             SetBrowserVersion();
         }
 
@@ -54,11 +55,11 @@ namespace Basin.Selenium.Builders
             _driverOptions.BrowserVersion = _config.BrowserName;
         }
 
-        public void SetHost()
+        public void SetPageLoadStrategy()
         {
-            if (_config.Host == null) return;
+            if (string.IsNullOrEmpty(_config.PageLoadStrategy)) return;
 
-            _driverService.Host = _config.Host.ToString();
+            _driverOptions.PageLoadStrategy = DriverConfig.PageLoadStrategies[_config.PageLoadStrategy];
         }
 
         /// <inheritdoc />

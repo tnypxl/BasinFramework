@@ -39,6 +39,7 @@ namespace Basin.Selenium.Builders
             EnableHeadlessMode();
             SetPlatformName();
             SetBrowserVersion();
+            SetPageLoadStrategy();
             AddArguments();
         }
 
@@ -82,11 +83,11 @@ namespace Basin.Selenium.Builders
             _driverOptions.AddArgument("-headless");
         }
 
-        public void SetHost()
+        public void SetPageLoadStrategy()
         {
-            if (_config.Host == null) return;
+            if (string.IsNullOrEmpty(_config.PageLoadStrategy)) return;
 
-            _driverService.Host = _config.Host.ToString();
+            _driverOptions.PageLoadStrategy = DriverConfig.PageLoadStrategies[_config.PageLoadStrategy];
         }
 
         /// <inheritdoc />

@@ -38,6 +38,7 @@ namespace Basin.Selenium.Builders
             SetPlatformName();
             SetBrowserVersion();
             EnableHeadlessMode();
+            SetPageLoadStrategy();
             AddArguments();
         }
 
@@ -80,6 +81,13 @@ namespace Basin.Selenium.Builders
 
             _driverOptions.AddArgument("--headless");
             _driverOptions.AddArgument("--disable-gpu");
+        }
+
+        public void SetPageLoadStrategy()
+        {
+            if (string.IsNullOrEmpty(_config.PageLoadStrategy)) return;
+
+            _driverOptions.PageLoadStrategy = DriverConfig.PageLoadStrategies[_config.PageLoadStrategy];
         }
 
         /// <inheritdoc />

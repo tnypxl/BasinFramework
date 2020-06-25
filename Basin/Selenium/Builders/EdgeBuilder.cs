@@ -27,6 +27,7 @@ namespace Basin.Selenium.Builders
             CreateOptions();
             SetPlatformName();
             SetBrowserVersion();
+            SetPageLoadStrategy();
             AddArguments();
         }
 
@@ -66,6 +67,13 @@ namespace Basin.Selenium.Builders
             _driverOptions.AddArguments(_config.Arguments);
         }
 
+        public void SetPageLoadStrategy()
+        {
+            if (string.IsNullOrEmpty(_config.PageLoadStrategy)) return;
+
+            _driverOptions.PageLoadStrategy = DriverConfig.PageLoadStrategies[_config.PageLoadStrategy];
+        }
+
         /// <inheritdoc />
         public IWebDriver GetDriver => _config.Host == null
             ? new EdgeDriver(DriverService, DriverOptions)
@@ -77,6 +85,6 @@ namespace Basin.Selenium.Builders
 
         /// <inheritdoc />
         public EdgeOptions DriverOptions => _driverOptions
-            ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions()");
+            ?? throw new NullReferenceException("_driverOptions is null. Call CreateOptions().");
     }
 }
