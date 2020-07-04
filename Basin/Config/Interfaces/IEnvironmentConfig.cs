@@ -8,6 +8,6 @@ namespace Basin.Config.Interfaces
 
         string Login { get; set; }
 
-        string Driver { get; set; }
+        string Browser { get; set; }
     }
 }

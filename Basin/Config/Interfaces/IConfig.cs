@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Basin.Core.Browsers.Interfaces;
 using Config.Net;
 
 namespace Basin.Config.Interfaces
@@ -8,8 +9,8 @@ namespace Basin.Config.Interfaces
         [Option(Alias = "Environment")]
         IEnvironmentConfig Environment { get; }
 
-        [Option(Alias = "Drivers")]
-        IEnumerable<IDriverConfig> Drivers { get; }
+        [Option(Alias = "Browsers")]
+        IEnumerable<IBrowserConfig> Browsers { get; }
 
         [Option(Alias = "Sites")]
         IEnumerable<ISiteConfig> Sites { get; }
@@ -20,7 +21,7 @@ namespace Basin.Config.Interfaces
 
     public interface ICurrentConfig
     {
-        IDriverConfig Driver { get; set; }
+        IBrowserConfig Browser { get; set; }
 
         ISiteConfig Site { get; set; }
 
