@@ -18,21 +18,21 @@ Create a JSON file at the root of your project
 {
     "Environment": {
         "Site": "integration",
-        "Driver": "Local Chrome",
+        "Browser": "Local Chrome",
         "Login": "lebronjaymes"
     },
 
     "Sites": [
         {
-            "Name": "staging",
+            "Id": "staging",
             "Url": "https://staging.coolapp.com"
         },
         {
-            "Name": "integration",
+            "Id": "integration",
             "Url": "https://integration.coolapp.com"
         },
         {
-            "Name": "preprod",
+            "Id": "preprod",
             "Url": "http://preprod.coolapp.com"
         }
     ],
@@ -50,10 +50,10 @@ Create a JSON file at the root of your project
         }
     ],
 
-    "Drivers": [
+    "Browsers": [
         {
-            "Name": "Local Chrome",
-            "BrowserName": "chrome",
+            "Id": "Local Chrome",
+            "Kind": "chrome",
             "Timeout": 10
         }
     ]
@@ -63,16 +63,16 @@ Create a JSON file at the root of your project
 Initialize the config file:
 
 ```csharp
-BSN.SetConfig("path/to/json/config/file.json");
+Basin.SetConfig("path/to/json/config/file.json");
 ```
 
 Then you access config data with `BSN.Config`
 
 ```csharp
-BSN.Config.Site.Name; // returns "integration"
-BSN.Config.Site.Url; // returns "https://integration.coolapp.com"
-BSN.Config.Driver.BrowserName; // returns "chrome"
-BSN.Config.Login.Username; // returns "lebronjaymes"
+Basin.Config.Site.Name; // returns "integration"
+Basin.Config.Site.Url; // returns "https://integration.coolapp.com"
+Basin.Config.Driver.BrowserName; // returns "chrome"
+Basin.Config.Login.Username; // returns "lebronjaymes"
 ```
 
 ### Start a browser session
@@ -80,31 +80,41 @@ BSN.Config.Login.Username; // returns "lebronjaymes"
 By default, all the drivers are configured with a clean slate. That just means there are no browser flags or custom binary paths being set initially. Starting up a browser and going to a url is 2 lines of code.
 
 ```c#
-// Uses the value defined in `Environment.Driver` to load a listed driver config
-Driver.Init(); 
+// Uses the value defined in `Environment.Browser` by default to load a listed browser config by its `Id`
+Browser.Init(); 
 
-// Goes to a given url
-Driver.Goto("http://someurl");
+// Navigates to a given url
+Browser.Goto("http://someurl");
 ```
 
-For the most part, nothing else is needed. But if you need to access the `IWebDriver` instance, you just call `Driver.Current`.
+For the most part, nothing else is needed. But if you need to access the `IWebDriver` instance, just call `Browser.Current`.
 
-### Use your own `IWebDriver` instance
+### Use a `IWebDriver` instance directly
 
 Maybe I already have code written to manage driver instances. Just pass in an instance of IWebDriver.
 
 ```c#
-Driver.Init(new FirefoxDriver());
-Driver.Goto("http://someurl");
+Browser.Init(new FirefoxDriver());
+Browser.Goto("http://someurl");
 ```
 
 ### Use a driver builder
 
-Basin provides builders for situations where you need to customize driver options
+Basin provides some default browser classes that expose driver service/options for custom configurations. As time goes, more helper methods will be added to provide a common configuration API between all the web drivers.
 
+```c#
+var firefoxBrowserWithLogging = new FirefoxBrowser()
+    .CreateService()
+    .CreateOptions();
+
+firefoxBrowserWithLogging.FirefoxDriverService.HideCommandPrompt = true;
+firefoxBrowserWithLogging.FirefoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.All);
+firefoxBrowserWithLogging.FirefoxOptions.BrowserVersion = "77.0";
+
+Browser.Init(firefoxBrowserWithLogging);
 ```
-WORK IN PROGRESS
-```
+
+Or you can create your own 
 
 
 ### Creating simple page object class
