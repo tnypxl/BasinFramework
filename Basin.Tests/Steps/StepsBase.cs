@@ -1,8 +1,5 @@
 using System.IO;
-using Basin.Config.Interfaces;
 using Basin.Selenium;
-using Basin.Selenium.Builders;
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Basin.Tests.Steps

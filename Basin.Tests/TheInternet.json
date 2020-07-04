@@ -1,23 +1,24 @@
 {
   "Environment": {
     "Site": "The Internet",
-    "Driver": "Remote Firefox"
+    "Browser": "Local Chrome"
   },
   "Sites": [
     {
-      "Name": "The Internet",
+      "Id": "The Internet",
       "Url": "http://the-internet.herokuapp.com"
     }
   ],
-  "Drivers": [
+  "Browsers": [
     {
-      "Name": "Local Chrome",
-      "BrowserName": "chrome",
-      "Timeout": 5
+      "Id": "Local Chrome",
+      "Kind": "chrome",
+      "Headless": true,
+      "Timeout": 10
     },
     {
-      "Name": "Remote Firefox",
-      "BrowserName": "firefox",
+      "Id": "Remote Firefox",
+      "Kind": "firefox",
       "Host": "http://localhost:4444/wd/hub"
     }
   ],
