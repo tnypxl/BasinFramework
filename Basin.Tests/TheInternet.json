@@ -1,7 +1,7 @@
 {
   "Environment": {
     "Site": "The Internet",
-    "Browser": "Local Firefox"
+    "Browser": "Local Chrome"
   },
   "Sites": [
     {
@@ -11,8 +11,8 @@
   ],
   "Browsers": [
     {
-      "Id": "Local Firefox",
-      "Kind": "firefox",
+      "Id": "Local Chrome",
+      "Kind": "chrome",
       "Headless": true,
       "Timeout": 10
     },
