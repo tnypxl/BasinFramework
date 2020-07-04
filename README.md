@@ -69,7 +69,7 @@ Initialize the config file:
 Basin.SetConfig("path/to/json/config/file.json");
 ```
 
-Then you access config data with `BSN.Config`
+Then you access config data with `Basin.Config`
 
 ```csharp
 Basin.Config.Site.Id; // returns "integration"
@@ -117,8 +117,6 @@ firefoxBrowserWithLogging.FirefoxOptions.BrowserVersion = "77.0";
 Browser.Init(firefoxBrowserWithLogging);
 ```
 
-Or you can create your own 
-
 
 ### Creating simple page object class
 
@@ -147,6 +145,7 @@ namespace Example
         }
     }
 }
+```
 
 ### Creating a page object map
 
