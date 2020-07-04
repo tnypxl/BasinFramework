@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Basin.Core.Browsers;
-using Basin.Core.Browsers.Interfaces;
 
-namespace Basin.Selenium
+namespace Basin.Core.Browsers
 {
     public static class BrowserFactory
     {
@@ -13,7 +10,7 @@ namespace Basin.Selenium
             { "firefox", new FirefoxBrowser() },
             { "internet explorer", new InternetExplorerBrowser() }
         };
-        
+
         public static Browser Current => new ConfiguredBrowserDecorator(SupportedBrowsers[BSN.Config.Browser.Kind]);
     }
 }
