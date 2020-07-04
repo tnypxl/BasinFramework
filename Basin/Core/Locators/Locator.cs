@@ -38,18 +38,21 @@ namespace Basin.Core.Locators
             XPath.Append("[contains(concat(' ',normalize-space(@class),' '),' ")
                  .Append(className)
                  .Append(" ')]");
+
             return this;
         }
 
         public ILocatorBuilder WithId(string id)
         {
             WithAttr("id", id);
+
             return this;
         }
 
         public ILocatorBuilder WithAttr(string name, string value)
         {
             XPath.Append(GetXPathAttribute(name, value));
+
             return this;
         }
 

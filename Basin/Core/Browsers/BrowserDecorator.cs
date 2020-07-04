@@ -8,7 +8,7 @@ namespace Basin.Core.Browsers
     public abstract class BrowserDecorator : Browser
     {
         private Browser _browser;
-        
+
         protected BrowserDecorator(Browser browser)
         {
             _browser = browser;
@@ -20,19 +20,19 @@ namespace Basin.Core.Browsers
         }
 
         public override IWebDriver Driver => _browser.Driver;
-        
+
         public override ChromeOptions ChromeOptions => _browser.ChromeOptions;
-        
+
         public override ChromeDriverService ChromeDriverService => _browser.ChromeDriverService;
-        
+
         public override FirefoxDriverService FirefoxDriverService => _browser.FirefoxDriverService;
-        
+
         public override FirefoxOptions FirefoxOptions => _browser.FirefoxOptions;
-        
+
         public override InternetExplorerDriverService InternetExplorerDriverService => _browser.InternetExplorerDriverService;
-        
+
         public override InternetExplorerOptions InternetExplorerOptions => _browser.InternetExplorerOptions;
-        
+
         public override Browser CreateDriverService(string pathToDriverExecutable = null)
         {
             return _browser.CreateDriverService(pathToDriverExecutable);

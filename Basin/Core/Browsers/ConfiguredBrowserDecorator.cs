@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Linq;
 using Basin.Config.Interfaces;
-using Basin.Core.Browsers.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -14,35 +12,35 @@ namespace Basin.Core.Browsers
         private readonly Browser _browser;
 
         private IBrowserConfig Config { get; } = BSN.Config.Browser;
-        public ConfiguredBrowserDecorator(Browser browser) : base(browser) 
+        public ConfiguredBrowserDecorator(Browser browser) : base(browser)
         {
             _browser = browser;
-            
+
             CreateDriverService();
             CreateDriverOptions();
             SetVersion();
             SetPlatformName();
-            
+
             if (Config.Kind == "ie") return;
-            
+
             SetArguments();
             EnableHeadlessMode();
         }
 
         public override IWebDriver Driver => _browser.Driver;
-        
+
         public override ChromeDriverService ChromeDriverService => _browser.ChromeDriverService;
-        
+
         public override ChromeOptions ChromeOptions => _browser.ChromeOptions;
-        
+
         public override FirefoxDriverService FirefoxDriverService => _browser.FirefoxDriverService;
-        
+
         public override FirefoxOptions FirefoxOptions => _browser.FirefoxOptions;
-        
+
         public override InternetExplorerDriverService InternetExplorerDriverService => _browser.InternetExplorerDriverService;
-        
+
         public override InternetExplorerOptions InternetExplorerOptions => _browser.InternetExplorerOptions;
-        
+
         public sealed override Browser CreateDriverService(string pathToDriverExecutable = null)
         {
             return _browser.CreateDriverService(BSN.Config.Browser.PathToDriverBinary);

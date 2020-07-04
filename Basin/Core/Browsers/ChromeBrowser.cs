@@ -1,5 +1,3 @@
-#define CHROME
-using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -10,10 +8,10 @@ namespace Basin.Core.Browsers
     public class ChromeBrowser : Browser
     {
         private ChromeDriverService _service;
-        
+
         private ChromeOptions _options;
-        
-        public override IWebDriver Driver => 
+
+        public override IWebDriver Driver =>
             BSN.Config.Browser.Host == null
                 ? new ChromeDriver(ChromeDriverService, ChromeOptions)
                 : new RemoteWebDriver(BSN.Config.Browser.Host, ChromeOptions);
@@ -21,7 +19,7 @@ namespace Basin.Core.Browsers
         public override ChromeOptions ChromeOptions => _options;
 
         public override ChromeDriverService ChromeDriverService => _service;
-        
+
         public override Browser CreateDriverService(string pathToDriverExecutable = null)
         {
             _service = string.IsNullOrEmpty(pathToDriverExecutable)
@@ -44,36 +42,36 @@ namespace Basin.Core.Browsers
         public override Browser SetVersion(string version = null)
         {
             if (string.IsNullOrEmpty(version)) return this;
-                
+
             _options.BrowserVersion = version;
-        
+
             return this;
         }
-        
+
         public override Browser SetPlatformName(string platformName = null)
         {
             if (string.IsNullOrEmpty(platformName)) return this;
-            
+
             _options.PlatformName = platformName;
-        
+
             return this;
         }
-        
+
         public override Browser EnableHeadlessMode(bool enabled = false)
         {
             if (!enabled) return this;
-            
+
             _options.AddArguments("--headless", "--disable-gpu");
-        
+
             return this;
         }
-        
+
         public override Browser SetArguments(params string[] arguments)
         {
-            if (arguments == null || !arguments.Any()) return this;
-        
+            if (arguments?.Any() != true) return this;
+
             _options.AddArguments(arguments);
-        
+
             return this;
         }
 
@@ -83,7 +81,7 @@ namespace Basin.Core.Browsers
 
             return this;
         }
-        
-        
+
+
     }
 }

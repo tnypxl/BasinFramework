@@ -1,6 +1,5 @@
 using System;
 using Basin.Core.Browsers;
-using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 
 namespace Basin.Selenium
@@ -20,14 +19,14 @@ namespace Basin.Selenium
         public static void Init()
         {
             _driver = BrowserFactory.Current.Driver;
-            
+
             FinishSetup();
         }
 
         public static void Init(Browser browser)
         {
             _driver = browser.Driver;
-            
+
             FinishSetup();
         }
 
