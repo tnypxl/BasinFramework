@@ -69,9 +69,9 @@ Basin.SetConfig("path/to/json/config/file.json");
 Then you access config data with `BSN.Config`
 
 ```csharp
-Basin.Config.Site.Name; // returns "integration"
+Basin.Config.Site.Id; // returns "integration"
 Basin.Config.Site.Url; // returns "https://integration.coolapp.com"
-Basin.Config.Driver.BrowserName; // returns "chrome"
+Basin.Config.Browser.Kind; // returns "chrome"
 Basin.Config.Login.Username; // returns "lebronjaymes"
 ```
 
