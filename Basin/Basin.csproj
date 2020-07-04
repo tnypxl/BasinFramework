@@ -27,4 +27,14 @@
       <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
       <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.1" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Selenium\Browsers" />
+      <Folder Include="Selenium\Builders" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Selenium\Builders\FirefoxBuilder.cs" />
+      <Compile Remove="Selenium\Builders\EdgeBuilder.cs" />
+    </ItemGroup>
 </Project>

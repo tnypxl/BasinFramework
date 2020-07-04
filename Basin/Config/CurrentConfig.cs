@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.Config.Interfaces;
+using Basin.Core.Browsers.Interfaces;
 
 namespace Basin.Config
 {
@@ -9,7 +10,7 @@ namespace Basin.Config
     {
         private static IConfig _config;
 
-        public IDriverConfig Driver { get; set; }
+        public IBrowserConfig Browser { get; set; }
         public ISiteConfig Site { get; set; }
         public ILoginConfig Login { get; set; }
 
@@ -18,13 +19,13 @@ namespace Basin.Config
             _config = config;
 
             SetSiteConfig();
-            SetDriverConfig();
+            SetBrowserConfig();
             SetLoginConfig();
         }
 
-        public void SetSiteConfig() => Site = _config.Sites.First(site => site.Name == _config.Environment.Site);
+        public void SetSiteConfig() => Site = _config.Sites.First(site => site.Id == _config.Environment.Site);
 
-        public void SetDriverConfig() => Driver = _config.Drivers.First(driver => driver.Name == _config.Environment.Driver);
+        public void SetBrowserConfig() => Browser = _config.Browsers.First(browser => browser.Id == _config.Environment.Browser);
 
         public void SetLoginConfig()
         {

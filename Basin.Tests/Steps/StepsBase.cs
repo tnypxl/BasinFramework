@@ -1,8 +1,10 @@
+using System;
 using System.IO;
-using Basin.Config.Interfaces;
+using Basin.Core.Browsers;
 using Basin.Selenium;
-using Basin.Selenium.Builders;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using TechTalk.SpecFlow;
 
 namespace Basin.Tests.Steps
@@ -19,6 +21,10 @@ namespace Basin.Tests.Steps
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
+            // var myAwesomeBrowser = new ChromeBrowser()
+            //     .CreateDriverService()
+            //     .CreateDriverOptions();
+
             Driver.Init();
             Pages.Init();
         }

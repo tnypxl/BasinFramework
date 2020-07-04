@@ -1,4 +1,5 @@
 using System;
+using Basin.Core.Browsers;
 using Basin.Selenium.Interfaces;
 using OpenQA.Selenium;
 
@@ -18,21 +19,22 @@ namespace Basin.Selenium
 
         public static void Init()
         {
-            _driver = DriverFactory.GetBuilder.Invoke().GetDriver;
-
+            _driver = BrowserFactory.Current.Driver;
+            
             FinishSetup();
         }
 
-        public static void Init(Func<IDriverBuilder> builder)
+        public static void Init(Browser browser)
         {
-            _driver = builder.Invoke().GetDriver;
-
+            _driver = browser.Driver;
+            
             FinishSetup();
         }
 
         public static void Init(IWebDriver driver)
         {
             _driver = driver;
+            Wait = new Wait(BSN.Config.Browser.Timeout);
         }
 
         public static void Goto(string url)
@@ -49,7 +51,7 @@ namespace Basin.Selenium
 
         private static void FinishSetup()
         {
-            Wait = new Wait(BSN.Config.Driver.Timeout);
+            Wait = new Wait(BSN.Config.Browser.Timeout);
             Window = new Window();
             Window.Maximize();
         }
