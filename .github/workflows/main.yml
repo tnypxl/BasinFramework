@@ -32,7 +32,7 @@ jobs:
         uses: rohith/publish-nuget@v2
         with:
           PACKAGE_NAME: BasinFramework
-          PROJECT_PATH: Basin/Basin.csproj
+          PROJECT_FILE_PATH: Basin/Basin.csproj
           VERSION_FILE_PATH: Basin/VERSION
           VERSION_REGEX: (.*?)
           TAG_COMMIT: true
