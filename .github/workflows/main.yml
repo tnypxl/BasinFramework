@@ -27,3 +27,15 @@ jobs:
       
       - name: Test
         run: dotnet test --no-restore
+      
+      - name: Publish Nuget
+        uses: rohith/publish-nuget@v2
+        with:
+          PACKAGE_NAME: BasinFramework
+          PROJECT_PATH: Basin/Basin.csproj
+          VERSION_FILE_PATH: VERSION
+          VERSION_REGEX: (.*?)
+          TAG_COMMIT: true
+          TAG_FORMAT: v*
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        
