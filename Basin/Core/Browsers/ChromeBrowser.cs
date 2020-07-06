@@ -81,7 +81,5 @@ namespace Basin.Core.Browsers
 
             return this;
         }
-
-
     }
 }

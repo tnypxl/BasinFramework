@@ -18,7 +18,7 @@ namespace Basin.Tests.Pages
             {
                 var addedElementsCount = Map.DeleteButton.All.Count;
                 Map.AddElementButton.Click();
-                Wait.Until(driver => addedElementsCount > i);
+                Wait.Until(_ => addedElementsCount > i);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Basin.Tests.Pages
         {
             try
             {
-                Driver.Wait.Until(driver => Map.AllDeleteButtons.Count > 0);
+                Driver.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
                 return Map.AllDeleteButtons.Count == expectedCount;
             }
             catch (WebDriverTimeoutException)

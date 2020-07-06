@@ -14,7 +14,7 @@ namespace Basin.Pages
     public abstract class Page<TPageMap> : IPageBase where TPageMap : new()
     {
         private readonly TPageMap _map = new TPageMap();
-        
+
         public Wait Wait => Driver.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();

@@ -12,7 +12,7 @@ namespace Basin.Tests.Steps
             Driver.Goto(BSN.Config.Site.Url);
         }
 
-        [Given(@"I navigate to the example named '(.*?)'")]
+        [Given("I navigate to the example named '(.*?)'")]
         public static void NavigateToExample(string exampleName)
         {
             Pages.Home.NavigateToExample(exampleName);
