@@ -49,6 +49,15 @@ namespace Basin.Core.Locators
             return this;
         }
 
+        public ILocatorBuilder WithAttr(string name)
+        {
+            XPath.Append("[@")
+                 .Append(name)
+                 .Append(']');
+
+            return this;
+        }
+
         public ILocatorBuilder WithAttr(string name, string value)
         {
             XPath.Append(GetXPathAttribute(name, value));
@@ -91,8 +100,10 @@ namespace Basin.Core.Locators
             switch
             {
                 "^" => $"[starts-with(@{attrName}, '{modAttrValue}')]",
-                "$" => $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]", // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
-                // So we have to make this unholy mess to get the same behavior in XPath 1.0
+
+                // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
+                // So we have to make this unholy mess to get the same behavior with XPath 1.0
+                "$" => $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]",
                 "*" => $"[contains(@{attrName}, '{modAttrValue}')]",
                 _ => $"[@{attrName}='{modAttrValue}']",
             };
