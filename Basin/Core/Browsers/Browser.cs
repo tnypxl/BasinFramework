@@ -23,7 +23,7 @@ namespace Basin.Core.Browsers
 
         #region Chrome Interfaces
 
-        public virtual Browser SetOptions(ChromeOptions options) => this;
+        public virtual Browser SetOptions(ChromeOptions options) => null;
 
         public virtual ChromeOptions ChromeOptions => null;
 
@@ -33,7 +33,7 @@ namespace Basin.Core.Browsers
 
         #region Firefox Interfaces
 
-        public virtual Browser SetOptions(FirefoxOptions options) => this;
+        public virtual Browser SetOptions(FirefoxOptions options) => null;
 
         public virtual FirefoxOptions FirefoxOptions => null;
 
@@ -43,7 +43,7 @@ namespace Basin.Core.Browsers
 
         #region Internet Explorer Interfaces
 
-        public virtual Browser SetOptions(InternetExplorerOptions options) => this;
+        public virtual Browser SetOptions(InternetExplorerOptions options) => null;
 
         public virtual InternetExplorerOptions InternetExplorerOptions => null;
 
