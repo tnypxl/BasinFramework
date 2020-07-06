@@ -43,6 +43,8 @@ namespace Basin.Selenium
             // FoundBy = _locator.By;
         }
 
+        public string Description { get; set; }
+
         public By FoundBy { get; set; }
 
         public By ParentFoundBy { get; set; }
@@ -216,6 +218,12 @@ namespace Basin.Selenium
         public Element WithDescendant(Element descendant)
         {
             _locator.WithDescendant(descendant._locator);
+            return this;
+        }
+
+        public Element As(string description)
+        {
+            Description = description;
             return this;
         }
 
