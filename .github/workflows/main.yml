@@ -34,8 +34,6 @@ jobs:
           PACKAGE_NAME: BasinFramework
           PROJECT_FILE_PATH: Basin/Basin.csproj
           VERSION_FILE_PATH: Basin/VERSION
-          VERSION_REGEX: (.*?)
           TAG_COMMIT: true
-          TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         
