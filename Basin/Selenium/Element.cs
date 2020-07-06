@@ -64,17 +64,12 @@ namespace Basin.Selenium
             }
         }
 
-        /// <summary>
-        ///     Locates and returns an <see cref="IWebElement" />, will return null if its
-        /// </summary>
         private IWebElement Locate
         {
             get
             {
                 if (_locator != null)
-                {
                     FoundBy = _locator.By;
-                }
 
                 return Wait.Until(driver =>
                 {
