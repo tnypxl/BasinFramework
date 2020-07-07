@@ -46,6 +46,6 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.publish_nuget.outputs.PACKAGE_PATH }}
           asset_name: ${{ steps.publish_nuget.outputs.PACKAGE_NAME }}
-          asset_type: application/zip
+          asset_content_type: application/nupkg
       
           

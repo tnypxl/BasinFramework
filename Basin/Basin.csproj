@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <PackageId>BasinFramework</PackageId>
-        <PackageVersion>1.1.0-alpha3</PackageVersion>
+        <PackageVersion>1.1.0-alpha4</PackageVersion>
         <Title>Basin Framework</Title>
         <Authors>Arik Jones</Authors>
         <LangVersion>8</LangVersion>
