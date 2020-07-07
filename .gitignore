@@ -42,5 +42,8 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# Specflow .feature.cs
+/**/*.feature.cs
+
 # Visual Studio 2015
 .vs/
