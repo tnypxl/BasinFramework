@@ -1,4 +1,4 @@
-name: Build
+name: Basin Build
 
 on:
   pull_request:

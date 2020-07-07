@@ -1,23 +1,26 @@
-name: Publish
+name: Basin Release
 
 on:
   push:
     branches: [master]
 
 jobs:
-  publish:
+  publish_and_release:
     runs-on: ubuntu-latest
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
 
     steps:
       - uses: actions/checkout@v2
+      
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.300
+      
       - name: Publish NuGet
-        uses: brandedoutcast/publish-nuget@v2.5.2
+        id: publish_nuget
+        uses: brandedoutcast/publish-nuget@v2
         with:
           PACKAGE_NAME: BasinFramework
           PROJECT_FILE_PATH: Basin/Basin.csproj
@@ -26,13 +29,23 @@ jobs:
           TAG_COMMIT: true
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ env.VERSION }}
-          release_name: v${{ env.VERSION }}
+          tag_name: ${{ steps.publish_nuget.outputs.VERSION }}
+          release_name: ${{ steps.publish_nuget.outputs.VERSION }}
           body_path: RELEASE_NOTES.md
+      
+      - name: Add NuGet to Release
+        uses: actions/upload-release-artifact@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.publish_nuget.outputs.PACKAGE_PATH }}
+          asset_name: ${{ steps.publish_nuget.outputs.PACKAGE_NAME }}
+          asset_type: application/zip
+      
           
