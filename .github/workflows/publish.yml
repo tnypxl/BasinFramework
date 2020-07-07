@@ -13,16 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Dotnet
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.300
-      - name: Publish Nuget
-        uses: rohith/publish-nuget@v2
+      - name: Publish NuGet
+        uses: brandedoutcast/publish-nuget@v2.5.2
         with:
           PACKAGE_NAME: BasinFramework
           PROJECT_FILE_PATH: Basin/Basin.csproj
-          VERSION_FILE_PATH: Basin/VERSION
-          VERSION_REGEX: (.*?)
+          VERSION_FILE_PATH: Basin/Basin.csproj
+          VERSION_REGEX: <PackageVersion>(.*?)</PackageVersion>
           TAG_COMMIT: true
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
