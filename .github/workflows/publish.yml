@@ -1,11 +1,11 @@
-name: Publish and Release
+name: Basin Release
 
 on:
   push:
     branches: [master]
 
 jobs:
-  publish:
+  publish_and_release:
     runs-on: ubuntu-latest
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1

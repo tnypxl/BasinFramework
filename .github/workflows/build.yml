@@ -1,11 +1,11 @@
-name: Build
+name: Basin Build
 
 on:
   pull_request:
     branches: [master]
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
