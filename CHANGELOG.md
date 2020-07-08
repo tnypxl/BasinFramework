@@ -1,7 +1,7 @@
 ## v1.1.1
 
 * **[NEW]** Added more html tags.
-* **[STRUCTURAL]** In `Basin.Selenium` namespace, renamed static `Driver` class to `Browser`
+* **[STRUCTURAL]** Renamed static `Driver` class to `Browser`
 * **[STRUCTURAL]** Renamed `BSN` to `Basin`.
 
 ## v1.1.0
