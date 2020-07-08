@@ -77,6 +77,5 @@ namespace Basin.Core.Browsers
         {
             return _browser.SetOptions(options);
         }
-
     }
 }

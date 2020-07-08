@@ -10,20 +10,20 @@ namespace Basin.Tests.Steps
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            BSN.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
+            Basin.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
         }
 
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
-            Driver.Init();
+            Browser.Init();
             Pages.Init();
         }
 
         [AfterScenario]
         public static void AfterScenarioHook()
         {
-            Driver.Current?.Quit();
+            Browser.Current?.Quit();
         }
     }
 }
