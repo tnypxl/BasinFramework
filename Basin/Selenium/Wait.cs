@@ -10,7 +10,7 @@ namespace Basin.Selenium
 
         public Wait(int waitSeconds)
         {
-            _wait = new WebDriverWait(Driver.Current, TimeSpan.FromSeconds(waitSeconds))
+            _wait = new WebDriverWait(Browser.Current, TimeSpan.FromSeconds(waitSeconds))
             {
                 PollingInterval = TimeSpan.FromMilliseconds(500)
             };

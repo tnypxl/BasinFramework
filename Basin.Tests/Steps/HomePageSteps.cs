@@ -9,7 +9,7 @@ namespace Basin.Tests.Steps
         [Given("I am on the home page")]
         public static void OnTheHomePage()
         {
-            Driver.Goto(BSN.Config.Site.Url);
+            Browser.Goto(Basin.Config.Site.Url);
         }
 
         [Given(@"I navigate to the example named '(.*?)'")]

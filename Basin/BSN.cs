@@ -1,13 +1,10 @@
-using System;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Basin.Config;
 using Basin.Config.Interfaces;
 using Config.Net;
 
 namespace Basin
 {
-    public static class BSN
+    public static class Basin
     {
         public static CurrentConfig Config;
 
