@@ -5,7 +5,6 @@ namespace Basin.Pages
 {
     public abstract class PageMap : IHtmlElements
     {
-        public Element Tag(string tagName) => new Element(tagName);
 
         public Element AbbreviationTag => new Element("abbr");
 
@@ -198,5 +197,15 @@ namespace Basin.Pages
         public Element TimeTag => new Element("time");
 
         public Element UnorderedListTag => new Element("ul");
+
+        public Element UnderlineTag => new Element("u");
+
+        public Element VarTag => new Element("var");
+
+        public Element TrackTag => new Element("track");
+
+        public Element TitleTag => new Element("title");
+
+        public Element Tag(string tagName) => new Element(tagName);
     }
 }

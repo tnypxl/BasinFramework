@@ -4,7 +4,6 @@ namespace Basin.Core.Locators.Interfaces
 {
     public interface IHtmlElements
     {
-        Element Tag(string tagName);
 
         Element AbbreviationTag { get; }
 
@@ -187,5 +186,14 @@ namespace Basin.Core.Locators.Interfaces
         Element TextAreaTag { get; }
 
         Element TextInputTag { get; }
+
+        Element UnderlineTag { get; }
+
+        Element VarTag { get; }
+
+        Element TrackTag { get; }
+
+        Element TitleTag { get; }
+        Element Tag(string tagName);
     }
 }
