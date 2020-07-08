@@ -4,7 +4,6 @@ namespace Basin.Core.Locators.Interfaces
 {
     public interface IHtmlElements
     {
-
         Element AbbreviationTag { get; }
 
         Element AddressTag { get; }

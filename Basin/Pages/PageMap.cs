@@ -5,7 +5,6 @@ namespace Basin.Pages
 {
     public abstract class PageMap : IHtmlElements
     {
-
         public Element AbbreviationTag => new Element("abbr");
 
         public Element AbbrTag => AbbreviationTag;

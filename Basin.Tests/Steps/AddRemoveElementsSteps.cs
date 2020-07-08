@@ -19,6 +19,5 @@ namespace Basin.Tests.Steps
                 Pages.AddRemoveElementsExample.HasNumberOfDeleteButtons(expectedCount),
                 $"Expected {expectedCount} Delete button(s) to be displayed. Got {Pages.AddRemoveElementsExample.Map.AllDeleteButtons.Count} instead.");
         }
-
     }
 }
