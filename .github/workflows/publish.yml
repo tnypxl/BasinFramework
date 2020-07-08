@@ -2,7 +2,7 @@ name: Basin Release
 
 on:
   push:
-    branches: [master]
+    branches: [release]
 
 jobs:
   publish_and_release:
