@@ -1,14 +1,4 @@
-======== v1.1.0
-This is mostly comprised of underlying structural changes.
-
-* **[NEW]** Automated nuget publishing and github releases
-* **[BREAKING CHANGE]** `BSN.*` is now `Basin.*`
-* **[BREAKING CHANGE]** Driver instance management are based on decorators
-* **[BREAKING CHANGE]** `BrowserFactory()` updated to use decorators
-
-
-
-======== v0.0.8 
+v0.0.8 ==========================================================
 * **[FIX]** PageCollections would throw a duplicate key error. It just returns if the key already exists.
 * **[NEW]** New `Locator()` class that builds an XPath selector for you and returns `By.XPath`. If more advance XPath usage is need, Just use the existing `Locate` methods.
   * Usage: `new Locator("table").WithId("earningsTable").By;`
