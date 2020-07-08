@@ -12,9 +12,9 @@ namespace Basin.Core.Browsers
         private FirefoxOptions _options;
 
         public override IWebDriver Driver =>
-            BSN.Config.Browser.Host == null
+            Basin.Config.Browser.Host == null
                 ? new FirefoxDriver(FirefoxDriverService, FirefoxOptions)
-                : new RemoteWebDriver(BSN.Config.Browser.Host, FirefoxOptions);
+                : new RemoteWebDriver(Basin.Config.Browser.Host, FirefoxOptions);
 
         public override FirefoxDriverService FirefoxDriverService => _service;
 

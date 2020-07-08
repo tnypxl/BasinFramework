@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Basin.Selenium
 {
-    public static class Driver
+    public static class Browser
     {
         [ThreadStatic] private static IWebDriver _driver;
 
@@ -23,7 +23,7 @@ namespace Basin.Selenium
             FinishSetup();
         }
 
-        public static void Init(Browser browser)
+        public static void Init(Core.Browsers.Browser browser)
         {
             _driver = browser.Driver;
 
@@ -33,7 +33,7 @@ namespace Basin.Selenium
         public static void Init(IWebDriver driver)
         {
             _driver = driver;
-            Wait = new Wait(BSN.Config.Browser.Timeout);
+            Wait = new Wait(Basin.Config.Browser.Timeout);
         }
 
         public static void Goto(string url)
@@ -50,7 +50,7 @@ namespace Basin.Selenium
 
         private static void FinishSetup()
         {
-            Wait = new Wait(BSN.Config.Browser.Timeout);
+            Wait = new Wait(Basin.Config.Browser.Timeout);
             Window = new Window();
             Window.Maximize();
         }

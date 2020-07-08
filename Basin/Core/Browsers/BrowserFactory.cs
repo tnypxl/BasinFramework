@@ -11,6 +11,6 @@ namespace Basin.Core.Browsers
             { "internet explorer", new InternetExplorerBrowser() }
         };
 
-        public static Browser Current => new ConfiguredBrowserDecorator(SupportedBrowsers[BSN.Config.Browser.Kind]);
+        public static Browser Current => new ConfiguredBrowserDecorator(SupportedBrowsers[Basin.Config.Browser.Kind]);
     }
 }
