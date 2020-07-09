@@ -16,9 +16,9 @@ namespace Basin.Core.Browsers
         public override InternetExplorerOptions InternetExplorerOptions => _options;
 
         public override IWebDriver Driver =>
-            Basin.Config.Browser.Host == null
+            BasinEnv.Browser.Host == null
                 ? new InternetExplorerDriver(InternetExplorerDriverService, InternetExplorerOptions)
-                : new RemoteWebDriver(Basin.Config.Browser.Host, InternetExplorerOptions);
+                : new RemoteWebDriver(BasinEnv.Browser.Host, InternetExplorerOptions);
 
         public override Browser CreateDriverService(string pathToDriverExecutable = null)
         {

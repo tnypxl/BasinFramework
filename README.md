@@ -66,16 +66,16 @@ Create a JSON file at the root of your project
 Initialize the config file:
 
 ```csharp
-Basin.SetConfig("path/to/json/config/file.json");
+BasinEnv.SetConfig("path/to/json/config/file.json");
 ```
 
-Then you access config data with `Basin.Config`
+Then you access config data with `BasinEnv`
 
 ```csharp
-Basin.Config.Site.Id; // returns "integration"
-Basin.Config.Site.Url; // returns "https://integration.coolapp.com"
-Basin.Config.Browser.Kind; // returns "chrome"
-Basin.Config.Login.Username; // returns "lebronjaymes"
+BasinEnv.Site.Id; // returns "integration"
+BasinEnv.Site.Url; // returns "https://integration.coolapp.com"
+BasinEnv.Browser.Kind; // returns "chrome"
+BasinEnv.Login.Username; // returns "lebronjaymes"
 ```
 
 ### Start a browser session
