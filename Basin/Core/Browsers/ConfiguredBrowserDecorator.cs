@@ -11,7 +11,7 @@ namespace Basin.Core.Browsers
     {
         private readonly Browser _browser;
 
-        private IBrowserConfig Config { get; } = Basin.Config.Browser;
+        private IBrowserConfig Config { get; } = BasinEnv.Browser;
         public ConfiguredBrowserDecorator(Browser browser) : base(browser)
         {
             _browser = browser;
@@ -43,32 +43,32 @@ namespace Basin.Core.Browsers
 
         public sealed override Browser CreateDriverService(string pathToDriverExecutable = null)
         {
-            return _browser.CreateDriverService(Basin.Config.Browser.PathToDriverBinary);
+            return _browser.CreateDriverService(BasinEnv.Browser.PathToDriverBinary);
         }
 
         public sealed override Browser CreateDriverOptions(string pathToBrowserExecutable = null)
         {
-            return _browser.CreateDriverOptions(Basin.Config.Browser.PathToBrowserExecutable);
+            return _browser.CreateDriverOptions(BasinEnv.Browser.PathToBrowserExecutable);
         }
 
         public sealed override Browser SetVersion(string version = null)
         {
-            return _browser.SetVersion(Basin.Config.Browser.Version);
+            return _browser.SetVersion(BasinEnv.Browser.Version);
         }
 
         public sealed override Browser SetPlatformName(string platformName = null)
         {
-            return _browser.SetPlatformName(Basin.Config.Browser.PlatformName);
+            return _browser.SetPlatformName(BasinEnv.Browser.PlatformName);
         }
 
         public sealed override Browser EnableHeadlessMode(bool enabled = false)
         {
-            return _browser.EnableHeadlessMode(Basin.Config.Browser.Headless);
+            return _browser.EnableHeadlessMode(BasinEnv.Browser.Headless);
         }
 
         public sealed override Browser SetArguments(params string[] arguments)
         {
-            return _browser.SetArguments(Basin.Config.Browser.Arguments.ToArray());
+            return _browser.SetArguments(BasinEnv.Browser.Arguments.ToArray());
         }
 
         public override Browser SetOptions(ChromeOptions options)
