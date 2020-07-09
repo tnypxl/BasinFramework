@@ -39,7 +39,9 @@ namespace Basin.Tests.Pages
     public class AddRemoveElementsPageMap : PageMap
     {
         public Element AddElementButton => ButtonTag.WithText("Add Element");
+
         public Element DeleteButton => ButtonTag.WithClass("added-manually");
+
         public Elements AllDeleteButtons => DeleteButton.All;
     }
 }

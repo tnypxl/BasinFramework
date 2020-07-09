@@ -12,9 +12,9 @@ namespace Basin.Core.Browsers
         private ChromeOptions _options;
 
         public override IWebDriver Driver =>
-            Basin.Config.Browser.Host == null
+            BasinEnv.Browser.Host == null
                 ? new ChromeDriver(ChromeDriverService, ChromeOptions)
-                : new RemoteWebDriver(Basin.Config.Browser.Host, ChromeOptions);
+                : new RemoteWebDriver(BasinEnv.Browser.Host, ChromeOptions);
 
         public override ChromeOptions ChromeOptions => _options;
 

@@ -1,3 +1,7 @@
+## v1.1.2
+
+* [FIX] Classes can't be named identically to namespaces. Renamed `Basin()` class to `BasinEnv()` to fix namespace issues, but also to be more indicitive of its purpose.
+
 ## v1.1.1
 
 * **[NEW]** Added more html tags.

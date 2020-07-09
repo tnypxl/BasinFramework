@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Basin.Core.Browsers;
 using OpenQA.Selenium;
 
@@ -33,7 +33,7 @@ namespace Basin.Selenium
         public static void Init(IWebDriver driver)
         {
             _driver = driver;
-            Wait = new Wait(Basin.Config.Browser.Timeout);
+            Wait = new Wait(BasinEnv.Browser.Timeout);
         }
 
         public static void Goto(string url)
@@ -50,7 +50,7 @@ namespace Basin.Selenium
 
         private static void FinishSetup()
         {
-            Wait = new Wait(Basin.Config.Browser.Timeout);
+            Wait = new Wait(BasinEnv.Browser.Timeout);
             Window = new Window();
             Window.Maximize();
         }

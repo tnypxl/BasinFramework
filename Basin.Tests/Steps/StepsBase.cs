@@ -10,7 +10,7 @@ namespace Basin.Tests.Steps
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
-            Basin.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
+            BasinEnv.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
         }
 
         [BeforeScenario]
