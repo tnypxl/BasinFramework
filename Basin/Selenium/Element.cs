@@ -147,54 +147,86 @@ namespace Basin.Selenium
         public void Hover()
         {
             var actions = new Actions(Browser.Current);
+
             actions.MoveToElement(Current).Perform();
         }
 
         public Element Inside(Element parent)
         {
             _locator.Inside(parent._locator);
+
             return this;
         }
 
         public Element WithText(string text)
         {
             _locator.WithText(text);
+
             return this;
         }
 
         public Element WithClass(string className)
         {
             _locator.WithClass(className);
+
             return this;
         }
 
         public Element WithId(string id)
         {
             _locator.WithId(id);
+
             return this;
         }
 
         public Element WithAttr(string name, string value)
         {
             _locator.WithAttr(name, value);
+
             return this;
         }
 
         public Element WithChild(Element child)
         {
             _locator.WithChild(child._locator);
+
             return this;
         }
 
         public Element WithDescendant(Element descendant)
         {
             _locator.WithDescendant(descendant._locator);
+
             return this;
         }
+
+        public Element Parent()
+        {
+            _locator.Parent();
+
+            return this;
+        }
+
+        public Element Before(Element element)
+        {
+            _locator.Before(element._locator);
+
+            return this;
+        }
+
+        public Element After(Element element)
+        {
+            _locator.After(element._locator);
+
+            return this;
+        }
+
+
 
         public Element As(string description)
         {
             Description = description;
+
             return this;
         }
 

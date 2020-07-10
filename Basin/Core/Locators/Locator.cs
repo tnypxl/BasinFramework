@@ -1,3 +1,4 @@
+using System.Xml.XPath;
 using System.Text;
 using System.Text.RegularExpressions;
 using Basin.Core.Locators.Interfaces;
@@ -26,9 +27,7 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithText(string text)
         {
-            XPath.Append("[contains(.,'")
-                 .Append(text)
-                 .Append("')]");
+            XPath.Append(GetXPathStringFunc(".", text));
 
             return this;
         }
@@ -60,17 +59,19 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithAttr(string name, string value)
         {
-            XPath.Append(GetXPathAttribute(name, value));
+            XPath.Append(GetXPathStringFunc($"@{name}", value));
 
             return this;
         }
 
         public ILocatorBuilder WithChild(ILocatorBuilder child)
         {
+
+            var newChildXPath = child.XPath;
+
             // XPath axis is descendant (e.g, "//") by default
             // We need to remove one axis to make it a child
             // "//div" becomes "/div"
-            var newChildXPath = child.XPath;
             newChildXPath.Remove(0, 1);
 
             XPath.Append("[.")
@@ -89,23 +90,47 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        private static string GetXPathAttribute(string attrName, string attrValue)
+        public ILocatorBuilder Parent()
         {
-            string modAttrValue;
-            var op = Regex.Match(attrValue, @"^(\^|\$|\*){1}").Value;
+            XPath.Append("/parent::*");
 
-            modAttrValue = string.IsNullOrEmpty(op) ? attrValue : attrValue.Remove(0, 1); // Remove operator if present
+            return this;
+        }
+
+        public ILocatorBuilder After(ILocatorBuilder sibling)
+        {
+            XPath.Append(sibling.XPath)
+                 .Append("/following-sibling::")
+                 .Append(XPath);
+
+            return this;
+        }
+
+        public ILocatorBuilder Before(ILocatorBuilder sibling)
+        {
+            XPath.Append(sibling.XPath)
+                 .Append("/preceding-sibling::")
+                 .Append(XPath);
+
+            return this;
+        }
+
+        private static string GetXPathStringFunc(string attrOrFuncName, string attrOrFuncValue)
+        {
+            var op = Regex.Match(attrOrFuncValue, @"^(\^|\$|\*){1}").Value;
+
+            attrOrFuncValue = string.IsNullOrEmpty(op) ? attrOrFuncValue : attrOrFuncValue.Remove(0, 1);
 
             return op
             switch
             {
-                "^" => $"[starts-with(@{attrName}, '{modAttrValue}')]",
+                "^" => $"[starts-with({attrOrFuncName}, '{attrOrFuncValue}')]",
 
                 // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
                 // So we have to make this unholy mess to get the same behavior with XPath 1.0
-                "$" => $"[substring(@{attrName}, string-length(@{attrName}) - string-length('{modAttrValue}') +1)]",
-                "*" => $"[contains(@{attrName}, '{modAttrValue}')]",
-                _ => $"[@{attrName}='{modAttrValue}']",
+                "$" => $"[substring({attrOrFuncName}, string-length({attrOrFuncName}) - string-length('{attrOrFuncValue}') +1)]",
+                "*" => $"[contains({attrOrFuncName}, '{attrOrFuncValue}')]",
+                _ => $"[{attrOrFuncName}='{attrOrFuncValue}']",
             };
         }
     }
