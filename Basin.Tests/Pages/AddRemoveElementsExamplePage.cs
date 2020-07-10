@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
 namespace Basin.Tests.Pages
 {
-    public class AddRemoveElementsPage : Page<AddRemoveElementsPageMap>
+    public class AddRemoveElementsExamplePage : Page<AddRemoveElementsPageMap>
     {
         public void AddElement()
         {

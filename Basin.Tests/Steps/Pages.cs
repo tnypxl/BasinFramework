@@ -6,12 +6,16 @@ namespace Basin.Tests.Steps
     public static class Pages
     {
         [ThreadStatic] public static HomePage Home;
-        [ThreadStatic] public static AddRemoveElementsPage AddRemoveElementsExample;
+
+        [ThreadStatic] public static AddRemoveElementsExamplePage AddRemoveElementsExample;
+
+        [ThreadStatic] public static LargeAndDeepDOMExamplePage LargeAndDeepDOMExample;
 
         public static void Init()
         {
             Home = new HomePage();
-            AddRemoveElementsExample = new AddRemoveElementsPage();
+            AddRemoveElementsExample = new AddRemoveElementsExamplePage();
+            LargeAndDeepDOMExample = new LargeAndDeepDOMExamplePage();
         }
     }
 }

@@ -13,7 +13,6 @@
     {
       "Id": "Local Chrome",
       "Kind": "chrome",
-      "Headless": true,
       "Timeout": 10
     },
     {
