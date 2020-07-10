@@ -8,12 +8,11 @@ on:
 
 jobs:
   publish_and_release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
-
     steps:
-      - if: github.event.pull_request.merged == true
       - uses: actions/checkout@v2
       
       - name: Setup Dotnet
@@ -22,7 +21,6 @@ jobs:
           dotnet-version: 3.1.300
       
       - name: Publish NuGet
-        if: github.event.pull_request.merged == true
         id: publish_nuget
         uses: brandedoutcast/publish-nuget@v2
         with:
@@ -35,7 +33,6 @@ jobs:
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         
       - name: Create Release
-        if: github.event.pull_request.merged == true
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -46,7 +43,6 @@ jobs:
           body_path: RELEASE_NOTES.md
       
       - name: Add NuGet to Release
-        if: github.event.pull_request.merged == true
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
