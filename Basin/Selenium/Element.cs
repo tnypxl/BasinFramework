@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,35 +13,16 @@ namespace Basin.Selenium
 {
     public sealed class Element : IWebElement
     {
-        private readonly IWebElement _element;
-        private readonly IWebElement _parentElement;
+        // private readonly IWebElement _element;
+
         private readonly int _timeout;
+
         private readonly ILocatorBuilder _locator;
 
-        public Element(IWebElement element)
-        {
-            _element = element;
-        }
-
-        public Element(By by, int timeout = 5)
-        {
-            FoundBy = by;
-            _timeout = timeout;
-        }
-
-        public Element(By by, By parentBy, int timeout = 5)
-        {
-            FoundBy = by;
-            ParentFoundBy = parentBy;
-            _parentElement = new Element(parentBy, timeout);
-            _timeout = timeout;
-        }
-
-        public Element(string tagName, int timeout = 5)
+        public Element(string tagName)
         {
             _locator = new Locator(tagName);
-            _timeout = timeout;
-            // FoundBy = _locator.By;
+            _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
         public string Description { get; set; }
@@ -68,14 +50,11 @@ namespace Basin.Selenium
         {
             get
             {
-                if (_locator != null)
-                    FoundBy = _locator.By;
+                FoundBy = _locator.By;
 
                 return Wait.Until(driver =>
                 {
-                    var element = ParentFoundBy != null ?
-                        CurrentParent.FindElement(FoundBy) :
-                        driver.FindElement(FoundBy);
+                    var element = driver.FindElement(FoundBy);
 
                     return element.Displayed ?
                         element :
@@ -100,14 +79,11 @@ namespace Basin.Selenium
         }
 
         private IWebElement Current => Locate ??
-            throw new NullReferenceException("Element could not located because it was null");
+            throw new NullReferenceException("Element could not be located because it was null");
 
-        private IWebElement CurrentParent => _parentElement ??
-            throw new NullReferenceException("Parent element could not be located because it was null");
+        public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(Current);
 
-        public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(_element);
-
-        public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(_element);
+        public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(Current);
 
         public string TagName => Current.TagName;
 
@@ -222,6 +198,24 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Elements All => new Elements(Browser.Current?.FindElements(_locator.By));
+        public Element IfTextMatches(string pattern)
+        {
+            if (!Exists || !Regex.IsMatch(Current.Text, pattern))
+            {
+                throw new NoSuchElementException("Element does not exist and/or does contain text matching the pattern provided.");
+            }
+
+            return this;
+        }
+
+        public Elements All
+        {
+            get
+            {
+                var by = _locator != null ? _locator.By : FoundBy;
+
+                return new Elements(Browser.Current?.FindElements(by));
+            }
+        }
     }
 }
