@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Config.Net;
 
 namespace Basin.Config.Interfaces
 {
@@ -9,7 +10,11 @@ namespace Basin.Config.Interfaces
 
         string Kind { get; set; }
 
+        [Option(DefaultValue = 10)]
         int Timeout { get; set; }
+
+        [Option(DefaultValue = 2)]
+        int ElementTimeout { get; set; }
 
         string PlatformName { get; set; }
 
@@ -17,6 +22,7 @@ namespace Basin.Config.Interfaces
 
         IEnumerable<string> Arguments { get; }
 
+        [Option(DefaultValue = false)]
         bool Headless { get; set; }
 
         string PathToDriverBinary { get; set; }
@@ -33,6 +39,8 @@ namespace Basin.Config.Interfaces
         public string Kind { get; set; }
 
         public int Timeout { get; set; }
+
+        public int ElementTimeout { get; set; }
 
         public string PlatformName { get; set; }
 
