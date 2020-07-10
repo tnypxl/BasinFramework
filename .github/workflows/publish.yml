@@ -1,15 +1,17 @@
 name: Basin Release
 
 on:
-  push:
-    branches: [release]
+  pull_request:
+    types: [closed]
+    labeled: [release]
+    branches: [master]
 
 jobs:
   publish_and_release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
-
     steps:
       - uses: actions/checkout@v2
       
