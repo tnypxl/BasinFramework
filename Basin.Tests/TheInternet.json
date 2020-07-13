@@ -13,7 +13,10 @@
     {
       "Id": "Local Chrome",
       "Kind": "chrome",
-      "Timeout": 10
+      "Timeout": 10,
+      "Arguments": [
+        "--remote-debugging-port=9222"
+      ]
     },
     {
       "Id": "Remote Firefox",
