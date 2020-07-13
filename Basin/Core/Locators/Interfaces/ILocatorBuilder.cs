@@ -23,10 +23,16 @@ namespace Basin.Core.Locators.Interfaces
 
         ILocatorBuilder WithDescendant(ILocatorBuilder descendant);
 
+        ILocatorBuilder Child();
+
+        ILocatorBuilder Child(ILocatorBuilder childLocator);
+
         ILocatorBuilder Parent();
 
-        ILocatorBuilder Before(ILocatorBuilder sibling);
+        ILocatorBuilder Parent(ILocatorBuilder parentLocator);
 
-        ILocatorBuilder After(ILocatorBuilder sibling);
+        ILocatorBuilder Precedes(ILocatorBuilder sibling);
+
+        ILocatorBuilder Follows(ILocatorBuilder sibling);
     }
 }

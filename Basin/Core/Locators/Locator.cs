@@ -66,16 +66,11 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithChild(ILocatorBuilder child)
         {
-
-            var newChildXPath = child.XPath;
-
             // XPath axis is descendant (e.g, "//") by default
             // We need to remove one axis to make it a child
-            // "//div" becomes "/div"
-            newChildXPath.Remove(0, 1);
-
+            // Ergo, "//div" becomes "/div"
             XPath.Append("[.")
-                 .Append(newChildXPath)
+                 .Append(child.XPath.Remove(0, 1))
                  .Append(']');
 
             return this;
@@ -97,39 +92,81 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        public ILocatorBuilder After(ILocatorBuilder sibling)
+        public ILocatorBuilder Parent(ILocatorBuilder parentLocator)
         {
-            XPath.Append(sibling.XPath)
-                 .Append("/following-sibling::")
-                 .Append(XPath);
+            XPath.Append("/parent::")
+                 .Append(parentLocator.XPath.Remove(0, 2));
 
             return this;
         }
 
-        public ILocatorBuilder Before(ILocatorBuilder sibling)
+        public ILocatorBuilder Child()
         {
-            XPath.Append(sibling.XPath)
-                 .Append("/preceding-sibling::")
-                 .Append(XPath);
+            XPath.Append("/child::*");
 
             return this;
         }
+
+        public ILocatorBuilder Child(ILocatorBuilder childLocator)
+        {
+            XPath.Append("/child::")
+                 .Append(childLocator.XPath.Remove(0, 2));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Locate an element that follows another element
+        /// </summary>
+        /// <param name="sibling" type="ILocatorBuilder"></param>
+        /// <returns>//sibling-element/preceding-sibling::element</returns>
+        public ILocatorBuilder Follows(ILocatorBuilder sibling)
+        {
+            XPath.Remove(0, 2)
+                 .Insert(0, "/following-sibling::")
+                 .Insert(0, sibling.XPath);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Locate an element that precedes another element
+        /// </summary>
+        /// <param name="sibling"></param>
+        /// <returns>//siblingElement/preceding-sibling::element</returns>
+        public ILocatorBuilder Precedes(ILocatorBuilder sibling)
+        {
+            XPath.Remove(0, 2)
+                 .Insert(0, "/preceding-sibling::")
+                 .Insert(0, sibling.XPath);
+
+            return this;
+        }
+
+        // private static bool RemoveAxes(StringBuilder xPath)
+        // {
+        //     // var numberOfPrefixedAxes =
+        //     if (Regex.IsMatch(xPath.ToString(), "/"))
+        //         return false;
+        // }
 
         private static string GetXPathStringFunc(string attrOrFuncName, string attrOrFuncValue)
         {
-            var op = Regex.Match(attrOrFuncValue, @"^(\^|\$|\*){1}").Value;
+            var op = Regex.Match(attrOrFuncValue, @"^(\^\||\$\||\*\|){1}").Value;
 
-            attrOrFuncValue = string.IsNullOrEmpty(op) ? attrOrFuncValue : attrOrFuncValue.Remove(0, 1);
+            // Remove operator if the string contains one
+            attrOrFuncValue = string.IsNullOrEmpty(op)
+                ? attrOrFuncValue
+                : attrOrFuncValue.Remove(0, 2);
 
-            return op
-            switch
+            return op switch
             {
-                "^" => $"[starts-with({attrOrFuncName}, '{attrOrFuncValue}')]",
+                "^|" => $"[starts-with({attrOrFuncName}, '{attrOrFuncValue}')]",
 
                 // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
                 // So we have to make this unholy mess to get the same behavior with XPath 1.0
-                "$" => $"[substring({attrOrFuncName}, string-length({attrOrFuncName}) - string-length('{attrOrFuncValue}') +1)]",
-                "*" => $"[contains({attrOrFuncName}, '{attrOrFuncValue}')]",
+                "$|" => $"[substring({attrOrFuncName}, string-length({attrOrFuncName}) - string-length('{attrOrFuncValue}') +1)]",
+                "*|" => $"[contains({attrOrFuncName}, '{attrOrFuncValue}')]",
                 _ => $"[{attrOrFuncName}='{attrOrFuncValue}']",
             };
         }

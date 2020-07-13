@@ -1,22 +1,31 @@
 using System.Reflection;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
+using Basin.Tests.Pages;
 
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public static class LargeAndDeepDomExampleSteps
+    public class LargeAndDeepDomExampleSteps
     {
-        [Then("I can see that item '(.*?)' comes after item '(.*?)'")]
-        public static void CanSeeItemComesAfterItem(string item, string targetItem)
+        private readonly LargeAndDeepDOMExamplePage Page = Pages.LargeAndDeepDOMExample;
+
+        [Then("I can locate element '(.*?)' by its following element '(.*?)'")]
+        public void ThenILocateFindElementByItsFollowingElement(string elementText, string siblingElementText)
         {
-            Assert.That(Pages.LargeAndDeepDOMExample.ItemComesAfter(item, targetItem));
+            Assert.That(Page.Item(elementText).Follows(Page.Item(siblingElementText)).Displayed);
         }
 
-        [Then("I can see that item '(.*?)' comes before item '(.*?)'")]
-        public static void CanSeeItemComesBeforeItem(string item, string targetItem)
+        [Then("I can locate element '(.*?)' by its preceding element '(.*?)'")]
+        public void ThenILocateFindElementByItsPrecedingElement(string elementText, string siblingElementText)
         {
-            Assert.That(Pages.LargeAndDeepDOMExample.ItemComesBefore(item, targetItem));
+            Assert.That(Page.Item(elementText).Precedes(Page.Item(siblingElementText)).Displayed);
+        }
+
+        [Then("I can locate parent (.*?) of element (.*?)")]
+        public void ThenICanLocateParentOfElement(string elementText, string parentText)
+        {
+            Assert.That(Page.Item(elementText).Parent(Page.Item(parentText)).Displayed);
         }
     }
 }

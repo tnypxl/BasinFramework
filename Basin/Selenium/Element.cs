@@ -207,20 +207,40 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element Before(Element element)
+        public Element Parent(Element element)
         {
-            _locator.Before(element._locator);
+            _locator.Parent(element._locator);
 
             return this;
         }
 
-        public Element After(Element element)
+        public Element Child()
         {
-            _locator.After(element._locator);
+            _locator.Child();
 
             return this;
         }
 
+        public Element Child(Element element)
+        {
+            _locator.Child(element._locator);
+
+            return this;
+        }
+
+        public Element Precedes(Element element)
+        {
+            _locator.Precedes(element._locator);
+
+            return this;
+        }
+
+        public Element Follows(Element element)
+        {
+            _locator.Follows(element._locator);
+
+            return this;
+        }
 
 
         public Element As(string description)
