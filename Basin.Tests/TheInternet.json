@@ -1,27 +1,26 @@
 {
   "Environment": {
     "Site": "The Internet",
-    "Browser": "Local Chrome"
+    "Browser": "Remote Firefox"
   },
   "Sites": [
     {
       "Id": "The Internet",
-      "Url": "http://the-internet.herokuapp.com"
+      "Url": "http://app:5000"
     }
   ],
   "Browsers": [
     {
       "Id": "Local Chrome",
       "Kind": "chrome",
-      "Timeout": 10,
-      "Arguments": [
-        "--remote-debugging-port=9222"
-      ]
+      "Timeout": 10
     },
     {
       "Id": "Remote Firefox",
       "Kind": "firefox",
-      "Host": "http://localhost:4444/wd/hub"
+      "Version": "78.0",
+      "Host": "http://localhost:4444",
+      "Headless": true
     }
   ],
   "Logins": [

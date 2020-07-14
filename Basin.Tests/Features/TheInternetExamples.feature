@@ -12,12 +12,16 @@
 
 	Scenario: Locates an element by its following element
 		When I navigate to the example named 'Large & Deep DOM'
-		Then I can locate element '1.2' by its following element '1.3'
+		Then I can locate element '1.3' that follows element '1.2'
 
 	Scenario: Locates an element by its preceding element
 		When I navigate to the example named 'Large & Deep DOM'
-		Then I can locate element '1.3' by its preceding element '1.2'
+		Then I can locate element '1.2' that precedes element '1.3'
 
 	Scenario: Locates parent of element
 		When I navigate to the example named 'Large & Deep DOM'
-		Then I can locate parent '13.1' of element '14.1'
+		Then I can locate the first parent of element '4.1'
+
+	Scenario: Locates specific parent of element
+		When I navigate to the example named 'Large & Deep DOM'
+		Then I can locate parent '1.1' of element '2.1'

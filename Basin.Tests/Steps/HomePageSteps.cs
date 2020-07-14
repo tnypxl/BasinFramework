@@ -12,7 +12,7 @@ namespace Basin.Tests.Steps
             Browser.Goto(BasinEnv.Site.Url);
         }
 
-        [Given("I navigate to the example named '(.*?)'")]
+        [StepDefinition("I navigate to the example named '(.*?)'")]
         public static void NavigateToExample(string exampleName)
         {
             Pages.Home.NavigateToExample(exampleName);
