@@ -1,7 +1,7 @@
 
 # Basin Framework
 
-![Basin](https://github.com/tnypxl/BasinFrameworkDotNetCore/workflows/Basin/badge.svg)
+![Basin Build](https://github.com/tnypxl/BasinFrameworkDotNetCore/workflows/Basin%20Build/badge.svg)
 
 An opinionated browser test framework for Selenium WebDriver. There are many like this one. The goal here was to build something that was easy to implement while still providing flexibility without over abstracting.
 
