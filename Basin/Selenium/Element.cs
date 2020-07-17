@@ -35,7 +35,7 @@ namespace Basin.Selenium
         {
             get
             {
-                var wait = new DefaultWait<IWebDriver>(Browser.Current)
+                var wait = new DefaultWait<IWebDriver>(BrowserSession.Current)
                 {
                     Timeout = TimeSpan.FromSeconds(_timeout)
                 };
@@ -146,7 +146,7 @@ namespace Basin.Selenium
 
         public void Hover()
         {
-            var actions = new Actions(Browser.Current);
+            var actions = new Actions(BrowserSession.Current);
 
             actions.MoveToElement(Current).Perform();
         }
@@ -242,7 +242,6 @@ namespace Basin.Selenium
             return this;
         }
 
-
         public Element As(string description)
         {
             Description = description;
@@ -266,7 +265,7 @@ namespace Basin.Selenium
             {
                 var by = _locator != null ? _locator.By : FoundBy;
 
-                return new Elements(Browser.Current?.FindElements(by));
+                return new Elements(BrowserSession.Current?.FindElements(by));
             }
         }
     }
