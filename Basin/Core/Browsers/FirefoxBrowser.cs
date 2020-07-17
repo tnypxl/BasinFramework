@@ -1,85 +1,38 @@
-using System.Linq;
+using System;
+using Basin.Config.Interfaces;
+using Basin.Core.Browsers.Interfaces;
+using Basin.Core.Browsers.Mappers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 
 namespace Basin.Core.Browsers
 {
-    public class FirefoxBrowser : Browser
+    public class FirefoxBrowser : IFirefoxBrowser
     {
-        private FirefoxDriverService _service;
-
-        private FirefoxOptions _options;
-
-        public override IWebDriver Driver =>
-            BasinEnv.Browser.Host == null
-                ? new FirefoxDriver(_service, _options)
-                : new RemoteWebDriver(_options);
-
-        public override FirefoxDriverService FirefoxDriverService => _service;
-
-        public override FirefoxOptions FirefoxOptions => _options;
-
-        public override Browser CreateDriverService(string pathToDriverExecutable = null)
+        public FirefoxBrowser()
         {
-            _service = string.IsNullOrEmpty(pathToDriverExecutable)
-                ? FirefoxDriverService.CreateDefaultService()
-                : FirefoxDriverService.CreateDefaultService(pathToDriverExecutable);
-
-            return this;
         }
 
-        public override Browser CreateDriverOptions(string pathToBrowserExecutable = null)
+        public FirefoxBrowser(IBrowserConfig config)
         {
-            _options = new FirefoxOptions();
+            Service = new FirefoxServiceMapper(config).Service;
+            Options = new FirefoxOptionsMapper(config).Options;
 
-            if (string.IsNullOrEmpty(pathToBrowserExecutable))
-                _options.BrowserExecutableLocation = pathToBrowserExecutable;
-
-            return this;
+            CreateDriver(config.Host);
         }
 
-        public override Browser SetVersion(string version = null)
+        public FirefoxDriverService Service { get; set; }
+
+        public FirefoxOptions Options { get; set; }
+
+        public IWebDriver Driver { get; set; }
+
+        public void CreateDriver(Uri host = null)
         {
-            if (string.IsNullOrEmpty(version)) return this;
-
-            _options.BrowserVersion = version;
-
-            return this;
-        }
-
-        public override Browser SetPlatformName(string platformName = null)
-        {
-            if (string.IsNullOrEmpty(platformName)) return this;
-
-            _options.PlatformName = platformName;
-
-            return this;
-        }
-
-        public override Browser EnableHeadlessMode(bool enabled = false)
-        {
-            if (!enabled) return this;
-
-            _options.AddArgument("-headless");
-
-            return this;
-        }
-
-        public override Browser SetArguments(params string[] arguments)
-        {
-            if (arguments?.Any() != true) return this;
-
-            _options.AddArguments(arguments);
-
-            return this;
-        }
-
-        public override Browser SetOptions(FirefoxOptions options)
-        {
-            _options = options;
-
-            return this;
+            Driver = host == null
+                ? new FirefoxDriver(Service, Options)
+                : new RemoteWebDriver(host, Options);
         }
     }
 }
