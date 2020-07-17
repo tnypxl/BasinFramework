@@ -1,8 +1,6 @@
-using System.Reflection;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using Basin.Tests.Pages;
-using System;
 
 namespace Basin.Tests.Steps
 {
@@ -18,23 +16,38 @@ namespace Basin.Tests.Steps
         }
 
         [Then("I can locate element '(.*?)' that precedes element '(.*?)'")]
-        public void ThenILocateElementThatPrecedesElement(string elementText, string siblingElementText)
+        public void ThenICanLocateElementThatPrecedesElement(string elementText, string siblingElementText)
         {
             Assert.That(Page.Item(elementText).Precedes(Page.Item(siblingElementText)).Exists);
         }
 
-        [Then("I can locate parent (.*?) of element (.*?)")]
-        public void ThenICanLocateParentOfElement(string parentText, string elementText)
+        [Then("I can locate the first parent of element")]
+        public void ThenICanLocateParentOfElement()
         {
-            Console.WriteLine(Page.Item(elementText).Parent(Page.Item(parentText)).FoundBy.ToString());
+            const string elementText = "4.1";
+
+            Assert.That(Page.Item(elementText).Parent().Exists);
+            Assert.That(Page.Item(elementText).Parent().WithId("sibling-3.1").Exists);
+        }
+
+        [Then("I can locate parent '(.*?)' of element '(.*?)'")]
+        public void ThenICanLocateSpecificParentOfElement(string parentText, string elementText)
+        {
             Assert.That(Page.Item(elementText).Parent(Page.Item(parentText)).Exists);
         }
 
-        [Then("I can locate the first parent of element (.*?)")]
-        public void ThenICanLocateParentOfElement(string elementText)
+        [Then("I can locate the first child of element")]
+        public void ThenICanLocateChildOfElement()
         {
-            Console.WriteLine(Page.Item(elementText).Parent().FoundBy.ToString());
-            Assert.That(Page.Item(elementText).Parent().Exists);
+            const string elementText = "4.1";
+
+            Assert.That(Page.Item(elementText).Child(Page.Item("4.2")).Exists);
+        }
+
+        [Then("I can locate child '(.*?)' of element '(.*?)'")]
+        public void ThenICanLocateSpecificChildOfElement(string childText, string elementText)
+        {
+            Assert.That(Page.Item(elementText).Child(Page.Item(childText)).Exists);
         }
     }
 }

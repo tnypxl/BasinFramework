@@ -17,29 +17,14 @@ namespace Basin.Tests.Steps
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
-            Browser.Init(RemoteFirefox());
+            BrowserSession.Init();
             Pages.Init();
         }
 
         [AfterScenario]
         public static void AfterScenarioHook()
         {
-            Browser.Current?.Quit();
+            BrowserSession.Current?.Quit();
         }
-
-        private static Browsers.FirefoxBrowser RemoteFirefox()
-        {
-            var browser = new Browsers.FirefoxBrowser();
-
-            browser.CreateDriverService();
-            browser.CreateDriverOptions();
-            browser.FirefoxDriverService.Host = "localhost";
-            browser.FirefoxDriverService.Port = 4444;
-            browser.FirefoxOptions.BrowserVersion = "78.0";
-            browser.FirefoxOptions.PlatformName = "linux";
-
-            return browser;
-        }
-
     }
 }

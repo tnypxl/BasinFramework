@@ -26,7 +26,7 @@ namespace Basin.Tests.Pages
         {
             try
             {
-                Browser.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
+                BrowserSession.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
                 return Map.AllDeleteButtons.Count == expectedCount;
             }
             catch (WebDriverTimeoutException)
