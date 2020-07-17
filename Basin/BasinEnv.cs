@@ -30,8 +30,14 @@ namespace Basin
 
         public static void UseBrowser(string browserId) => Browser = _config.SetBrowserConfig(browserId).Browser;
 
+        public static void UseBrowser(IBrowserConfig browserConfig) => Browser = browserConfig;
+
         public static void UseSite(string siteId) => Site = _config.SetSiteConfig(siteId).Site;
 
+        public static void UseSite(ISiteConfig siteConfig) => Site = siteConfig;
+
         public static void UseLogin(string usernameOrRole) => Login = _config.SetLoginConfig(usernameOrRole).Login;
+
+        public static void UseLogin(ILoginConfig loginConfig) => Login = loginConfig;
     }
 }

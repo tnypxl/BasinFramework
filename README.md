@@ -78,45 +78,45 @@ BasinEnv.Browser.Kind; // returns "chrome"
 BasinEnv.Login.Username; // returns "lebronjaymes"
 ```
 
+Or switch to an different configuration
+
+```c#
+BasinEnv.UseSite("Some Other Site Id");
+BasinEnv.UseBrowser("Some Other Browser Id");
+```
+
+Or use a config object
+```c#
+BasinEnv.UseSite(new SiteConfig() {
+    Id = "My New Site",
+    Url = "http://dopesites.example.com"
+});
+```
+
+Note: If you use these methods before calling `BasinEnv.SetConfig()`, they will be overwritten with settings defined in the JSON config file.
+
 ### Start a browser session
 
 By default, all the drivers are configured with a clean slate. That just means there are no browser flags or custom binary paths being set initially. Starting up a browser and going to a url is 2 lines of code.
 
 ```c#
 // Uses the value defined in `Environment.Browser` by default to load a listed browser config by its `Id`
-Browser.Init(); 
+BrowserSession.Init(); 
 
 // Navigates to a given url
-Browser.Goto("http://someurl");
+BrowserSession.Goto("http://someurl");
 ```
 
-For the most part, nothing else is needed. But if you need to access the `IWebDriver` instance, just call `Browser.Current`.
+For the most part, nothing else is needed. But if you need to access the `IWebDriver` instance, just call `BrowserSession.Current`.
 
 ### Use a `IWebDriver` instance directly
 
 Maybe I already have code written to manage driver instances. Just pass in an instance of IWebDriver.
 
 ```c#
-Browser.Init(new FirefoxDriver());
-Browser.Goto("http://someurl");
+BrowserSession.Init(new FirefoxBrowser().Driver);
+BrowserSession.Goto("http://someurl");
 ```
-
-### Use a driver builder
-
-Basin provides some default browser classes that expose driver service/options for custom configurations. As time goes, more helper methods will be added to provide a common configuration API between all the web drivers.
-
-```c#
-var firefoxBrowserWithLogging = new FirefoxBrowser()
-    .CreateService()
-    .CreateOptions();
-
-firefoxBrowserWithLogging.FirefoxDriverService.HideCommandPrompt = true;
-firefoxBrowserWithLogging.FirefoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.All);
-firefoxBrowserWithLogging.FirefoxOptions.BrowserVersion = "77.0";
-
-Browser.Init(firefoxBrowserWithLogging);
-```
-
 
 ### Creating simple page object class
 
