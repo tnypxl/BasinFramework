@@ -1,4 +1,5 @@
-﻿using Basin.Config;
+﻿using System;
+using Basin.Config;
 using Basin.Config.Interfaces;
 using Config.Net;
 
@@ -8,11 +9,11 @@ namespace Basin
     {
         private static CurrentConfig _config;
 
-        public static ISiteConfig Site;
+        [ThreadStatic] public static ISiteConfig Site;
 
-        public static IBrowserConfig Browser;
+        [ThreadStatic] public static IBrowserConfig Browser;
 
-        public static ILoginConfig Login;
+        [ThreadStatic] public static ILoginConfig Login;
 
         public static ConfigurationBuilder<IConfig> GetConfig => new ConfigurationBuilder<IConfig>();
 
@@ -26,5 +27,11 @@ namespace Basin
 
             Login = _config.Login;
         }
+
+        public static void UseBrowser(string browserId) => Browser = _config.SetBrowserConfig(browserId).Browser;
+
+        public static void UseSite(string siteId) => Site = _config.SetSiteConfig(siteId).Site;
+
+        public static void UseLogin(string usernameOrRole) => Login = _config.SetLoginConfig(usernameOrRole).Login;
     }
 }

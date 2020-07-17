@@ -7,7 +7,7 @@ namespace Basin.Config.Interfaces
     public interface IConfig
     {
         [Option(Alias = "Environment")]
-        IEnvironmentConfig Environment { get; }
+        IEnvironmentConfig Environment { get; set; }
 
         [Option(Alias = "Browsers")]
         IEnumerable<IBrowserConfig> Browsers { get; }

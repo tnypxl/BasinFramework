@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.Config.Interfaces;
-using Basin.Core.Browsers.Interfaces;
 
 namespace Basin.Config
 {
@@ -11,27 +10,47 @@ namespace Basin.Config
         private static IConfig _config;
 
         public IBrowserConfig Browser { get; set; }
+
         public ISiteConfig Site { get; set; }
+
         public ILoginConfig Login { get; set; }
 
         public CurrentConfig(IConfig config)
         {
             _config = config;
 
-            SetSiteConfig();
-            SetBrowserConfig();
-            SetLoginConfig();
+            SetSiteConfig(_config.Environment.Site);
+            SetBrowserConfig(_config.Environment.Browser);
+            SetLoginConfig(_config.Environment.Login);
         }
 
-        public void SetSiteConfig() => Site = _config.Sites.First(site => site.Id == _config.Environment.Site);
-
-        public void SetBrowserConfig() => Browser = _config.Browsers.First(browser => browser.Id == _config.Environment.Browser);
-
-        public void SetLoginConfig()
+        public CurrentConfig SetSiteConfig(string siteId)
         {
-            if (string.IsNullOrEmpty(_config.Environment.Login)) return;
+            if (string.IsNullOrEmpty(siteId))
+                throw new ArgumentNullException(nameof(siteId));
 
-            Login = _config.Logins.First(login => Regex.IsMatch(_config.Environment.Login, $"{login.Role}|{login.Username}"));
+            Site = _config.Sites.First(site => siteId == site.Id);
+
+            return this;
+        }
+
+        public CurrentConfig SetBrowserConfig(string browserId)
+        {
+            if (string.IsNullOrEmpty(browserId))
+                throw new ArgumentNullException(nameof(browserId));
+
+            Browser = _config.Browsers.First(browser => browserId == browser.Id);
+
+            return this;
+        }
+
+        public CurrentConfig SetLoginConfig(string usernameOrRole)
+        {
+            if (string.IsNullOrEmpty(usernameOrRole)) return this;
+
+            Login = _config.Logins.First(login => Regex.IsMatch(usernameOrRole, $"{login.Role}|{login.Username}"));
+
+            return this;
         }
     }
 }

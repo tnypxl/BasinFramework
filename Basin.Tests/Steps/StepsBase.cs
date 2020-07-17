@@ -1,5 +1,4 @@
 using System.IO;
-using Browsers = Basin.Core.Browsers;
 using Basin.Selenium;
 using TechTalk.SpecFlow;
 
@@ -17,6 +16,7 @@ namespace Basin.Tests.Steps
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
+            BasinEnv.UseBrowser("Firefox");
             BrowserSession.Init();
             Pages.Init();
         }

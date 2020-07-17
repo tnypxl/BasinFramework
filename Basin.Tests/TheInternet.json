@@ -25,6 +25,11 @@
       "Version": "83.0",
       "Host": "http://localhost:4444",
       "Headless": true
+    },
+    {
+      "Id": "Firefox",
+      "Kind": "firefox",
+      "Headless": true
     }
   ],
   "Logins": [
