@@ -35,7 +35,7 @@ namespace Basin.Selenium
         {
             get
             {
-                var wait = new DefaultWait<IWebDriver>(Browser.Current)
+                var wait = new DefaultWait<IWebDriver>(BrowserSession.Current)
                 {
                     Timeout = TimeSpan.FromSeconds(_timeout)
                 };
@@ -146,55 +146,106 @@ namespace Basin.Selenium
 
         public void Hover()
         {
-            var actions = new Actions(Browser.Current);
+            var actions = new Actions(BrowserSession.Current);
+
             actions.MoveToElement(Current).Perform();
         }
 
         public Element Inside(Element parent)
         {
             _locator.Inside(parent._locator);
+
             return this;
         }
 
         public Element WithText(string text)
         {
             _locator.WithText(text);
+
             return this;
         }
 
         public Element WithClass(string className)
         {
             _locator.WithClass(className);
+
             return this;
         }
 
         public Element WithId(string id)
         {
             _locator.WithId(id);
+
             return this;
         }
 
         public Element WithAttr(string name, string value)
         {
             _locator.WithAttr(name, value);
+
             return this;
         }
 
         public Element WithChild(Element child)
         {
             _locator.WithChild(child._locator);
+
             return this;
         }
 
         public Element WithDescendant(Element descendant)
         {
             _locator.WithDescendant(descendant._locator);
+
+            return this;
+        }
+
+        public Element Parent()
+        {
+            _locator.Parent();
+
+            return this;
+        }
+
+        public Element Parent(Element element)
+        {
+            _locator.Parent(element._locator);
+
+            return this;
+        }
+
+        public Element Child()
+        {
+            _locator.Child();
+
+            return this;
+        }
+
+        public Element Child(Element element)
+        {
+            _locator.Child(element._locator);
+
+            return this;
+        }
+
+        public Element Precedes(Element element)
+        {
+            _locator.Precedes(element._locator);
+
+            return this;
+        }
+
+        public Element Follows(Element element)
+        {
+            _locator.Follows(element._locator);
+
             return this;
         }
 
         public Element As(string description)
         {
             Description = description;
+
             return this;
         }
 
@@ -214,7 +265,7 @@ namespace Basin.Selenium
             {
                 var by = _locator != null ? _locator.By : FoundBy;
 
-                return new Elements(Browser.Current?.FindElements(by));
+                return new Elements(BrowserSession.Current?.FindElements(by));
             }
         }
     }

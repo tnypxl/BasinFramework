@@ -4,16 +4,16 @@ using TechTalk.SpecFlow;
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public static class AddRemoveElementsSteps
+    public class AddRemoveElementsSteps
     {
         [When("I add an element to the page")]
-        public static void WhenIAddAnElementToThePage()
+        public void WhenIAddAnElementToThePage()
         {
             Pages.AddRemoveElementsExample.AddElement();
         }
 
         [Then(@"I can see (\d+) Delete buttons? has been added")]
-        public static void ThenICanSeeASingleElementHasBeenAdded(int expectedCount)
+        public void ThenICanSeeASingleElementHasBeenAdded(int expectedCount)
         {
             Assert.That(
                 Pages.AddRemoveElementsExample.HasNumberOfDeleteButtons(expectedCount),

@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using Basin.Pages;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
 namespace Basin.Tests.Pages
 {
-    public class AddRemoveElementsPage : Page<AddRemoveElementsPageMap>
+    public class AddRemoveElementsExamplePage : Page<AddRemoveElementsPageMap>
     {
         public void AddElement()
         {
@@ -26,7 +26,7 @@ namespace Basin.Tests.Pages
         {
             try
             {
-                Browser.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
+                BrowserSession.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
                 return Map.AllDeleteButtons.Count == expectedCount;
             }
             catch (WebDriverTimeoutException)

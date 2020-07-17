@@ -1,25 +1,28 @@
 {
   "Environment": {
-    "Site": "The Internet",
-    "Browser": "Local Chrome"
+    "Site": "DEV",
+    "Browser": "Chrome"
   },
   "Sites": [
     {
-      "Id": "The Internet",
+      "Id": "DEV",
       "Url": "http://the-internet.herokuapp.com"
+    },
+    {
+      "Id": "CI",
+      "Url": "http://localhost:7080"
     }
   ],
   "Browsers": [
     {
-      "Id": "Local Chrome",
+      "Id": "Chrome",
       "Kind": "chrome",
-      "Headless": true,
       "Timeout": 10
     },
     {
-      "Id": "Remote Firefox",
+      "Id": "Firefox",
       "Kind": "firefox",
-      "Host": "http://localhost:4444/wd/hub"
+      "Headless": true
     }
   ],
   "Logins": [

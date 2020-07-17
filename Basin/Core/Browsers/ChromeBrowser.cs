@@ -1,85 +1,36 @@
-using System.Linq;
+using System;
+using Basin.Config.Interfaces;
+using Basin.Core.Browsers.Interfaces;
+using Basin.Core.Browsers.Mappers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 
 namespace Basin.Core.Browsers
 {
-    public class ChromeBrowser : Browser
+    public class ChromeBrowser : IChromeBrowser
     {
-        private ChromeDriverService _service;
-
-        private ChromeOptions _options;
-
-        public override IWebDriver Driver =>
-            BasinEnv.Browser.Host == null
-                ? new ChromeDriver(ChromeDriverService, ChromeOptions)
-                : new RemoteWebDriver(BasinEnv.Browser.Host, ChromeOptions);
-
-        public override ChromeOptions ChromeOptions => _options;
-
-        public override ChromeDriverService ChromeDriverService => _service;
-
-        public override Browser CreateDriverService(string pathToDriverExecutable = null)
+        public ChromeBrowser(IBrowserConfig config)
         {
-            _service = string.IsNullOrEmpty(pathToDriverExecutable)
-                ? ChromeDriverService.CreateDefaultService()
-                : ChromeDriverService.CreateDefaultService(pathToDriverExecutable);
+            Service = new ChromeServiceMapper(config).Service;
+            Options = new ChromeOptionsMapper(config).Options;
 
-            return this;
+            CreateDriver(config.Host);
         }
 
-        public override Browser CreateDriverOptions(string pathToBrowserExecutable = null)
+        public ChromeDriverService Service { get; set; }
+
+        public ChromeOptions Options { get; set; }
+
+        public IWebDriver Driver { get; set; }
+
+        // public void CreateDriver() => Driver = new ChromeDriver(Service, Options);
+
+        public void CreateDriver(Uri host = null)
         {
-            _options = new ChromeOptions();
-
-            if (string.IsNullOrEmpty(pathToBrowserExecutable))
-                _options.BinaryLocation = pathToBrowserExecutable;
-
-            return this;
-        }
-
-        public override Browser SetVersion(string version = null)
-        {
-            if (string.IsNullOrEmpty(version)) return this;
-
-            _options.BrowserVersion = version;
-
-            return this;
-        }
-
-        public override Browser SetPlatformName(string platformName = null)
-        {
-            if (string.IsNullOrEmpty(platformName)) return this;
-
-            _options.PlatformName = platformName;
-
-            return this;
-        }
-
-        public override Browser EnableHeadlessMode(bool enabled = false)
-        {
-            if (!enabled) return this;
-
-            _options.AddArguments("--headless", "--disable-gpu");
-
-            return this;
-        }
-
-        public override Browser SetArguments(params string[] arguments)
-        {
-            if (arguments?.Any() != true) return this;
-
-            _options.AddArguments(arguments);
-
-            return this;
-        }
-
-        public override Browser SetOptions(ChromeOptions options)
-        {
-            _options = options;
-
-            return this;
+            Driver = (host == null)
+                ? new ChromeDriver(Service, Options)
+                : new RemoteWebDriver(host, Options);
         }
     }
 }

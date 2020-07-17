@@ -16,14 +16,15 @@ namespace Basin.Tests.Steps
         [BeforeScenario]
         public static void BeforeScenarioHook()
         {
-            Browser.Init();
+            BasinEnv.UseBrowser("Firefox");
+            BrowserSession.Init();
             Pages.Init();
         }
 
         [AfterScenario]
         public static void AfterScenarioHook()
         {
-            Browser.Current?.Quit();
+            BrowserSession.Current?.Quit();
         }
     }
 }

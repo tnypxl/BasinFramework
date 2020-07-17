@@ -7,14 +7,14 @@ namespace Basin.Selenium
 {
     public class Window
     {
-        public ReadOnlyCollection<string> CurrentWindows => Browser.Current.WindowHandles;
+        public ReadOnlyCollection<string> CurrentWindows => BrowserSession.Current.WindowHandles;
 
         public static Size ScreenSize
         {
             get
             {
                 const string javascript = "return [window.screen.availWidth, window.screen.availHeight];";
-                var javaScriptExecutor = (IJavaScriptExecutor)Browser.Current;
+                var javaScriptExecutor = (IJavaScriptExecutor)BrowserSession.Current;
 
                 dynamic dimensions = javaScriptExecutor.ExecuteScript(javascript, null);
                 var x = Convert.ToInt32(dimensions[0]);
@@ -26,13 +26,13 @@ namespace Basin.Selenium
 
         public void SwitchTo(int windowIndex)
         {
-            Browser.Current.SwitchTo().Window(CurrentWindows[windowIndex]);
+            BrowserSession.Current.SwitchTo().Window(CurrentWindows[windowIndex]);
         }
 
         public static void Maximize()
         {
-            Browser.Current.Manage().Window.Position = new Point(0, 0);
-            Browser.Current.Manage().Window.Size = ScreenSize;
+            BrowserSession.Current.Manage().Window.Position = new Point(0, 0);
+            BrowserSession.Current.Manage().Window.Size = ScreenSize;
         }
     }
 }

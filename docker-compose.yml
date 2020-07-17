@@ -3,7 +3,7 @@ version: "3"
 services:
   selenoid:
     container_name: selenoid
-    network_mode: bridge
+    # network_mode: bridge
     image: aerokube/selenoid:latest-release
     volumes:
       - "$PWD:/etc/selenoid"
@@ -23,3 +23,12 @@ services:
       ]
     ports:
       - "4444:4444"
+    links:
+      - app:app
+
+  app:
+    container_name: app
+    image: gprestes/the-internet
+    # network_mode: bridge
+    ports:
+      - "7080:5000"

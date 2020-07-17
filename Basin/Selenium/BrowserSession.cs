@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Basin.Selenium
 {
-    public static class Browser
+    public static class BrowserSession
     {
         [ThreadStatic] private static IWebDriver _driver;
 
@@ -18,14 +18,7 @@ namespace Basin.Selenium
 
         public static void Init()
         {
-            _driver = BrowserFactory.Current.Driver;
-
-            FinishSetup();
-        }
-
-        public static void Init(Core.Browsers.Browser browser)
-        {
-            _driver = browser.Driver;
+            _driver = ConfiguredBrowserFactory.Current;
 
             FinishSetup();
         }

@@ -6,7 +6,7 @@ namespace Basin.Pages
 {
     public abstract class Page : PageMap, IPageBase
     {
-        public Wait Wait => Browser.Wait;
+        public Wait Wait => BrowserSession.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();
     }
@@ -15,7 +15,7 @@ namespace Basin.Pages
     {
         private readonly TPageMap _map = new TPageMap();
 
-        public Wait Wait => Browser.Wait;
+        public Wait Wait => BrowserSession.Wait;
 
         public TPage On<TPage>() where TPage : new() => new TPage();
 
