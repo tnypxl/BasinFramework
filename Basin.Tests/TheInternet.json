@@ -1,6 +1,6 @@
 {
   "Environment": {
-    "Site": "CI",
+    "Site": "DEV",
     "Browser": "Chrome"
   },
   "Sites": [
@@ -18,13 +18,6 @@
       "Id": "Chrome",
       "Kind": "chrome",
       "Timeout": 10
-    },
-    {
-      "Id": "Remote Chrome",
-      "Kind": "firefox",
-      "Version": "83.0",
-      "Host": "http://localhost:4444",
-      "Headless": true
     },
     {
       "Id": "Firefox",
