@@ -260,7 +260,7 @@ namespace Basin.Selenium
         {
             if (!Exists || !Regex.IsMatch(Current.Text, pattern))
             {
-                throw new NoSuchElementException("Element does not exist and/or does contain text matching the pattern provided.");
+                throw new NoSuchElementException("Element does not exist or does contain text matching the pattern provided.");
             }
 
             return this;
