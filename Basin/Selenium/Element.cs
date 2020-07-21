@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using Basin.Core.Locators;
@@ -25,7 +24,7 @@ namespace Basin.Selenium
             _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
-        public string Description { get; set; }
+        public string Label { get; set; }
 
         public By FoundBy { get; set; }
 
@@ -249,9 +248,9 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element As(string description)
+        public Element As(string label)
         {
-            Description = description;
+            Label = label;
 
             return this;
         }
