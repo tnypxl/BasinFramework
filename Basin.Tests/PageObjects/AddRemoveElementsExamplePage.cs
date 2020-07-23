@@ -1,9 +1,8 @@
-﻿using System;
-using Basin.Pages;
+﻿using Basin.PageObjects;
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.Tests.Pages
+namespace Basin.Tests.PageObjects
 {
     public class AddRemoveElementsExamplePage : Page<AddRemoveElementsPageMap>
     {
@@ -26,7 +25,7 @@ namespace Basin.Tests.Pages
         {
             try
             {
-                BrowserSession.Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
+                Wait.Until(_ => Map.AllDeleteButtons.Count > 0);
                 return Map.AllDeleteButtons.Count == expectedCount;
             }
             catch (WebDriverTimeoutException)

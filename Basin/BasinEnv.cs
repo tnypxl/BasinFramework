@@ -2,18 +2,21 @@
 using Basin.Config;
 using Basin.Config.Interfaces;
 using Config.Net;
+using Basin.PageObjects.Interfaces;
 
 namespace Basin
 {
     public static class BasinEnv
     {
-        private static CurrentConfig _config;
+        [ThreadStatic] private static CurrentConfig _config;
 
         [ThreadStatic] public static ISiteConfig Site;
 
         [ThreadStatic] public static IBrowserConfig Browser;
 
         [ThreadStatic] public static ILoginConfig Login;
+
+        [ThreadStatic] public static IPageCollection Pages;
 
         public static ConfigurationBuilder<IConfig> GetConfig => new ConfigurationBuilder<IConfig>();
 
@@ -22,6 +25,7 @@ namespace Basin
             _config = new CurrentConfig(GetConfig.UseJsonFile(configPath).Build());
             Site = _config.Site;
             Browser = _config.Browser;
+            Pages = _config.Pages;
 
             if (_config.Login == null) return;
 

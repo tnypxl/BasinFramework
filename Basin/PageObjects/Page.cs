@@ -1,14 +1,14 @@
 using System;
-using Basin.Pages.Interfaces;
+using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 
-namespace Basin.Pages
+namespace Basin.PageObjects
 {
     public abstract class Page : PageMap, IPageBase
     {
         public Wait Wait => BrowserSession.Wait;
 
-        public TPage On<TPage>() where TPage : new() => new TPage();
+        // public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
     public abstract class Page<TPageMap> : IPageBase where TPageMap : new()
@@ -17,7 +17,7 @@ namespace Basin.Pages
 
         public Wait Wait => BrowserSession.Wait;
 
-        public TPage On<TPage>() where TPage : new() => new TPage();
+        // public TPage On<TPage>() where TPage : new() => new TPage();
 
         public TPageMap Map => _map ?? throw new NullReferenceException("Map is null. Set with an instance of PageMap");
     }

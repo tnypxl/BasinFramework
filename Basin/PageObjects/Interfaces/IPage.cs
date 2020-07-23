@@ -1,4 +1,4 @@
-namespace Basin.Pages.Interfaces
+namespace Basin.PageObjects.Interfaces
 {
     /// <summary>
     /// Interface for defining page object classes with element maps.

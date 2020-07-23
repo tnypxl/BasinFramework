@@ -1,7 +1,7 @@
-﻿using Basin.Pages;
+﻿using Basin.PageObjects;
 using Basin.Selenium;
 
-namespace Basin.Tests.Pages
+namespace Basin.Tests.PageObjects
 {
     public class LargeAndDeepDOMExamplePage : Page
     {

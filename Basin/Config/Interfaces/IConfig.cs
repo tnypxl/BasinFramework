@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Basin.Core.Browsers.Interfaces;
+using Basin.PageObjects.Interfaces;
 using Config.Net;
 
 namespace Basin.Config.Interfaces
@@ -26,5 +26,7 @@ namespace Basin.Config.Interfaces
         ISiteConfig Site { get; set; }
 
         ILoginConfig Login { get; set; }
+
+        IPageCollection Pages { get; }
     }
 }

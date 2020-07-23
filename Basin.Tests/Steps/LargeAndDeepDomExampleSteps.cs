@@ -1,13 +1,15 @@
 using NUnit.Framework;
 using TechTalk.SpecFlow;
-using Basin.Tests.Pages;
+using Basin.Tests.PageObjects;
+using Basin.PageObjects;
+using System;
 
 namespace Basin.Tests.Steps
 {
     [Binding]
     public class LargeAndDeepDomExampleSteps
     {
-        private readonly LargeAndDeepDOMExamplePage Page = Pages.LargeAndDeepDOMExample;
+        private LargeAndDeepDOMExamplePage Page => Pages.Get<LargeAndDeepDOMExamplePage>();
 
         [Then("I can locate element '(.*?)' that follows element '(.*?)'")]
         public void ThenICanLocateElementThatFollowsElement(string elementText, string siblingElementText)

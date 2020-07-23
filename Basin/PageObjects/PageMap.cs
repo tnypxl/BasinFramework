@@ -1,7 +1,7 @@
 using Basin.Core.Locators.Interfaces;
 using Basin.Selenium;
 
-namespace Basin.Pages
+namespace Basin.PageObjects
 {
     public abstract class PageMap : IHtmlElements
     {

@@ -1,21 +1,23 @@
-﻿using Basin.Selenium;
+﻿using Basin.PageObjects;
+using Basin.Selenium;
+using Basin.Tests.PageObjects;
 using TechTalk.SpecFlow;
 
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public static class HomePageSteps
+    public class HomePageSteps
     {
         [Given("I am on the home page")]
-        public static void OnTheHomePage()
+        public void OnTheHomePage()
         {
             BrowserSession.Goto(BasinEnv.Site.Url);
         }
 
         [StepDefinition("I navigate to the example named '(.*?)'")]
-        public static void NavigateToExample(string exampleName)
+        public void NavigateToExample(string exampleName)
         {
-            Pages.Home.NavigateToExample(exampleName);
+            Pages.Use<HomePage>(p => p.NavigateToExample(exampleName));
         }
     }
 }
