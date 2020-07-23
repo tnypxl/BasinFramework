@@ -1,28 +1,35 @@
+using System;
 using System.IO;
+using Basin.PageObjects;
 using Basin.Selenium;
+using Basin.Tests.PageObjects;
 using TechTalk.SpecFlow;
 
 namespace Basin.Tests.Steps
 {
     [Binding]
-    public static class StepsBase
+    public class StepsBase
     {
+
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
             BasinEnv.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
+            Pages.Add(new HomePage());
+            Pages.Add(new AddRemoveElementsExamplePage());
+            Pages.Add(new LargeAndDeepDOMExamplePage());
         }
 
         [BeforeScenario]
-        public static void BeforeScenarioHook()
+        public void BeforeScenarioHook()
         {
-            BasinEnv.UseBrowser("Firefox");
+            // BasinEnv.UseBrowser("Chrome");
+            Console.WriteLine(BasinEnv.Pages.Count);
             BrowserSession.Init();
-            Pages.Init();
         }
 
         [AfterScenario]
-        public static void AfterScenarioHook()
+        public void AfterScenarioHook()
         {
             BrowserSession.Current?.Quit();
         }
