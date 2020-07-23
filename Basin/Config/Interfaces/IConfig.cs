@@ -26,5 +26,7 @@ namespace Basin.Config.Interfaces
         ISiteConfig Site { get; set; }
 
         ILoginConfig Login { get; set; }
+
+        Dictionary<string, object> Pages { get; }
     }
 }

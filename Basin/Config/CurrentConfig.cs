@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.Config.Interfaces;
@@ -15,6 +16,8 @@ namespace Basin.Config
 
         public ILoginConfig Login { get; set; }
 
+        public Dictionary<string, object> Pages { get; }
+
         public CurrentConfig(IConfig config)
         {
             _config = config;
@@ -22,6 +25,7 @@ namespace Basin.Config
             SetSiteConfig(_config.Environment.Site);
             SetBrowserConfig(_config.Environment.Browser);
             SetLoginConfig(_config.Environment.Login);
+            Pages = new Dictionary<string, object>();
         }
 
         public CurrentConfig SetSiteConfig(string siteId)
