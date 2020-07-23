@@ -179,6 +179,13 @@ namespace Basin.Selenium
             return this;
         }
 
+        public Element WithAttr(string name)
+        {
+            _locator.WithAttr(name);
+
+            return this;
+        }
+
         public Element WithAttr(string name, string value)
         {
             _locator.WithAttr(name, value);

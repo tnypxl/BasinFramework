@@ -17,6 +17,8 @@ namespace Basin.Core.Locators.Interfaces
 
         ILocatorBuilder WithId(string id);
 
+        ILocatorBuilder WithAttr(string name);
+
         ILocatorBuilder WithAttr(string name, string value);
 
         ILocatorBuilder WithChild(ILocatorBuilder child);
