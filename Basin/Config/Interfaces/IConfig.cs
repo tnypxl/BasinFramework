@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Basin.Core.Browsers.Interfaces;
+using Basin.PageObjects.Interfaces;
 using Config.Net;
 
 namespace Basin.Config.Interfaces
@@ -27,6 +27,6 @@ namespace Basin.Config.Interfaces
 
         ILoginConfig Login { get; set; }
 
-        Dictionary<string, object> Pages { get; }
+        IPageCollection Pages { get; }
     }
 }

@@ -4,17 +4,10 @@ namespace Basin.PageObjects
 {
     public static class Pages
     {
-        public static void Add<TPage>(TPage page)
-        {
-            var pageKey = typeof(TPage).ToString();
+        public static void Add<TPage>(TPage page) => BasinEnv.Pages.Add(page);
 
-            if (BasinEnv.Pages.ContainsKey(pageKey)) return;
+        public static TPage Get<TPage>() => BasinEnv.Pages.Get<TPage>();
 
-            BasinEnv.Pages.Add(pageKey, page);
-        }
-
-        public static TPage Get<TPage>() => (TPage)BasinEnv.Pages[typeof(TPage).ToString()];
-
-        public static void Use<TPage>(Action<TPage> page) => page.Invoke(Get<TPage>());
+        public static void Use<TPage>(Action<TPage> page) => page.Invoke(BasinEnv.Pages.Get<TPage>());
     }
 }

@@ -10,7 +10,6 @@ namespace Basin.Tests.Steps
     [Binding]
     public class StepsBase
     {
-
         [BeforeFeature]
         public static void BeforeFeatureHook()
         {
@@ -24,7 +23,6 @@ namespace Basin.Tests.Steps
         public void BeforeScenarioHook()
         {
             // BasinEnv.UseBrowser("Chrome");
-            Console.WriteLine(BasinEnv.Pages.Count);
             BrowserSession.Init();
         }
 

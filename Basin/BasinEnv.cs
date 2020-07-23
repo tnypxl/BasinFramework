@@ -2,7 +2,7 @@
 using Basin.Config;
 using Basin.Config.Interfaces;
 using Config.Net;
-using System.Collections.Generic;
+using Basin.PageObjects.Interfaces;
 
 namespace Basin
 {
@@ -16,7 +16,7 @@ namespace Basin
 
         [ThreadStatic] public static ILoginConfig Login;
 
-        [ThreadStatic] public static IDictionary<string, object> Pages;
+        [ThreadStatic] public static IPageCollection Pages;
 
         public static ConfigurationBuilder<IConfig> GetConfig => new ConfigurationBuilder<IConfig>();
 

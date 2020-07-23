@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.Config.Interfaces;
+using Basin.PageObjects;
+using Basin.PageObjects.Interfaces;
 
 namespace Basin.Config
 {
@@ -16,7 +18,7 @@ namespace Basin.Config
 
         public ILoginConfig Login { get; set; }
 
-        public Dictionary<string, object> Pages { get; }
+        public IPageCollection Pages { get; }
 
         public CurrentConfig(IConfig config)
         {
@@ -25,7 +27,7 @@ namespace Basin.Config
             SetSiteConfig(_config.Environment.Site);
             SetBrowserConfig(_config.Environment.Browser);
             SetLoginConfig(_config.Environment.Login);
-            Pages = new Dictionary<string, object>();
+            Pages = new PageCollection();
         }
 
         public CurrentConfig SetSiteConfig(string siteId)

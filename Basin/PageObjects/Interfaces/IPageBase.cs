@@ -9,11 +9,11 @@ namespace Basin.PageObjects.Interfaces
         /// </summary>
         Wait Wait { get; }
 
-        /// <summary>
-        /// Instantiates a page object class for use with other fluent page object classes
-        /// </summary>
-        /// <typeparam name="TPage"></typeparam>
-        /// <returns><see cref="TPage"/></returns>
-        TPage On<TPage>() where TPage : new();
+        // /// <summary>
+        // /// Instantiates a page object class for use with other fluent page object classes
+        // /// </summary>
+        // /// <typeparam name="TPage"></typeparam>
+        // /// <returns><see cref="TPage"/></returns>
+        // TPage On<TPage>() where TPage : new();
     }
 }

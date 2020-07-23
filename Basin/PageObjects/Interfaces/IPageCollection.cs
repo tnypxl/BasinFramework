@@ -10,6 +10,6 @@ namespace Basin.PageObjects.Interfaces
 
         TPage Get<TPage>();
 
-        ConcurrentDictionary<string, object> Pages { get; }
+        IDictionary<string, object> Pages { get; }
     }
 }
