@@ -1,8 +1,8 @@
 using System;
-using Basin.Pages.Interfaces;
+using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 
-namespace Basin.Pages
+namespace Basin.PageObjects
 {
     public abstract class Page : PageMap, IPageBase
     {

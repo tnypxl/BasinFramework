@@ -1,6 +1,6 @@
 using Basin.Selenium;
 
-namespace Basin.Pages.Interfaces
+namespace Basin.PageObjects.Interfaces
 {
     public interface IPageBase
     {
