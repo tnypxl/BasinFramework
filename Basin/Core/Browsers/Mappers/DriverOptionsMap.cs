@@ -3,12 +3,9 @@ using Basin.Config.Interfaces;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public abstract class BrowserOptionsMapper<TDriverOptions> where TDriverOptions : new()
+    public abstract class DriverOptionsMap<TDriverOptions> where TDriverOptions : new()
     {
-        protected BrowserOptionsMapper(TDriverOptions options)
-        {
-            Options = options;
-        }
+        protected DriverOptionsMap() => Options = new TDriverOptions();
 
         public abstract string PathToBrowserBinary { set; }
 
@@ -19,6 +16,10 @@ namespace Basin.Core.Browsers.Mappers
         public abstract IEnumerable<string> Arguments { set; }
 
         public abstract bool EnableHeadlessMode { set; }
+
+        public abstract bool AcceptsInsecureCerts { set; }
+
+        public abstract void SetCapabilities(Dictionary<string, object> value);
 
         public TDriverOptions Options { get; }
     }
