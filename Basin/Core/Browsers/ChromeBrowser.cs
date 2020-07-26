@@ -24,9 +24,9 @@ namespace Basin.Core.Browsers
 
         public IWebDriver Driver { get; set; }
 
-        // public void CreateDriver() => Driver = new ChromeDriver(Service, Options);
+        public void CreateDriver() => CreateDriver(null);
 
-        public void CreateDriver(Uri host = null)
+        public void CreateDriver(Uri host)
         {
             Driver = (host == null)
                 ? new ChromeDriver(Service, Options)
