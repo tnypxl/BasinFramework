@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Basin.PageObjects;
 using Basin.Selenium;
@@ -22,7 +21,6 @@ namespace Basin.Tests.Steps
         [BeforeScenario]
         public void BeforeScenarioHook()
         {
-            // BasinEnv.UseBrowser("Chrome");
             BrowserSession.Init();
         }
 
