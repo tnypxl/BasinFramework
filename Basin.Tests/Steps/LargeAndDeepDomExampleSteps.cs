@@ -53,7 +53,7 @@ namespace Basin.Tests.Steps
 
 
         [Then("I can locate an element with exact text '(.*?)'")]
-        public void ThenICanAnElementWithExactText(string text)
+        public void ThenICanLocateAnElementWithExactText(string text)
         {
             Assert.That(Page.ItemWithExactText(text).Exists, Is.True);
         }
