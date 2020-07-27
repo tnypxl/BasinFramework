@@ -6,8 +6,6 @@ namespace Basin.Core.Browsers.Mappers
 {
     public class FirefoxOptionsMapper : DriverOptionsMap<FirefoxOptions>
     {
-        private Dictionary<string, object> _capabilities { get; } = new Dictionary<string, object>();
-
         public FirefoxOptionsMapper()
         {
         }
@@ -20,8 +18,8 @@ namespace Basin.Core.Browsers.Mappers
             Arguments = config.Arguments;
             EnableHeadlessMode = config.Headless;
             AcceptsInsecureCerts = config.AcceptsInsecureCerts;
-            SetCapabilities(config.Capabilities);
 
+            SetCapabilities(config.Capabilities);
         }
 
         public override string PathToBrowserBinary
@@ -63,8 +61,9 @@ namespace Basin.Core.Browsers.Mappers
 
         public override void SetCapabilities(Dictionary<string, object> caps)
         {
-            if (caps.Count > 0)
-                foreach (var cap in caps) Options.AddAdditionalCapability(cap.Key, cap.Value, true);
+            if (caps == null || caps.Count == 0) return;
+
+            foreach (var cap in caps) Options.AddAdditionalCapability(cap.Key, cap.Value, true);
         }
     }
 }
