@@ -1,3 +1,1 @@
-## v1.2.1
-
-* **[NEW ✨]** Configure driver capabilities from via JSON config
+* **[FIX 💪🏾]** `Element.WithText("$|someString")` was not using the correct xpath to locate elements with text that ends with a given string
