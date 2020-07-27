@@ -16,6 +16,7 @@ namespace Basin.Tests.Steps
             Pages.Add(new HomePage());
             Pages.Add(new AddRemoveElementsExamplePage());
             Pages.Add(new LargeAndDeepDOMExamplePage());
+            Pages.Add(new DynamicControlsExamplePage());
         }
 
         [BeforeScenario]

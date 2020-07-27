@@ -2,7 +2,6 @@ using NUnit.Framework;
 using TechTalk.SpecFlow;
 using Basin.Tests.PageObjects;
 using Basin.PageObjects;
-using System;
 
 namespace Basin.Tests.Steps
 {
@@ -50,6 +49,13 @@ namespace Basin.Tests.Steps
         public void ThenICanLocateSpecificChildOfElement(string childText, string elementText)
         {
             Assert.That(Page.Item(elementText).Child(Page.Item(childText)).Exists);
+        }
+
+
+        [Then("I can locate an element with exact text '(.*?)'")]
+        public void ThenICanLocateAnElementWithExactText(string text)
+        {
+            Assert.That(Page.ItemWithExactText(text).Exists, Is.True);
         }
     }
 }
