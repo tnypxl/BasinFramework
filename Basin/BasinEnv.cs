@@ -3,6 +3,7 @@ using Basin.Config;
 using Basin.Config.Interfaces;
 using Config.Net;
 using Basin.PageObjects.Interfaces;
+using Basin.Config.Extensions;
 
 namespace Basin
 {
@@ -22,7 +23,9 @@ namespace Basin
 
         public static void SetConfig(string configPath)
         {
-            _config = new CurrentConfig(GetConfig.UseJsonFile(configPath).Build());
+            _config = new CurrentConfig(GetConfig.UseJsonFile(configPath)
+                                                 .UseTypeParser(new DictionaryParser())
+                                                 .Build());
             Site = _config.Site;
             Browser = _config.Browser;
             Pages = _config.Pages;

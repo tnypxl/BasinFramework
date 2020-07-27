@@ -6,22 +6,22 @@ using OpenQA.Selenium.IE;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class InternetExplorerOptionsMapper : BrowserOptionsMapper<InternetExplorerOptions>
+    public class InternetExplorerOptionsMapper : DriverOptionsMap<InternetExplorerOptions>
     {
-        private readonly IBrowserConfig _config;
-
-        public InternetExplorerOptionsMapper() : base(new InternetExplorerOptions())
+        public InternetExplorerOptionsMapper()
         {
         }
 
-        public InternetExplorerOptionsMapper(IBrowserConfig config) : base(new InternetExplorerOptions())
+        public InternetExplorerOptionsMapper(IBrowserConfig config)
         {
-            _config = config;
-            PathToBrowserBinary = _config.PathToBrowserExecutable;
-            BrowserVersion = _config.Version;
-            PlatformName = _config.PlatformName;
-            Arguments = _config.Arguments;
-            EnableHeadlessMode = _config.Headless;
+            PathToBrowserBinary = config.PathToBrowserExecutable;
+            BrowserVersion = config.Version;
+            PlatformName = config.PlatformName;
+            Arguments = config.Arguments;
+            EnableHeadlessMode = config.Headless;
+            AcceptsInsecureCerts = config.AcceptsInsecureCerts;
+
+            SetCapabilities(config.Capabilities);
         }
 
         public override string PathToBrowserBinary
@@ -48,12 +48,24 @@ namespace Basin.Core.Browsers.Mappers
             }
         }
 
+        public override bool AcceptsInsecureCerts
+        {
+            set => Options.AcceptInsecureCertificates = value;
+        }
+
         public override bool EnableHeadlessMode
         {
             set
             {
                 if (value) throw new NotSupportedException("Internet Explorer does not support headless execution.");
             }
+        }
+
+        public override void SetCapabilities(Dictionary<string, object> caps)
+        {
+            if (caps == null || caps.Count == 0) return;
+
+            foreach (var cap in caps) Options.AddAdditionalCapability(cap.Key, cap.Value, true);
         }
     }
 }

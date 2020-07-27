@@ -4,7 +4,7 @@ using OpenQA.Selenium.IE;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class InternetExplorerServiceMapper : BrowserServiceMapper<InternetExplorerDriverService>
+    public class InternetExplorerServiceMapper : DriverServiceMap<InternetExplorerDriverService>
     {
         public override string PathToDriverBinary { get; set; }
 

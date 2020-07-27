@@ -28,6 +28,8 @@ namespace Basin.Core.Browsers
 
         public IWebDriver Driver { get; set; }
 
+        public void CreateDriver() => CreateDriver(null);
+
         public void CreateDriver(Uri host = null)
         {
             Driver = host == null

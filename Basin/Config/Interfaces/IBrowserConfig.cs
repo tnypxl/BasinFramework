@@ -25,11 +25,16 @@ namespace Basin.Config.Interfaces
         [Option(DefaultValue = false)]
         bool Headless { get; set; }
 
+        [Option(DefaultValue = false)]
+        bool AcceptsInsecureCerts { get; set; }
+
         string PathToDriverBinary { get; set; }
 
         string PathToBrowserExecutable { get; set; }
 
         Uri Host { get; set; }
+
+        Dictionary<string, object> Capabilities { get; }
     }
 
     public class BrowserConfig : IBrowserConfig
@@ -55,5 +60,9 @@ namespace Basin.Config.Interfaces
         public string PathToBrowserExecutable { get; set; }
 
         public Uri Host { get; set; }
+
+        public bool AcceptsInsecureCerts { get; set; }
+
+        public Dictionary<string, object> Capabilities { get; }
     }
 }
