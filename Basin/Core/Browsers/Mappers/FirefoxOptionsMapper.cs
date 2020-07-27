@@ -4,18 +4,24 @@ using OpenQA.Selenium.Firefox;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class FirefoxOptionsMapper : BrowserOptionsMapper<FirefoxOptions>
+    public class FirefoxOptionsMapper : DriverOptionsMap<FirefoxOptions>
     {
-        private readonly IBrowserConfig _config;
+        private Dictionary<string, object> _capabilities { get; } = new Dictionary<string, object>();
 
-        public FirefoxOptionsMapper(IBrowserConfig config) : base(new FirefoxOptions())
+        public FirefoxOptionsMapper()
         {
-            _config = config;
-            PathToBrowserBinary = _config.PathToBrowserExecutable;
-            BrowserVersion = _config.Version;
-            PlatformName = _config.PlatformName;
-            Arguments = _config.Arguments;
-            EnableHeadlessMode = _config.Headless;
+        }
+
+        public FirefoxOptionsMapper(IBrowserConfig config)
+        {
+            PathToBrowserBinary = config.PathToBrowserExecutable;
+            BrowserVersion = config.Version;
+            PlatformName = config.PlatformName;
+            Arguments = config.Arguments;
+            EnableHeadlessMode = config.Headless;
+            AcceptsInsecureCerts = config.AcceptsInsecureCerts;
+            SetCapabilities(config.Capabilities);
+
         }
 
         public override string PathToBrowserBinary
@@ -35,16 +41,30 @@ namespace Basin.Core.Browsers.Mappers
 
         public override IEnumerable<string> Arguments
         {
-            set => Options.AddArguments(value);
+            set
+            {
+                if (value == null) return;
+                Options.AddArguments(value);
+            }
+        }
+
+        public override bool AcceptsInsecureCerts
+        {
+            set => Options.AcceptInsecureCertificates = value;
         }
 
         public override bool EnableHeadlessMode
         {
             set
             {
-                if (value)
-                    Options.AddArgument("-headless");
+                if (value) Options.AddArgument("-headless");
             }
+        }
+
+        public override void SetCapabilities(Dictionary<string, object> caps)
+        {
+            if (caps.Count > 0)
+                foreach (var cap in caps) Options.AddAdditionalCapability(cap.Key, cap.Value, true);
         }
     }
 }

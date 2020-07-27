@@ -1,12 +1,10 @@
 ﻿using System;
-using System.IO;
 using Basin.Config.Interfaces;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class FirefoxServiceMapper : BrowserServiceMapper<FirefoxDriverService>
+    public class FirefoxServiceMapper : DriverServiceMap<FirefoxDriverService>
     {
         public override string PathToDriverBinary { get; set; }
 
