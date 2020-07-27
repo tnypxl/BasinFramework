@@ -1,3 +1,7 @@
+## v1.2.1
+
+* **[NEW ✨]** Add capabilities from JSON config
+
 ## v1.2.0
 
 * **[NEW ✨]** Add `Precedes()`, `Follows()`, `Child()`, and `Parent()` methods to `Locator() and Element()` classes.
