@@ -1,3 +1,7 @@
+## v1.2.2
+
+* **[FIX 💪🏾]** `Element.WithText("$|someString")` was not using the correct xpath to locate elements with text that ends with a given string
+
 ## v1.2.1
 
 * **[NEW ✨]** Add capabilities from JSON config
