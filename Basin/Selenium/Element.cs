@@ -1,10 +1,8 @@
 using System.Text.RegularExpressions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using Basin.Core.Locators;
-using Basin.Core.Locators.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;

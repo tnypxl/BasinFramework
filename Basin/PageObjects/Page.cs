@@ -4,6 +4,8 @@ using Basin.Selenium;
 
 namespace Basin.PageObjects
 {
+    public delegate void Screens();
+
     public abstract class Page : PageMap, IPageBase
     {
         public Wait Wait => BrowserSession.Wait;
@@ -25,4 +27,8 @@ namespace Basin.PageObjects
     public abstract class PageComponent : Page { }
 
     public abstract class PageComponent<TPageComponentMap> : Page<TPageComponentMap> where TPageComponentMap : new() { }
+
+    public abstract class Screen : Page { }
+
+    public abstract class ScreenComponent<TScreenComponentMap> : Page<TScreenComponentMap> where TScreenComponentMap : new() { }
 }
