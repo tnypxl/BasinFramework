@@ -1,3 +1,8 @@
+## v1.2.4
+
+* **[NEW ✨]** Added `Use<TPage>()` method to PageCollection
+* **[NEW ✨]** Added overloads for `Use<TPage>()` that returns the page instance
+
 ## v1.2.3
 
 * **[NEW ✨]** Added `Screen` type equivalents for `PageMap`, `Page` and `Page<TPageMap>`
