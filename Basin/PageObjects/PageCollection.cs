@@ -35,6 +35,10 @@ namespace Basin.PageObjects
             return (TPage)page;
         }
 
+        public void Use<TPage>(Action<TPage> pageFunc) => pageFunc.Invoke(Get<TPage>());
+
+        public TPage Use<TPage>(Func<TPage, TPage> pageFunc) => pageFunc.Invoke(Get<TPage>());
+
         public IDictionary<string, object> Pages { get; }
     }
 }

@@ -8,6 +8,8 @@ namespace Basin.PageObjects
 
         public static TPage Get<TPage>() => BasinEnv.Pages.Get<TPage>();
 
-        public static void Use<TPage>(Action<TPage> page) => page.Invoke(BasinEnv.Pages.Get<TPage>());
+        public static void Use<TPage>(Action<TPage> pageFunc) => pageFunc.Invoke(BasinEnv.Pages.Get<TPage>());
+
+        public static TPage Use<TPage>(Func<TPage, TPage> pageFunc) => pageFunc.Invoke(BasinEnv.Pages.Get<TPage>());
     }
 }
