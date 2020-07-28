@@ -1,3 +1,11 @@
+## v1.2.3
+
+* **[NEW ✨]** Added `Screen` type equivalents for `PageMap`, `Page` and `Page<TPageMap>`
+* **[HOUSEKEEPING 🧹]** Changed PageMap property protection level from public to protected (#58)
+* **[HOUSEKEEPING 🧹]** Removed IHtmlElements interface
+* **[HOUSEKEEPING 🧹]** Removed Interfaces directory
+* **[HOUSEKEEPING 🧹]** Some minor cleanup
+
 ## v1.2.2
 
 * **[FIX 💪🏾]** `Element.WithText("$|someString")` was not using the correct xpath to locate elements with text that ends with a given string
