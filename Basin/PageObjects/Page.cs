@@ -30,5 +30,9 @@ namespace Basin.PageObjects
 
     public abstract class Screen : Page { }
 
+    public abstract class Screen<TScreenMap> : Page<TScreenMap> where TScreenMap : new() { }
+
+    public abstract class ScreenComponent : Page { }
+
     public abstract class ScreenComponent<TScreenComponentMap> : Page<TScreenComponentMap> where TScreenComponentMap : new() { }
 }
