@@ -1,2 +1,1 @@
-* **[NEW ✨]** Added `Use<TPage>()` method to PageCollection
-* **[NEW ✨]** Added overloads for `Use<TPage>()` that returns the page instance
+* **[HOUSEKEEPING 🧹]** Add missing `Screen` and `ScreenComponent` base classes. Was missed in the last release.

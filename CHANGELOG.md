@@ -1,3 +1,7 @@
+## 1.2.4.1
+
+* **[HOUSEKEEPING 🧹]** Add missing `Screen` and `ScreenComponent` base classes.
+
 ## v1.2.4
 
 * **[NEW ✨]** Added `Use<TPage>()` method to PageCollection
