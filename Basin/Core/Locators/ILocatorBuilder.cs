@@ -11,19 +11,19 @@ namespace Basin.Core.Locators
 
         ILocatorBuilder Inside(ILocatorBuilder parent);
 
-        ILocatorBuilder WithText(string text);
+        ILocatorBuilder WithText(string text, bool inclusive = true);
 
-        ILocatorBuilder WithClass(string className);
+        ILocatorBuilder WithClass(string className, bool inclusive = true);
 
-        ILocatorBuilder WithId(string id);
+        ILocatorBuilder WithId(string id, bool inclusive = true);
 
-        ILocatorBuilder WithAttr(string name);
+        ILocatorBuilder WithAttr(string name, bool inclusive = true);
 
-        ILocatorBuilder WithAttr(string name, string value);
+        ILocatorBuilder WithAttr(string name, string value, bool inclusive = true);
 
-        ILocatorBuilder WithChild(ILocatorBuilder child);
+        ILocatorBuilder WithChild(ILocatorBuilder child, bool inclusive = true);
 
-        ILocatorBuilder WithDescendant(ILocatorBuilder descendant);
+        ILocatorBuilder WithDescendant(ILocatorBuilder descendant, bool inclusive = true);
 
         ILocatorBuilder Child();
 

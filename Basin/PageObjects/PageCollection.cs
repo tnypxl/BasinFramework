@@ -28,7 +28,7 @@ namespace Basin.PageObjects
             var pageKey = typeof(TPage).ToString();
 
             if (!Pages.ContainsKey(pageKey))
-                throw new NullReferenceException($"Collection does not contain a page with key `{pageKey}`."); ;
+                throw new NullReferenceException($"Collection does not contain a page with key `{pageKey}`.");
 
             Pages.TryGetValue(pageKey, out object page);
 

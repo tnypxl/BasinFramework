@@ -28,7 +28,7 @@ namespace Basin.Tests.Steps
         [AfterScenario]
         public void AfterScenarioHook()
         {
-            BrowserSession.Current?.Quit();
+            BrowserSession.Quit();
         }
     }
 }
