@@ -21,9 +21,9 @@ namespace Basin.Selenium
         Element Precedes(Element element);
         Element WithAttr(string name, bool inclusive = true);
         Element WithAttr(string name, string value, bool inclusive = true);
-        Element WithChild(Element child);
+        Element WithChild(Element child, bool inclusive = true);
         Element WithClass(string className, bool inclusive = true);
-        Element WithDescendant(Element descendant);
+        Element WithDescendant(Element descendant, bool inclusive = true);
         Element WithId(string id, bool inclusive = true);
         Element WithText(string text, bool inclusive = true);
     }

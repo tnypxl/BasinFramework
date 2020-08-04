@@ -159,16 +159,16 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element WithChild(Element child)
+        public Element WithChild(Element child, bool inclusive = true)
         {
-            _locator.WithChild(child._locator);
+            _locator.WithChild(child._locator, inclusive);
 
             return this;
         }
 
-        public Element WithDescendant(Element descendant)
+        public Element WithDescendant(Element descendant, bool inclusive = true)
         {
-            _locator.WithDescendant(descendant._locator);
+            _locator.WithDescendant(descendant._locator, inclusive);
 
             return this;
         }

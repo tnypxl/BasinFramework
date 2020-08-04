@@ -56,5 +56,17 @@ namespace Basin.Tests.Steps
         {
             Assert.That(Page.ItemWithExactText(text).Exists, Is.True);
         }
+
+        [Then("I can locate element '(.*?)' excluding class name '(.*?)'")]
+        public void ThenICanLocateElementWhichExcludesClassName(string elementText, string className)
+        {
+            Assert.That(Page.ItemWithoutClassName(elementText, className).Exists, Is.True);
+        }
+
+        [Then("I can locate element '(.*?)' excluding descendant element '(.*?)'")]
+        public void ThenICanLocateElementWhichExcludesDescendantElement(string elementText, string descendantText)
+        {
+            Assert.That(Page.ItemWithoutDescedant(elementText, descendantText).Exists, Is.True);
+        }
     }
 }
