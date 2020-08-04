@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Basin.Config.Interfaces;
 using OpenQA.Selenium.Firefox;
 
@@ -6,9 +7,16 @@ namespace Basin.Core.Browsers.Mappers
 {
     public class FirefoxServiceMapper : DriverServiceMap<FirefoxDriverService>
     {
-        public override string PathToDriverBinary { get; set; }
+        public override string PathToDriverBinary { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
-        public FirefoxServiceMapper(string pathToDriverBinary = null)
+        public override bool HideCommandPrompt { get; set; } = true;
+
+        public FirefoxServiceMapper()
+        {
+            CreateService(PathToDriverBinary);
+        }
+
+        public FirefoxServiceMapper(string pathToDriverBinary)
         {
             PathToDriverBinary = pathToDriverBinary;
 
@@ -17,12 +25,16 @@ namespace Basin.Core.Browsers.Mappers
 
         public FirefoxServiceMapper(IBrowserConfig config)
         {
+            PathToDriverBinary = config.PathToDriverBinary ?? PathToDriverBinary;
+            HideCommandPrompt = config.HideCommandPrompt;
+
             CreateService(config.PathToDriverBinary);
         }
 
-        private void CreateService(string pathToDriverBinary = null)
+        private void CreateService(string pathToDriverBinary)
         {
-            Service = FirefoxDriverService.CreateDefaultService(pathToDriverBinary ?? AppDomain.CurrentDomain.BaseDirectory);
+            Service = FirefoxDriverService.CreateDefaultService(pathToDriverBinary);
+            Service.HideCommandPromptWindow = HideCommandPrompt;
         }
     }
 }

@@ -38,6 +38,7 @@ namespace Basin.Selenium
 
         public static void Quit()
         {
+            Current.Close();
             Current.Quit();
         }
 

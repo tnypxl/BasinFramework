@@ -35,6 +35,9 @@ namespace Basin.Config.Interfaces
         Uri Host { get; set; }
 
         Dictionary<string, object> Capabilities { get; }
+        
+        [Option(DefaultValue = true)]
+        bool HideCommandPrompt { get; set; }
     }
 
     public class BrowserConfig : IBrowserConfig
@@ -54,6 +57,8 @@ namespace Basin.Config.Interfaces
         public IEnumerable<string> Arguments { get; set; }
 
         public bool Headless { get; set; }
+
+        public bool HideCommandPrompt { get; set; }
 
         public string PathToDriverBinary { get; set; }
 

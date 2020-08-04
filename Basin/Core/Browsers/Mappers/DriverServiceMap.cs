@@ -7,6 +7,8 @@ namespace Basin.Core.Browsers.Mappers
     {
         public abstract string PathToDriverBinary { get; set; }
 
+        public abstract bool HideCommandPrompt { get; set; }
+
         public TDriverService Service { get; set; }
     }
 }
