@@ -1,30 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <PackageId>BasinFramework</PackageId>
-        <PackageVersion>1.2.4.1</PackageVersion>
-        <Title>Basin Framework</Title>
-        <Authors>Arik Jones</Authors>
-        <LangVersion>8</LangVersion>
-        <Copyright>Arik Jones</Copyright>
-        <PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageTags>selenium, browser, automation, framework</PackageTags>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageReleaseNotes>See the CHANGELOG.</PackageReleaseNotes>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <OutputType>Library</OutputType>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <Description>A .NET browser automation framework based on Selenium WebDriver</Description>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-    </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>BasinFramework</PackageId>
+		<PackageVersion>1.2.5</PackageVersion>
+		<Title>Basin Framework</Title>
+		<Authors>Arik Jones</Authors>
+		<LangVersion>8</LangVersion>
+		<Copyright>Arik Jones</Copyright>
+		<PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
+		<RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>selenium, browser, automation, framework</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>See the CHANGELOG.</PackageReleaseNotes>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<OutputType>Library</OutputType>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<Description>A .NET browser automation framework based on Selenium WebDriver</Description>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Config.Net" Version="4.14.23" />
-      <PackageReference Include="Config.Net.Json" Version="4.14.23" />
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-      <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-      <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.1" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Config.Net" Version="4.14.23" />
+		<PackageReference Include="Config.Net.Json" Version="4.14.23" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+		<PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.1" />
+	</ItemGroup>
 </Project>
