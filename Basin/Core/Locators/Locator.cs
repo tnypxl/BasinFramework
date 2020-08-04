@@ -1,3 +1,4 @@
+using System.Xml.XPath;
 using System.Text;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -6,6 +7,8 @@ namespace Basin.Core.Locators
 {
     public sealed class Locator : ILocatorBuilder
     {
+        public delegate ILocatorBuilder ContainsChild(ILocatorBuilder child);
+
         public By By => By.XPath(XPath.ToString());
 
         public StringBuilder XPath { get; }
@@ -23,62 +26,88 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        public ILocatorBuilder WithText(string text)
+        public ILocatorBuilder WithText(string text, bool inclusive = true)
         {
-            XPath.Append(GetXPathStringFunc(".", text));
+            XPath.Append(GetXPathStringFunc(".", text, inclusive));
 
             return this;
         }
 
-        public ILocatorBuilder WithClass(string className)
+        public ILocatorBuilder WithClass(string className, bool inclusive = true)
         {
-            XPath.Append("[contains(concat(' ',normalize-space(@class),' '),' ")
+            XPath.Append("[");
+
+            if (!inclusive) XPath.Append("not(");
+
+            XPath.Append("contains(concat(' ',normalize-space(@class),' '),' ")
                  .Append(className)
-                 .Append(" ')]");
+                 .Append(" ')");
+
+            if (!inclusive) XPath.Append(")");
+
+            XPath.Append("]");
 
             return this;
         }
 
-        public ILocatorBuilder WithId(string id)
+        public ILocatorBuilder WithId(string id, bool inclusive = true)
         {
-            WithAttr("id", id);
+            WithAttr("id", id, inclusive);
 
             return this;
         }
 
-        public ILocatorBuilder WithAttr(string name)
+        public ILocatorBuilder WithAttr(string name, bool inclusive = true)
         {
-            XPath.Append("[@")
-                 .Append(name)
-                 .Append(']');
+            XPath.Append("[");
+
+            if (!inclusive) XPath.Append("not(");
+
+            XPath.Append("@")
+                 .Append(name);
+
+            if (!inclusive) XPath.Append(")");
+
+            XPath.Append(']');
 
             return this;
         }
 
-        public ILocatorBuilder WithAttr(string name, string value)
+        public ILocatorBuilder WithAttr(string name, string value, bool inclusive = true)
         {
-            XPath.Append(GetXPathStringFunc($"@{name}", value));
+            XPath.Append(GetXPathStringFunc($"@{name}", value, inclusive));
 
             return this;
         }
 
-        public ILocatorBuilder WithChild(ILocatorBuilder child)
+        public ILocatorBuilder WithChild(ILocatorBuilder child, bool inclusive = true)
         {
-            // XPath axis is descendant (e.g, "//") by default
-            // We need to remove one axis to make it a child
-            // Ergo, "//div" becomes "/div"
-            XPath.Append("[.")
-                 .Append(child.XPath.Remove(0, 1))
-                 .Append(']');
+            XPath.Append("[");
+
+            if (!inclusive) XPath.Append("not(");
+
+            XPath.Append(".")
+                 .Append(child.XPath.Remove(0, 1));
+
+            if (!inclusive) XPath.Append(")");
+
+            XPath.Append(']');
 
             return this;
         }
 
-        public ILocatorBuilder WithDescendant(ILocatorBuilder descendant)
+        public ILocatorBuilder WithDescendant(ILocatorBuilder descendant, bool inclusive = true)
         {
-            XPath.Append("[.")
-                 .Append(descendant.XPath)
-                 .Append(']');
+            XPath.Append("[");
+
+            if (!inclusive) XPath.Append("not(");
+
+            XPath.Append(".")
+                 .Append(descendant.XPath);
+
+            if (!inclusive) XPath.Append(")");
+
+            XPath.Append(']');
 
             return this;
         }
@@ -113,11 +142,6 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        /// <summary>
-        /// Locate an element that follows another element
-        /// </summary>
-        /// <param name="sibling" type="ILocatorBuilder"></param>
-        /// <returns>//sibling-element/preceding-sibling::element</returns>
         public ILocatorBuilder Follows(ILocatorBuilder sibling)
         {
             XPath.Remove(0, 2)
@@ -127,11 +151,6 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        /// <summary>
-        /// Locate an element that precedes another element
-        /// </summary>
-        /// <param name="sibling"></param>
-        /// <returns>//siblingElement/preceding-sibling::element</returns>
         public ILocatorBuilder Precedes(ILocatorBuilder sibling)
         {
             XPath.Remove(0, 2)
@@ -141,14 +160,7 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        // private static bool RemoveAxes(StringBuilder xPath)
-        // {
-        //     // var numberOfPrefixedAxes =
-        //     if (Regex.IsMatch(xPath.ToString(), "/"))
-        //         return false;
-        // }
-
-        private static string GetXPathStringFunc(string attrOrFuncName, string attrOrFuncValue)
+        private static string GetXPathStringFunc(string attrOrFuncName, string attrOrFuncValue, bool inclusive = true)
         {
             var op = Regex.Match(attrOrFuncValue, @"^(\^\||\$\||\*\|){1}").Value;
 
@@ -157,16 +169,20 @@ namespace Basin.Core.Locators
                 ? attrOrFuncValue
                 : attrOrFuncValue.Remove(0, 2);
 
-            return op switch
+            var xPath = op switch
             {
-                "^|" => $@"[starts-with({attrOrFuncName}, ""{attrOrFuncValue}"")]",
+                "^|" => $@"starts-with({attrOrFuncName}, ""{attrOrFuncValue}"")",
 
                 // Can't use ends-with because Selenium 3 doesn't use XPath 2.0.
                 // So we have to make this unholy mess to get the same behavior with XPath 1.0
-                "$|" => $@"[contains({attrOrFuncName}, ""{attrOrFuncValue}"") and not(normalize-space(substring-after({attrOrFuncName}, ""{attrOrFuncValue}"")))]",
-                "*|" => $@"[contains({attrOrFuncName}, ""{attrOrFuncValue}"")]",
-                _ => $@"[{attrOrFuncName}=""{attrOrFuncValue}""]",
+                "$|" => $@"contains({attrOrFuncName}, ""{attrOrFuncValue}"") and not(normalize-space(substring-after({attrOrFuncName}, ""{attrOrFuncValue}"")))",
+                "*|" => $@"contains({attrOrFuncName}, ""{attrOrFuncValue}"")",
+                _ => $@"{attrOrFuncName}=""{attrOrFuncValue}""",
             };
+
+            return inclusive
+                ? $"[{xPath}]"
+                : $"[not({xPath})]";
         }
     }
 }

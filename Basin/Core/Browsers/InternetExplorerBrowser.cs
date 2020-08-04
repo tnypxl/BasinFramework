@@ -28,7 +28,6 @@ namespace Basin.Core.Browsers
 
         public void CreateDriver(Uri host)
         {
-
             Driver = (host == null)
                 ? new InternetExplorerDriver(Service, Options)
                 : new RemoteWebDriver(host, Options);

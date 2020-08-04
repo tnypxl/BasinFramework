@@ -9,10 +9,8 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Basin.Selenium
 {
-    public sealed class Element : IWebElement
+    public sealed class Element : IWebElement, IElement
     {
-        // private readonly IWebElement _element;
-
         private readonly int _timeout;
 
         private readonly ILocatorBuilder _locator;
@@ -26,8 +24,6 @@ namespace Basin.Selenium
         public string Description { get; set; }
 
         public By FoundBy { get; set; }
-
-        public By ParentFoundBy { get; set; }
 
         private DefaultWait<IWebDriver> Wait
         {
@@ -76,8 +72,7 @@ namespace Basin.Selenium
             }
         }
 
-        private IWebElement Current => Locate ??
-            throw new NullReferenceException("Element could not be located because it was null");
+        private IWebElement Current => Locate ?? throw new NullReferenceException("Element could not be located because it was null");
 
         public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(Current);
 
@@ -97,50 +92,23 @@ namespace Basin.Selenium
 
         public bool Displayed => Current.Displayed;
 
-        public void Clear()
-        {
-            Current.Clear();
-        }
+        public void Clear() => Current.Clear();
 
-        public void Click()
-        {
-            Current.Click();
-        }
+        public void Click() => Current.Click();
 
-        public IWebElement FindElement(By by)
-        {
-            return Current.FindElement(by);
-        }
+        public IWebElement FindElement(By by) => Current.FindElement(by);
 
-        public ReadOnlyCollection<IWebElement> FindElements(By by)
-        {
-            return Current.FindElements(by);
-        }
+        public ReadOnlyCollection<IWebElement> FindElements(By by) => Current.FindElements(by);
 
-        public string GetAttribute(string attributeName)
-        {
-            return Current.GetAttribute(attributeName);
-        }
+        public string GetAttribute(string attributeName) => Current.GetAttribute(attributeName);
 
-        public string GetCssValue(string propertyName)
-        {
-            return Current.GetCssValue(propertyName);
-        }
+        public string GetCssValue(string propertyName) => Current.GetCssValue(propertyName);
 
-        public string GetProperty(string propertyName)
-        {
-            return Current.GetProperty(propertyName);
-        }
+        public string GetProperty(string propertyName) => Current.GetProperty(propertyName);
 
-        public void SendKeys(string text)
-        {
-            Current.SendKeys(text);
-        }
+        public void SendKeys(string text) => Current.SendKeys(text);
 
-        public void Submit()
-        {
-            Current.Submit();
-        }
+        public void Submit() => Current.Submit();
 
         public void Hover()
         {
@@ -156,37 +124,37 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element WithText(string text)
+        public Element WithText(string text, bool inclusive = true)
         {
-            _locator.WithText(text);
+            _locator.WithText(text, inclusive);
 
             return this;
         }
 
-        public Element WithClass(string className)
+        public Element WithClass(string className, bool inclusive = true)
         {
-            _locator.WithClass(className);
+            _locator.WithClass(className, inclusive);
 
             return this;
         }
 
-        public Element WithId(string id)
+        public Element WithId(string id, bool inclusive = true)
         {
-            _locator.WithId(id);
+            _locator.WithId(id, inclusive);
 
             return this;
         }
 
-        public Element WithAttr(string name)
+        public Element WithAttr(string name, bool inclusive = true)
         {
-            _locator.WithAttr(name);
+            _locator.WithAttr(name, inclusive);
 
             return this;
         }
 
-        public Element WithAttr(string name, string value)
+        public Element WithAttr(string name, string value, bool inclusive = true)
         {
-            _locator.WithAttr(name, value);
+            _locator.WithAttr(name, value, inclusive);
 
             return this;
         }

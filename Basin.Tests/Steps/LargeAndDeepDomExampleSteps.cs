@@ -51,7 +51,6 @@ namespace Basin.Tests.Steps
             Assert.That(Page.Item(elementText).Child(Page.Item(childText)).Exists);
         }
 
-
         [Then("I can locate an element with exact text '(.*?)'")]
         public void ThenICanLocateAnElementWithExactText(string text)
         {
