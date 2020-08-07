@@ -1,210 +1,222 @@
-using Basin.Selenium;
+using Basin.Core.Elements;
 
 namespace Basin.PageObjects
 {
+    internal delegate SeleniumElementDecorator Element(string tagName);
+
     public abstract class PageMap
     {
-        protected Element AbbreviationTag => new Element("abbr");
+        private readonly Element GetElement;
+
+        private SeleniumElementDecorator GetSeleniumElement(string tagName) => new SeleniumElementDecorator(new ElementBase(tagName));
+
+
+        protected PageMap()
+        {
+            GetElement = new Element(GetSeleniumElement);
+        }
+
+        protected Element AbbreviationTag => GetElement("abbr");
 
         protected Element AbbrTag => AbbreviationTag;
 
-        protected Element AddressTag => new Element("address");
+        protected Element AddressTag => GetElement("address");
 
-        protected Element AnchorTag => new Element("a");
+        protected Element AnchorTag => GetElement("a");
 
-        protected Element AnyTag => new Element("*");
+        protected Element AnyTag => GetElement("*");
 
-        protected Element AreaTag => new Element("area");
+        protected Element AreaTag => GetElement("area");
 
-        protected Element ArticleTag => new Element("article");
+        protected Element ArticleTag => GetElement("article");
 
-        protected Element AsideTag => new Element("aside");
+        protected Element AsideTag => GetElement("aside");
 
-        protected Element AudioTag => new Element("audio");
+        protected Element AudioTag => GetElement("audio");
 
-        protected Element BaseTag => new Element("base");
+        protected Element BaseTag => GetElement("base");
 
-        protected Element BdiTag => new Element("bdi");
+        protected Element BdiTag => GetElement("bdi");
 
-        protected Element BdoTag => new Element("bdo");
+        protected Element BdoTag => GetElement("bdo");
 
-        protected Element BlockquoteTag => new Element("blockquote");
+        protected Element BlockquoteTag => GetElement("blockquote");
 
-        protected Element BodyTag => new Element("body");
+        protected Element BodyTag => GetElement("body");
 
-        protected Element BoldTag => new Element("bold");
+        protected Element BoldTag => GetElement("bold");
 
-        protected Element BrTag => new Element("br");
+        protected Element BrTag => GetElement("br");
 
-        protected Element ButtonTag => new Element("button");
+        protected Element ButtonTag => GetElement("button");
 
-        protected Element CanvasTag => new Element("canvas");
+        protected Element CanvasTag => GetElement("canvas");
 
-        protected Element CaptionTag => new Element("caption");
+        protected Element CaptionTag => GetElement("caption");
 
         protected Element CheckboxInputTag => InputTag.WithAttr("type", "checkbox");
 
-        protected Element CiteTag => new Element("cite");
+        protected Element CiteTag => GetElement("cite");
 
-        protected Element CodeTag => new Element("code");
+        protected Element CodeTag => GetElement("code");
 
-        protected Element ColumnGroupTag => new Element("colgroup");
+        protected Element ColumnGroupTag => GetElement("colgroup");
 
-        protected Element ColumnTag => new Element("col");
+        protected Element ColumnTag => GetElement("col");
 
-        protected Element DataListTag => new Element("datalist");
+        protected Element DataListTag => GetElement("datalist");
 
-        protected Element DataTag => new Element("data");
+        protected Element DataTag => GetElement("data");
 
         protected Element DateInputTag => InputTag.WithAttr("type", "datetime-local");
 
         protected Element DateTimeInputTag => InputTag.WithAttr("type", "datetime");
 
-        protected Element DefinitionListTag => new Element("dl");
+        protected Element DefinitionListTag => GetElement("dl");
 
-        protected Element DefinitionTag => new Element("dd");
+        protected Element DefinitionTag => GetElement("dd");
 
-        protected Element DefinitionTermTag => new Element("dt");
+        protected Element DefinitionTermTag => GetElement("dt");
 
-        protected Element DetailsTag => new Element("details");
+        protected Element DetailsTag => GetElement("details");
 
-        protected Element DfnTag => new Element("dfn");
+        protected Element DfnTag => GetElement("dfn");
 
-        protected Element DialogTag => new Element("dialog");
+        protected Element DialogTag => GetElement("dialog");
 
-        protected Element DivTag => new Element("div");
+        protected Element DivTag => GetElement("div");
 
-        protected Element EmbedTag => new Element("embed");
+        protected Element EmbedTag => GetElement("embed");
 
-        protected Element EmphasizedTag => new Element("em");
+        protected Element EmphasizedTag => GetElement("em");
 
         protected Element EmTag => EmphasizedTag;
 
-        protected Element FieldSetTag => new Element("fieldset");
+        protected Element FieldSetTag => GetElement("fieldset");
 
-        protected Element FigureCaptionTag => new Element("figcaption");
+        protected Element FigureCaptionTag => GetElement("figcaption");
 
-        protected Element FigureTag => new Element("figure");
+        protected Element FigureTag => GetElement("figure");
 
         protected Element FileInputTag => InputTag.WithAttr("type", "file");
 
-        protected Element FontTag => new Element("font");
+        protected Element FontTag => GetElement("font");
 
-        protected Element FooterTag => new Element("footer");
+        protected Element FooterTag => GetElement("footer");
 
-        protected Element FormTag => new Element("form");
+        protected Element FormTag => GetElement("form");
 
-        protected Element FramesetTag => new Element("frameset");
+        protected Element FramesetTag => GetElement("frameset");
 
-        protected Element FrameTag => new Element("frame");
+        protected Element FrameTag => GetElement("frame");
 
-        protected Element HeadingFiveTag => new Element("h5");
+        protected Element HeadingFiveTag => GetElement("h5");
 
-        protected Element HeadingFourTag => new Element("h4");
+        protected Element HeadingFourTag => GetElement("h4");
 
-        protected Element HeadingOneTag => new Element("h1");
+        protected Element HeadingOneTag => GetElement("h1");
 
-        protected Element HeadingSixTag => new Element("h6");
+        protected Element HeadingSixTag => GetElement("h6");
 
-        protected Element HeadingThreeTag => new Element("h3");
+        protected Element HeadingThreeTag => GetElement("h3");
 
-        protected Element HeadingTwoTag => new Element("h2");
+        protected Element HeadingTwoTag => GetElement("h2");
 
-        protected Element HeadTag => new Element("head");
+        protected Element HeadTag => GetElement("head");
 
         protected Element HiddenInputTag => InputTag.WithAttr("type", "hidden");
 
-        protected Element HorizontalRuleTag => new Element("hr");
+        protected Element HorizontalRuleTag => GetElement("hr");
 
         protected Element HrTag => HorizontalRuleTag;
 
-        protected Element HtmlTag => new Element("html");
+        protected Element HtmlTag => GetElement("html");
 
-        protected Element ImgTag => new Element("img");
+        protected Element ImgTag => GetElement("img");
 
-        protected Element InlineFrameTag => new Element("iframe");
+        protected Element InlineFrameTag => GetElement("iframe");
 
-        protected Element InputTag => new Element("input");
+        protected Element InputTag => GetElement("input");
 
-        protected Element InsTag => new Element("ins");
+        protected Element InsTag => GetElement("ins");
 
-        protected Element ItalicsTag => new Element("i");
+        protected Element ItalicsTag => GetElement("i");
 
-        protected Element LabelTag => new Element("label");
+        protected Element LabelTag => GetElement("label");
 
-        protected Element LegendTag => new Element("legend");
+        protected Element LegendTag => GetElement("legend");
 
-        protected Element LinkTag => new Element("link");
+        protected Element LinkTag => GetElement("link");
 
-        protected Element ListItemTag => new Element("li");
+        protected Element ListItemTag => GetElement("li");
 
-        protected Element MainTag => new Element("main");
+        protected Element MainTag => GetElement("main");
 
-        protected Element MetaTag => new Element("meta");
+        protected Element MetaTag => GetElement("meta");
 
-        protected Element NavTag => new Element("nav");
+        protected Element NavTag => GetElement("nav");
 
-        protected Element OptionTag => new Element("option");
+        protected Element OptionTag => GetElement("option");
 
-        protected Element OrderedListTag => new Element("ol");
+        protected Element OrderedListTag => GetElement("ol");
 
-        protected Element ParagraphTag => new Element("p");
+        protected Element ParagraphTag => GetElement("p");
 
         protected Element PasswordInputTag => InputTag.WithAttr("type", "password");
 
         protected Element RadioInputTag => InputTag.WithAttr("type", "radio");
 
-        protected Element SectionTag => new Element("section");
+        protected Element SectionTag => GetElement("section");
 
         protected Element SelectListTag => SelectTag;
 
-        protected Element SelectTag => new Element("select");
+        protected Element SelectTag => GetElement("select");
 
-        protected Element SpanTag => new Element("span");
+        protected Element SpanTag => GetElement("span");
 
-        protected Element StrongTag => new Element("strong");
+        protected Element StrongTag => GetElement("strong");
 
-        protected Element SubmitButton => new Element("input").WithAttr("type", "submit");
+        protected Element SubmitButton => GetElement("input").WithAttr("type", "submit");
 
-        protected Element SubscriptTag => new Element("sub");
+        protected Element SubscriptTag => GetElement("sub");
 
-        protected Element SummaryTag => new Element("summary");
+        protected Element SummaryTag => GetElement("summary");
 
-        protected Element SuperscriptTag => new Element("sup");
+        protected Element SuperscriptTag => GetElement("sup");
 
-        protected Element TableBodyTag => new Element("tbody");
+        protected Element TableBodyTag => GetElement("tbody");
 
-        protected Element TableCellTag => new Element("td");
+        protected Element TableCellTag => GetElement("td");
 
-        protected Element TableColumGroupTag => new Element("colgroup");
+        protected Element TableColumGroupTag => GetElement("colgroup");
 
-        protected Element TableColumnTag => new Element("col");
+        protected Element TableColumnTag => GetElement("col");
 
-        protected Element TableFooterTag => new Element("tfooter");
+        protected Element TableFooterTag => GetElement("tfooter");
 
-        protected Element TableHeaderTag => new Element("thead");
+        protected Element TableHeaderTag => GetElement("thead");
 
-        protected Element TableRowTag => new Element("tr");
+        protected Element TableRowTag => GetElement("tr");
 
-        protected Element TableTag => new Element("table");
+        protected Element TableTag => GetElement("table");
 
-        protected Element TextAreaTag => new Element("textarea");
+        protected Element TextAreaTag => GetElement("textarea");
 
-        protected Element TextInputTag => new Element("input").WithAttr("type", "text");
+        protected Element TextInputTag => GetElement("input").WithAttr("type", "text");
 
-        protected Element TimeTag => new Element("time");
+        protected Element TimeTag => GetElement("time");
 
-        protected Element UnorderedListTag => new Element("ul");
+        protected Element UnorderedListTag => GetElement("ul");
 
-        protected Element UnderlineTag => new Element("u");
+        protected Element UnderlineTag => GetElement("u");
 
-        protected Element VarTag => new Element("var");
+        protected Element VarTag => GetElement("var");
 
-        protected Element TrackTag => new Element("track");
+        protected Element TrackTag => GetElement("track");
 
-        protected Element TitleTag => new Element("title");
+        protected Element TitleTag => GetElement("title");
 
-        protected Element Tag(string tagName) => new Element(tagName);
+        protected Element Tag(string tagName) => GetElement(tagName);
     }
 
     public abstract class ScreenMap : PageMap { }

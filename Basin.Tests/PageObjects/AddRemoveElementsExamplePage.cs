@@ -1,5 +1,6 @@
-﻿using Basin.PageObjects;
-using Basin.Selenium;
+﻿using Basin.Core.Elements;
+using Basin.PageObjects;
+//using Basin.Cor;
 using OpenQA.Selenium;
 
 namespace Basin.Tests.PageObjects

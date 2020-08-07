@@ -1,75 +1,36 @@
-﻿using System;
+﻿using Basin.Core.Locators;
+using System;
 
 namespace Basin.Core.Elements
 {
     public class ElementBase : Element
     {
-        protected ElementBase()
+        public override ILocatorBuilder Locator { get; }
+
+        public ElementBase(string tagName)
         {
+            Locator = new Locator(tagName);
         }
 
-        public override bool Displayed => throw new NotImplementedException();
-
-        public override string Text => throw new NotImplementedException();
-
-        public override Element Child()
+        public override Element Inside(Element parent)
         {
-            throw new NotImplementedException();
+            Locator.Inside(parent.Locator);
+
+            return this;
         }
 
-        public override Element Child(Element targetElement)
+        public override Element WithText(string text, bool inclusive = true)
         {
-            throw new NotImplementedException();
+            Locator.WithText(text, inclusive);
+
+            return this;
         }
 
-        public override void Click()
+        public override Element WithClass(string className, bool inclusive = true)
         {
-            throw new NotImplementedException();
-        }
+            Locator.WithClass(className, inclusive);
 
-        public override Element Following(Element siblingElement)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element Parent()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element Parent(Element targetElement)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element Preceding(Element precedingElement)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SendKeys()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element WithAttr(string attributeName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element WithAttr(string attributeName, string attributeValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element WithChild(Element childElement)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element WithClass(string className)
-        {
-            throw new NotImplementedException();
+            return this;
         }
 
         public override Element WithClass(params string[] classNames)
@@ -77,14 +38,81 @@ namespace Basin.Core.Elements
             throw new NotImplementedException();
         }
 
-        public override Element WithDescendant(Element descendantElement)
+        public override Element WithId(string id, bool inclusive = true)
         {
-            throw new NotImplementedException();
+            Locator.WithId(id, inclusive);
+
+            return this;
         }
 
-        public override Element WithId(string id)
+        public override Element WithAttr(string name, bool inclusive = true)
         {
-            throw new NotImplementedException();
+            Locator.WithAttr(name, inclusive);
+
+            return this;
+        }
+
+        public override Element WithAttr(string name, string value, bool inclusive = true)
+        {
+            Locator.WithAttr(name, value, inclusive);
+
+            return this;
+        }
+
+        public override Element WithChild(Element childElement, bool inclusive = true)
+        {
+            Locator.WithChild(childElement.Locator, inclusive);
+
+            return this;
+        }
+
+        public override Element WithDescendant(Element descendantElement, bool inclusive = true)
+        {
+            Locator.WithDescendant(descendantElement.Locator, inclusive);
+
+            return this;
+        }
+
+        public override Element Parent()
+        {
+            Locator.Parent();
+
+            return this;
+        }
+
+        public override Element Parent(Element targetElement)
+        {
+            Locator.Parent(targetElement.Locator);
+
+            return this;
+        }
+
+        public override Element Child()
+        {
+            Locator.Child();
+
+            return this;
+        }
+
+        public override Element Child(Element targetElement)
+        {
+            Locator.Child(targetElement.Locator);
+
+            return this;
+        }
+
+        public override Element Preceding(Element siblingElement)
+        {
+            Locator.Precedes(siblingElement.Locator);
+
+            return this;
+        }
+
+        public override Element Following(Element siblingElement)
+        {
+            Locator.Follows(siblingElement.Locator);
+
+            return this;
         }
     }
 }

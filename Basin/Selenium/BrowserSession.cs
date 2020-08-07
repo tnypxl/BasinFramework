@@ -1,6 +1,7 @@
 ﻿using System;
 using Basin.Core.Browsers;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Basin.Selenium
 {
@@ -9,6 +10,8 @@ namespace Basin.Selenium
         [ThreadStatic] private static IWebDriver _driver;
 
         [ThreadStatic] public static Wait Wait;
+
+        [ThreadStatic] public static DefaultWait<IWebDriver> ElementWait;
 
         [ThreadStatic] public static Window Window;
 
@@ -45,8 +48,22 @@ namespace Basin.Selenium
         private static void FinishSetup()
         {
             Wait = new Wait(BasinEnv.Browser.Timeout);
+            ElementWait = GetElementWait(BasinEnv.Browser.ElementTimeout);
             Window = new Window();
             Window.Maximize();
+        }
+
+        private static DefaultWait<IWebDriver> GetElementWait(int timeout)
+        {
+            var wait = new DefaultWait<IWebDriver>(BrowserSession.Current)
+            {
+                Timeout = TimeSpan.FromSeconds(BasinEnv.Browser.ElementTimeout)
+            };
+
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+
+            return wait;
         }
     }
 }

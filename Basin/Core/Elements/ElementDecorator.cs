@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using Basin.Core.Locators;
 
 namespace Basin.Core.Elements
 {
@@ -9,89 +6,40 @@ namespace Basin.Core.Elements
     {
         protected Element _element;
 
-        protected ElementDecorator(Element element)
-        {
-            _element = element;
-        }
+        public override ILocatorBuilder Locator => _element.Locator;
 
-        public override bool Displayed => throw new NotImplementedException();
+        public ElementDecorator(Element element) => _element = element;
 
-        public override string Text => throw new NotImplementedException();
+        public void SetElement(Element element) => _element = element;
 
-        public override void SendKeys()
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Child() => _element.Child();
 
-        public override void Click()
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Child(Element targetElement) => _element.Child(targetElement);
 
+        public override Element Following(Element siblingElement) => _element.Following(siblingElement);
 
-        public override Element Child()
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Parent() => _element.Parent();
 
-        public override Element Child(Element targetElement)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Parent(Element targetElement) => _element.Parent(targetElement);
 
-        public override Element Following(Element siblingElement)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Preceding(Element siblingElement) => _element.Preceding(siblingElement);
 
-        public override Element Parent()
-        {
-            throw new NotImplementedException();
-        }
+        public override Element Inside(Element parentElement) => _element.Inside(parentElement);
 
-        public override Element Parent(Element targetElement)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithAttr(string attributeName, bool inclusive = true) => _element.WithAttr(attributeName, inclusive);
 
-        public override Element Preceding(Element precedingElement)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithAttr(string attributeName, string attributeValue, bool inclusive = true) => _element.WithAttr(attributeName, attributeValue, inclusive);
 
-        public override Element WithAttr(string attributeName)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithChild(Element childElement, bool inclusive = true) => _element.WithChild(childElement, inclusive);
 
-        public override Element WithAttr(string attributeName, string attributeValue)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithClass(string className, bool inclusive = true) => _element.WithClass(className, inclusive);
 
-        public override Element WithChild(Element childElement)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithClass(params string[] classNames) => _element.WithClass(classNames);
 
-        public override Element WithClass(string className)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithDescendant(Element descendantElement, bool inclusive = true) => _element.WithDescendant(descendantElement, inclusive);
 
-        public override Element WithClass(params string[] classNames)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithId(string id, bool inclusive = true) => _element.WithId(id, inclusive);
 
-        public override Element WithDescendant(Element descendantElement)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Element WithId(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public override Element WithText(string text, bool inclusive = true) => _element.WithText(text, inclusive);
     }
 }
