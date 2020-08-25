@@ -1,14 +1,11 @@
-using System.Xml.XPath;
 using System.Text;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 
-namespace Basin.Core.Locators
+namespace Basin.Locators
 {
     public sealed class Locator : ILocatorBuilder
     {
-        public delegate ILocatorBuilder ContainsChild(ILocatorBuilder child);
-
         public By By => By.XPath(XPath.ToString());
 
         public StringBuilder XPath { get; }

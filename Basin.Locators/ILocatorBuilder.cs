@@ -1,7 +1,7 @@
 using System.Text;
 using OpenQA.Selenium;
 
-namespace Basin.Core.Locators
+namespace Basin.Locators
 {
     public interface ILocatorBuilder
     {

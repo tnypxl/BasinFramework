@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>netcoreapp3.1</TargetFramework>
+	<PackageId>BasinFramework.Locators</PackageId>
+	<PackageVersion>1.0.0</PackageVersion>
+	<Title>Basin Framework - Locators</Title>
+	<Authors>Arik Jones</Authors>
+	<LangVersion>8</LangVersion>
+	<Copyright>Arik Jones</Copyright>
+	<PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
+	<PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
+	<RepositoryUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>selenium, browser, automation, testing</PackageTags>
+	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<OutputType>Library</OutputType>
+	<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	<Description>Fluently composed element locators for Selenium and Basin Framework.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  </ItemGroup>
+
+</Project>
