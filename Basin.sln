@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Tests", "Basin.Tests\Basin.Tests.csproj", "{C4C5DCDA-1DBB-49FA-A766-B7A82D8EDE51}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin", "Basin\Basin.csproj", "{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basin.Locators", "Basin.Locators\Basin.Locators.csproj", "{5580F492-168D-4A2F-A5D0-3C4A4A4C1E22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,15 @@ Global
 		{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A69E54D5-45F3-4F53-A6B5-85BB1F89C73D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5580F492-168D-4A2F-A5D0-3C4A4A4C1E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5580F492-168D-4A2F-A5D0-3C4A4A4C1E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5580F492-168D-4A2F-A5D0-3C4A4A4C1E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5580F492-168D-4A2F-A5D0-3C4A4A4C1E22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7618FB93-29D0-447E-A5CF-A79AB9E8296E}
 	EndGlobalSection
 EndGlobal
