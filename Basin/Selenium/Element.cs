@@ -13,15 +13,18 @@ namespace Basin.Selenium
     {
         private readonly int _timeout;
 
+        private readonly DefaultWait<IWebDriver> _wait;
+
         private readonly ILocatorBuilder _locator;
 
         public Element(string tagName)
         {
+            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
             _locator = new Locator(tagName);
             _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
-        public string Description { get; set; }
+        public string Label { get; set; }
 
         public By FoundBy { get; set; }
 
@@ -29,14 +32,11 @@ namespace Basin.Selenium
         {
             get
             {
-                var wait = new DefaultWait<IWebDriver>(BrowserSession.Current)
-                {
-                    Timeout = TimeSpan.FromSeconds(_timeout)
-                };
-                wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                _wait.Timeout = TimeSpan.FromSeconds(_timeout);
+                _wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
-                return wait;
+                return _wait;
             }
         }
 
@@ -50,27 +50,14 @@ namespace Basin.Selenium
                 {
                     var element = driver.FindElement(FoundBy);
 
-                    return element.Displayed ?
-                        element :
-                        null;
+                    return element.Displayed
+                        ? element
+                        : null;
                 });
             }
         }
 
-        public bool Exists
-        {
-            get
-            {
-                try
-                {
-                    return Current.Displayed;
-                }
-                catch (WebDriverTimeoutException)
-                {
-                    return false;
-                }
-            }
-        }
+        [Obsolete("Use `Element.Displayed` instead!")] public bool Exists => Displayed;
 
         private IWebElement Current => Locate ?? throw new NullReferenceException("Element could not be located because it was null");
 
@@ -90,7 +77,20 @@ namespace Basin.Selenium
 
         public Size Size => Current.Size;
 
-        public bool Displayed => Current.Displayed;
+        public bool Displayed
+        {
+            get
+            {
+                try
+                {
+                    return Current.Displayed;
+                }
+                catch (WebDriverTimeoutException)
+                {
+                    return false;
+                }
+            }
+        }
 
         public void Clear() => Current.Clear();
 
@@ -117,9 +117,9 @@ namespace Basin.Selenium
             actions.MoveToElement(Current).Perform();
         }
 
-        public Element Inside(Element parent)
+        public Element Inside(Element parentElement)
         {
-            _locator.Inside(parent._locator);
+            _locator.Inside(parentElement._locator);
 
             return this;
         }
@@ -159,16 +159,16 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element WithChild(Element child, bool inclusive = true)
+        public Element WithChild(Element childElement, bool inclusive = true)
         {
-            _locator.WithChild(child._locator, inclusive);
+            _locator.WithChild(childElement._locator, inclusive);
 
             return this;
         }
 
-        public Element WithDescendant(Element descendant, bool inclusive = true)
+        public Element WithDescendant(Element descendantElement, bool inclusive = true)
         {
-            _locator.WithDescendant(descendant._locator, inclusive);
+            _locator.WithDescendant(descendantElement._locator, inclusive);
 
             return this;
         }
@@ -180,9 +180,9 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element Parent(Element element)
+        public Element Parent(Element parentElement)
         {
-            _locator.Parent(element._locator);
+            _locator.Parent(parentElement._locator);
 
             return this;
         }
@@ -194,40 +194,46 @@ namespace Basin.Selenium
             return this;
         }
 
-        public Element Child(Element element)
+        public Element Child(Element childElement)
         {
-            _locator.Child(element._locator);
+            _locator.Child(childElement._locator);
 
             return this;
         }
 
-        public Element Precedes(Element element)
+        public Element Precedes(Element siblingElement)
         {
-            _locator.Precedes(element._locator);
+            _locator.Precedes(siblingElement._locator);
 
             return this;
         }
 
-        public Element Follows(Element element)
+        public Element Follows(Element siblingElement)
         {
-            _locator.Follows(element._locator);
+            _locator.Follows(siblingElement._locator);
 
             return this;
         }
 
-        public Element As(string description)
+        public Element As(string label)
         {
-            Description = description;
+            Label = label;
+
+            return this;
+        }
+
+        public Element AtPosition(int position)
+        {
+            _locator.AtPosition(position);
 
             return this;
         }
 
         public Element IfTextMatches(string pattern)
         {
-            if (!Exists || !Regex.IsMatch(Current.Text, pattern))
-            {
-                throw new NoSuchElementException("Element does not exist and/or does contain text matching the pattern provided.");
-            }
+            if (!Displayed) throw new NoSuchElementException("Could match element text because element was not visible.");
+
+            if (!Regex.IsMatch(Text, pattern)) throw new ArgumentException("Element text did not match the pattern provided.");
 
             return this;
         }
