@@ -1,6 +1,7 @@
 Feature: Parent Locators
+    
+    Find MY PARENTS! I'm LOST!
 
-    Feature Description
     Background:
         Given I am on the home page
 		When I navigate to the example named 'Large & Deep DOM'

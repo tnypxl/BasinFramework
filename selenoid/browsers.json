@@ -1,8 +1,8 @@
 {
   "firefox": {
     "versions": {
-      "78.0": {
-        "image": "selenoid/firefox:78.0",
+      "79.0": {
+        "image": "selenoid/firefox:79.0",
         "port": "4444",
         "path": "/wd/hub",
         "tmpfs": {
@@ -13,8 +13,8 @@
   },
   "chrome": {
     "versions": {
-      "83.0": {
-        "image": "selenoid/chrome:83.0",
+      "84.0": {
+        "image": "selenoid/chrome:84.0",
         "port": "4444",
         "path": "/",
         "tmpfs": {
