@@ -1,10 +1,15 @@
-## 1.2.5
+## v1.2.6
+* :heavy_plus_sign: ::: Implemented `Locator.AtPosition(int position)` to allow choosing an element at a specific index when there are multiple with the same locator properties.
+* :green_heart: ::: Updated GitHub build workflow to use docker-compose to spin up Selenoid and a custom version of The Internet (https://the-internet.herokuapp.com).
+* :x: ::: Make `Element.Exists` obsolete and use the same code in `Element.Displayed`.
+
+## v1.2.5
 * **[NEW ✨]** Elements can be located based on properties it doesn't have.
   * To find a div tag with "foo" as a class name: `DivTag.WithClass("foo")`
   * To find a div tag without "foo" as a class name: `DivTag.WithClass("foo", false)`
 * **[HOUSEKEEPING 🧹]** Added ability to configure "HideCommandPromptWindow". It is true by default.
 
-## 1.2.4.1
+## v1.2.4.1
 
 * **[HOUSEKEEPING 🧹]** Add missing `Screen` and `ScreenComponent` base classes.
 
