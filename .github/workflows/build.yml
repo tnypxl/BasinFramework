@@ -12,14 +12,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup Test Environment
+        run: docker-compose up -d
       
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.401
-      
-      - name: Start Selenoid
-        uses: Xotabu4/selenoid-github-action@v1
+
+      # - name: Start The Internet
+      #   uses: docker
+      #   run:
       
       - name: Install Dependencies
         run: dotnet restore
@@ -29,6 +33,9 @@ jobs:
       
       - name: Test
         run: dotnet test --no-restore
+
+      - name: Teardown Test Environment
+        run: docker-compose down
       
       # - name: Publish Nuget
       #   uses: rohith/publish-nuget@v2

@@ -233,7 +233,7 @@ namespace Basin.Selenium
         {
             if (!Displayed) throw new NoSuchElementException("Could match element text because element was not visible.");
 
-            if (!Regex.IsMatch(Text, pattern)) throw new ArgumentException("Element text did not match the pattern provided.");
+            if (!Regex.IsMatch(Text, pattern)) throw new ArgumentException("Element's text did not match the pattern provided.");
 
             return this;
         }
