@@ -40,3 +40,9 @@ services:
     # image: gprestes/the-internet
     ports:
       - "7080:5000"
+    
+  chrome:
+    image: selenoid/chrome:84.0
+
+  firefox:
+    image: selenoid/firefox:79.0

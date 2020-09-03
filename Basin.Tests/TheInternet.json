@@ -1,7 +1,7 @@
 {
   "Environment": {
-    "Site": "DEV",
-    "Browser": "Chrome"
+    "Site": "CI",
+    "Browser": "CI Chrome"
   },
   "Sites": [
     {
@@ -10,15 +10,20 @@
     },
     {
       "Id": "CI",
-      "Url": "http://localhost:7080"
+      "Url": "http://basinframework_app_1:5000"
     }
   ],
   "Browsers": [
     {
-      "Id": "Chrome",
+      "Id": "CI Chrome",
       "Kind": "chrome",
       "Headless": true,
-      "ElementTimeout": 5
+      "ElementTimeout": 5,
+      "Version": "84.0",
+      "Host": "http://localhost:4444/wd/hub",
+      "Capabilities": {
+        "applicationContainers": ["basinframework_app_1"]
+      }
     },
     {
       "Id": "Firefox",

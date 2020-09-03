@@ -20,25 +20,25 @@ namespace Basin.Tests.Steps
         [Then("I can locate a message that contains text '(.*?)'")]
         public void ThenICanLocateAMessageThatContainsText(string text)
         {
-            Assert.That(DynamicControlsExample.Map.Message($"*|{text}").Exists, Is.True);
+            Assert.That(DynamicControlsExample.Map.Message($"*|{text}").Displayed, Is.True);
         }
 
         [Then("I can locate a message with exact text '(.*?)'")]
         public void ThenICanLocateAMessageWithExactText(string text)
         {
-            Assert.That(DynamicControlsExample.Map.Message(text).Exists, Is.True);
+            Assert.That(DynamicControlsExample.Map.Message(text).Displayed, Is.True);
         }
 
         [Then("I can locate a message that ends with text '(.*?)'")]
         public void ThenICanLocateAMessageThatEndsWithText(string text)
         {
-            Assert.That(DynamicControlsExample.Map.Message($"$|{text}").Exists, Is.True);
+            Assert.That(DynamicControlsExample.Map.Message($"$|{text}").Displayed, Is.True);
         }
 
         [Then("I can locate a message that starts with text '(.*?)'")]
         public void ThenICanLocateAMessageThatStartsWithText(string text)
         {
-            Assert.That(DynamicControlsExample.Map.Message($"^|{text}").Exists, Is.True);
+            Assert.That(DynamicControlsExample.Map.Message($"^|{text}").Displayed, Is.True);
         }
     }
 }

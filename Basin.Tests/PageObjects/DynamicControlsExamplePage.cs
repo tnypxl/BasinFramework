@@ -34,9 +34,9 @@ namespace Basin.Tests.PageObjects
             return Map.TextField.Enabled;
         }
 
-        public bool CheckboxExists()
+        public bool CheckboxDisplayed()
         {
-            return Map.Checkbox.Exists;
+            return Map.Checkbox.Displayed;
         }
     }
 

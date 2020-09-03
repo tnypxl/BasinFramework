@@ -9,43 +9,43 @@ namespace Basin.Core.Locators
     {
         public delegate ILocatorBuilder ContainsChild(ILocatorBuilder child);
 
-        public By By => By.XPath(XPath.ToString());
+        public By By => By.XPath(Selector.ToString());
 
-        public StringBuilder XPath { get; }
+        public StringBuilder Selector { get; }
 
         public Locator(string tagName)
         {
             var rootXPath = $"//{tagName}";
-            XPath = new StringBuilder();
-            XPath.Append(rootXPath);
+            Selector = new StringBuilder();
+            Selector.Append(rootXPath);
         }
 
         public ILocatorBuilder Inside(ILocatorBuilder parent)
         {
-            XPath.Insert(0, parent.XPath);
+            Selector.Insert(0, parent.Selector);
             return this;
         }
 
         public ILocatorBuilder WithText(string text, bool inclusive = true)
         {
-            XPath.Append(GetXPathStringFunc(".", text, inclusive));
+            Selector.Append(GetXPathStringFunc(".", text, inclusive));
 
             return this;
         }
 
         public ILocatorBuilder WithClass(string className, bool inclusive = true)
         {
-            XPath.Append("[");
+            Selector.Append("[");
 
-            if (!inclusive) XPath.Append("not(");
+            if (!inclusive) Selector.Append("not(");
 
-            XPath.Append("contains(concat(' ',normalize-space(@class),' '),' ")
-                 .Append(className)
-                 .Append(" ')");
+            Selector.Append("contains(concat(' ',normalize-space(@class),' '),' ")
+                    .Append(className)
+                    .Append(" ')");
 
-            if (!inclusive) XPath.Append(")");
+            if (!inclusive) Selector.Append(")");
 
-            XPath.Append("]");
+            Selector.Append("]");
 
             return this;
         }
@@ -59,103 +59,112 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithAttr(string name, bool inclusive = true)
         {
-            XPath.Append("[");
+            Selector.Append("[");
 
-            if (!inclusive) XPath.Append("not(");
+            if (!inclusive) Selector.Append("not(");
 
-            XPath.Append("@")
-                 .Append(name);
+            Selector.Append("@")
+                    .Append(name);
 
-            if (!inclusive) XPath.Append(")");
+            if (!inclusive) Selector.Append(")");
 
-            XPath.Append(']');
+            Selector.Append(']');
 
             return this;
         }
 
         public ILocatorBuilder WithAttr(string name, string value, bool inclusive = true)
         {
-            XPath.Append(GetXPathStringFunc($"@{name}", value, inclusive));
+            Selector.Append(GetXPathStringFunc($"@{name}", value, inclusive));
 
             return this;
         }
 
         public ILocatorBuilder WithChild(ILocatorBuilder child, bool inclusive = true)
         {
-            XPath.Append("[");
+            Selector.Append("[");
 
-            if (!inclusive) XPath.Append("not(");
+            if (!inclusive) Selector.Append("not(");
 
-            XPath.Append(".")
-                 .Append(child.XPath.Remove(0, 1));
+            Selector.Append(".")
+                    .Append(child.Selector.Remove(0, 1));
 
-            if (!inclusive) XPath.Append(")");
+            if (!inclusive) Selector.Append(")");
 
-            XPath.Append(']');
+            Selector.Append(']');
 
             return this;
         }
 
         public ILocatorBuilder WithDescendant(ILocatorBuilder descendant, bool inclusive = true)
         {
-            XPath.Append("[");
+            Selector.Append("[");
 
-            if (!inclusive) XPath.Append("not(");
+            if (!inclusive) Selector.Append("not(");
 
-            XPath.Append(".")
-                 .Append(descendant.XPath);
+            Selector.Append(".")
+                    .Append(descendant.Selector);
 
-            if (!inclusive) XPath.Append(")");
+            if (!inclusive) Selector.Append(")");
 
-            XPath.Append(']');
+            Selector.Append(']');
 
             return this;
         }
 
         public ILocatorBuilder Parent()
         {
-            XPath.Append("/parent::*");
+            Selector.Append("/parent::*");
 
             return this;
         }
 
         public ILocatorBuilder Parent(ILocatorBuilder parentLocator)
         {
-            XPath.Append("/parent::")
-                 .Append(parentLocator.XPath.Remove(0, 2));
+            Selector.Append("/parent::")
+                    .Append(parentLocator.Selector.Remove(0, 2));
 
             return this;
         }
 
         public ILocatorBuilder Child()
         {
-            XPath.Append("/child::*");
+            Selector.Append("/child::*");
 
             return this;
         }
 
         public ILocatorBuilder Child(ILocatorBuilder childLocator)
         {
-            XPath.Append("/child::")
-                 .Append(childLocator.XPath.Remove(0, 2));
+            Selector.Append("/child::")
+                    .Append(childLocator.Selector.Remove(0, 2));
 
             return this;
         }
 
         public ILocatorBuilder Follows(ILocatorBuilder sibling)
         {
-            XPath.Remove(0, 2)
-                 .Insert(0, "/following-sibling::")
-                 .Insert(0, sibling.XPath);
+            Selector.Remove(0, 2)
+                    .Insert(0, "/following-sibling::")
+                    .Insert(0, sibling.Selector);
 
             return this;
         }
 
         public ILocatorBuilder Precedes(ILocatorBuilder sibling)
         {
-            XPath.Remove(0, 2)
-                 .Insert(0, "/preceding-sibling::")
-                 .Insert(0, sibling.XPath);
+            Selector.Remove(0, 2)
+                    .Insert(0, "/preceding-sibling::")
+                    .Insert(0, sibling.Selector);
+
+            return this;
+        }
+
+        public ILocatorBuilder AtPosition(int position)
+        {
+            Selector.Append("[")
+                    .Append(position.ToString())
+                    .Append("]");
 
             return this;
         }

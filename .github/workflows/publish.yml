@@ -27,7 +27,7 @@ jobs:
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.300
+          dotnet-version: 3.1.401
 
       - name: Publish NuGet
         id: publish_nuget

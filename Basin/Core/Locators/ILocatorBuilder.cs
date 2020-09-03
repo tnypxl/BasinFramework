@@ -7,7 +7,7 @@ namespace Basin.Core.Locators
     {
         By By { get; }
 
-        StringBuilder XPath { get; }
+        StringBuilder Selector { get; }
 
         ILocatorBuilder Inside(ILocatorBuilder parent);
 
@@ -36,5 +36,7 @@ namespace Basin.Core.Locators
         ILocatorBuilder Precedes(ILocatorBuilder sibling);
 
         ILocatorBuilder Follows(ILocatorBuilder sibling);
+
+        ILocatorBuilder AtPosition(int index);
     }
 }
