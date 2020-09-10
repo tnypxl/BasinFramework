@@ -2,6 +2,8 @@ using NUnit.Framework;
 using TechTalk.SpecFlow;
 using Basin.Tests.PageObjects;
 using Basin.PageObjects;
+using System.Runtime.InteropServices.ComTypes;
+using System.Linq;
 
 namespace Basin.Tests.Steps
 {
@@ -73,6 +75,24 @@ namespace Basin.Tests.Steps
         public void ThenICanLocateATableCellByRowAndColumnWithGivenText(int row, int column, string text)
         {
             Assert.That(Page.TableCellByRowAndColumn(row, column).Text == text, Is.True);
+        }
+
+        [Then("I can locate element '(.*?)' whose class attribute includes class name '(.*?)'")]
+        public void ThenICanLocateElementWhoseClassAttributeIncludesClassName(string elementText, string className)
+        {
+            Assert.That(Page.Item(elementText).WithClass(className).Displayed, Is.True);
+        }
+
+        [StepArgumentTransformation]
+        public string[] ConvertCommaSeparatedStringToStringArray(string commaSeparatedValue)
+        {
+            return commaSeparatedValue.Replace(" ", "").Split(",");
+        }
+
+        [Then("I can locate element '(.*?)' who class attribute includes multiple class names '(.*?)'")]
+        public void ThenICanLocateElementWhoseClassAttributeIncludesMultipleClassNames(string elementText, string[] multipleClassNames)
+        {
+            Assert.That(Page.Item(elementText).WithClass(multipleClassNames.ToArray()).Displayed, Is.True);
         }
     }
 }

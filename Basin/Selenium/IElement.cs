@@ -94,6 +94,12 @@ namespace Basin.Selenium
         Element WithClass(string className, bool inclusive = true);
 
         /// <summary>
+        /// Locate element with a class attribute containing multiple class names.
+        /// </summary>
+        /// <param name="classNames">param string array of HTML class names</param>
+        Element WithClass(params string[] classNames);
+
+        /// <summary>
         /// Locate element containing specific descendant elements
         /// </summary>
         /// <param name="descendantElement"></param>

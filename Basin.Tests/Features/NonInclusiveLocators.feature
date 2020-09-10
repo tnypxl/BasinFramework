@@ -1,9 +1,8 @@
 ﻿Feature: Non-Inclusive Locators
-	In order to build a locator
+	In order to be located
 	As an Element
 	I want to be found based on properties I don't have
 
-@mytag
 Scenario: Locate element that excludes a given class name
 	Given I am on the home page
 	When I navigate to the example named 'Large & Deep DOM'

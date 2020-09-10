@@ -15,6 +15,8 @@ namespace Basin.Core.Locators
 
         ILocatorBuilder WithClass(string className, bool inclusive = true);
 
+        ILocatorBuilder WithClass(params string[] classNames);
+
         ILocatorBuilder WithId(string id, bool inclusive = true);
 
         ILocatorBuilder WithAttr(string name, bool inclusive = true);
