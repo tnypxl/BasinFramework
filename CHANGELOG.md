@@ -1,3 +1,6 @@
+## v1.2.7
+* :heavy_plus_sign: Locate elements by multiple classes in an element's class attribute (#72) 
+
 ## v1.2.6
 * :heavy_plus_sign: ::: Implemented `Locator.AtPosition(int position)` to allow choosing an element at a specific index when there are multiple with the same locator properties.
 * :green_heart: ::: Updated GitHub build workflow to use docker-compose to spin up Selenoid and a custom version of The Internet (https://the-internet.herokuapp.com).
