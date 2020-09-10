@@ -1,6 +1,4 @@
-* :heavy_plus_sign: ::: Implemented `Locator.AtPosition(int position)` to allow choosing an element at a specific index when there are multiple with the same locator properties.
-* :green_heart: ::: Updated GitHub build workflow to use docker-compose to spin up Selenoid and a custom version of The Internet (https://the-internet.herokuapp.com).
-* :x: ::: Make `Element.Exists` obsolete and use the same code in `Element.Displayed`.
+* :heavy_plus_sign: ::: Locate elements by multiple classes in an element's class attribute (#72) 
 
 
 <!-- 
