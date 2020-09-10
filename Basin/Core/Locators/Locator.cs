@@ -2,6 +2,7 @@ using System.Xml.XPath;
 using System.Text;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
+using System.Linq;
 
 namespace Basin.Core.Locators
 {
@@ -46,6 +47,18 @@ namespace Basin.Core.Locators
             if (!inclusive) Selector.Append(")");
 
             Selector.Append("]");
+
+            return this;
+        }
+
+        public ILocatorBuilder WithClass(params string[] classNames)
+        {
+            for (int i = 0; i < classNames.Length; i++)
+                classNames[i] = GetClassNameXPath(classNames[i]);
+
+            Selector.Append("[")
+                    .AppendJoin(" and ", classNames)
+                    .Append("]");
 
             return this;
         }
@@ -167,6 +180,22 @@ namespace Basin.Core.Locators
                     .Append("]");
 
             return this;
+        }
+
+        private static string GetClassNameXPath(string className)
+        {
+            var classNameXpath = new StringBuilder();
+            bool exclude = Regex.IsMatch(className, "^!");
+
+            if (exclude) classNameXpath.Append("not(");
+
+            classNameXpath.Append("contains(concat(' ',normalize-space(@class),' '),' ")
+                          .Append(className.Replace("!", ""))
+                          .Append(" ')");
+
+            if (exclude) classNameXpath.Append(")");
+
+            return classNameXpath.ToString();
         }
 
         private static string GetXPathStringFunc(string attrOrFuncName, string attrOrFuncValue, bool inclusive = true)

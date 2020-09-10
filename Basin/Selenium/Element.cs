@@ -138,6 +138,13 @@ namespace Basin.Selenium
             return this;
         }
 
+        public Element WithClass(params string[] classNames)
+        {
+            _locator.WithClass(classNames);
+
+            return this;
+        }
+
         public Element WithId(string id, bool inclusive = true)
         {
             _locator.WithId(id, inclusive);
