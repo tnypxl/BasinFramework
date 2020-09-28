@@ -2,7 +2,6 @@ using NUnit.Framework;
 using TechTalk.SpecFlow;
 using Basin.Tests.PageObjects;
 using Basin.PageObjects;
-using System.Runtime.InteropServices.ComTypes;
 using System.Linq;
 
 namespace Basin.Tests.Steps
@@ -10,7 +9,7 @@ namespace Basin.Tests.Steps
     [Binding]
     public class LargeAndDeepDomExampleSteps
     {
-        private LargeAndDeepDOMExamplePage Page => Pages.Get<LargeAndDeepDOMExamplePage>();
+        private LargeAndDeepDomExamplePage Page => Pages.Get<LargeAndDeepDomExamplePage>();
 
         [Then("I can locate element '(.*?)' that follows element '(.*?)'")]
         public void ThenICanLocateElementThatFollowsElement(string elementText, string siblingElementText)
@@ -93,6 +92,12 @@ namespace Basin.Tests.Steps
         public void ThenICanLocateElementWhoseClassAttributeIncludesMultipleClassNames(string elementText, string[] multipleClassNames)
         {
             Assert.That(Page.Item(elementText).WithClass(multipleClassNames.ToArray()).Displayed, Is.True);
+        }
+
+        [Then(@"I can locate element using By\.Id '(.*?)'")]
+        public void ThenICanLocateElementById(string elementId)
+        {
+            Assert.That(Page.ItemById($"{elementId}").Displayed, Is.True);
         }
     }
 }
