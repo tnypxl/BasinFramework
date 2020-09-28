@@ -1,5 +1,5 @@
-* :heavy_plus_sign: ::: Locate elements by multiple classes in an element's class attribute (#72) 
 
+* :green_heart: Add support for traditional By locators (#74)
 
 <!-- 
 :heavy_plus_sign: when adding a file or implementing a feature

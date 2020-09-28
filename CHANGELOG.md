@@ -1,3 +1,6 @@
+## v1.2.7.1
+* :green_heart: Add support for traditional By locators (#74)
+
 ## v1.2.7
 * :heavy_plus_sign: Locate elements by multiple classes in an element's class attribute (#72) 
 
