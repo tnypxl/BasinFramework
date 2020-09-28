@@ -15,7 +15,7 @@ namespace Basin.Tests.Steps
             BasinEnv.SetConfig($"{Path.GetFullPath("../../../")}/TheInternet.json");
             Pages.Add(new HomePage());
             Pages.Add(new AddRemoveElementsExamplePage());
-            Pages.Add(new LargeAndDeepDOMExamplePage());
+            Pages.Add(new LargeAndDeepDomExamplePage());
             Pages.Add(new DynamicControlsExamplePage());
         }
 

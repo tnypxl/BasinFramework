@@ -19,7 +19,7 @@ namespace Basin.Tests.PageObjects
         public void BuildExamples()
         {
             Examples.Add(new AddRemoveElementsExamplePage());
-            Examples.Add(new LargeAndDeepDOMExamplePage());
+            Examples.Add(new LargeAndDeepDomExamplePage());
         }
     }
 }
