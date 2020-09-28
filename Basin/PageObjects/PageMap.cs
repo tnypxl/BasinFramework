@@ -1,9 +1,12 @@
 using Basin.Selenium;
+using OpenQA.Selenium;
 
 namespace Basin.PageObjects
 {
     public abstract class PageMap
     {
+        protected Element Locate(By by) => new Element(by);
+
         protected Element AbbreviationTag => new Element("abbr");
 
         protected Element AbbrTag => AbbreviationTag;

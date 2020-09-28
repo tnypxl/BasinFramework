@@ -17,6 +17,19 @@ namespace Basin.Selenium
 
         private readonly ILocatorBuilder _locator;
 
+        public Element()
+        {
+            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
+            _timeout = BasinEnv.Browser.ElementTimeout;
+        }
+
+        public Element(By by)
+        {
+            FoundBy = by;
+            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
+            _timeout = BasinEnv.Browser.ElementTimeout;
+        }
+
         public Element(string tagName)
         {
             _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
@@ -44,7 +57,7 @@ namespace Basin.Selenium
         {
             get
             {
-                FoundBy = _locator.By;
+                FoundBy ??= _locator.By;
 
                 return Wait.Until(driver =>
                 {
