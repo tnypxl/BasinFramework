@@ -10,7 +10,7 @@
     },
     {
       "Id": "CI",
-      "Url": "http://basinframework_app_1:5000"
+      "Url": "http://basin_app_1:5000"
     }
   ],
   "Browsers": [
@@ -18,11 +18,12 @@
       "Id": "CI Chrome",
       "Kind": "chrome",
       "Headless": true,
-      "ElementTimeout": 5,
+      "ElementTimeout": 3,
+      "Timeout": 3,
       "Version": "84.0",
       "Host": "http://localhost:4444/wd/hub",
       "Capabilities": {
-        "applicationContainers": ["basinframework_app_1"]
+        "applicationContainers": ["basin_app_1"]
       }
     },
     {

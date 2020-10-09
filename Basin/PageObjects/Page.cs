@@ -1,4 +1,5 @@
 using System;
+using Basin.PageObjects;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 
@@ -8,18 +9,27 @@ namespace Basin.PageObjects
 
     public abstract class Page : PageMap, IPageBase
     {
+        protected readonly PageActor I;
+        protected Page() => I = new PageActor();
         public Wait Wait => BrowserSession.Wait;
+        
+    }
 
         // public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
     public abstract class Page<TPageMap> : IPageBase where TPageMap : new()
     {
+        protected readonly PageActor I;
+        
+        protected Page() => I = new PageActor();
 
         public Wait Wait => BrowserSession.Wait;
 
         public TPageMap Map { get; } = new TPageMap();
     }
+
+        
 
     public abstract class PageComponent : Page { }
 

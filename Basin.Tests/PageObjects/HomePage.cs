@@ -1,5 +1,6 @@
 using Basin.PageObjects;
 using Basin.Selenium;
+using Google.Protobuf.Collections;
 
 namespace Basin.Tests.PageObjects
 {
@@ -12,7 +13,7 @@ namespace Basin.Tests.PageObjects
 
         private Element ExampleLink(string name) => AnchorTag.WithText(name).Inside(ListItemTag);
 
-        public void NavigateToExample(string name) => ExampleLink(name).Click();
+        public void NavigateToExample(string name) => I.Click(ExampleLink(name));
 
         public PageCollection Examples { get; } = new PageCollection();
 

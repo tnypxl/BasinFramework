@@ -13,11 +13,10 @@ namespace Basin.Tests.PageObjects
 
         public void AddMultipleElements(int count)
         {
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
-                var addedElementsCount = Map.DeleteButton.All.Count;
                 Map.AddElementButton.Click();
-                Wait.Until(_ => addedElementsCount > i);
+                Wait.Until(_ => Map.DeleteButton.All.Count > i);
             }
         }
 
