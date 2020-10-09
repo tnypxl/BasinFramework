@@ -9,13 +9,19 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Basin.Selenium
 {
-    public sealed class Element : IWebElement, IElement
+    public class Element : IWebElement, IElement, IShadowElement
     {
+        #region Private Fields
+
         private readonly int _timeout;
 
         private readonly DefaultWait<IWebDriver> _wait;
 
         private readonly ILocatorBuilder _locator;
+
+        #endregion
+
+        #region Constructors
 
         public Element()
         {
@@ -37,9 +43,11 @@ namespace Basin.Selenium
             _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
-        public string Label { get; set; }
+        #endregion
 
-        public By FoundBy { get; set; }
+        #region Private Props
+        
+        private static IJavaScriptExecutor Js => (IJavaScriptExecutor) BrowserSession.Current;
 
         private DefaultWait<IWebDriver> Wait
         {
@@ -58,25 +66,38 @@ namespace Basin.Selenium
             get
             {
                 FoundBy ??= _locator.By;
-
-                return Wait.Until(driver =>
-                {
-                    var element = driver.FindElement(FoundBy);
-
-                    return element.Displayed
-                        ? element
-                        : null;
-                });
+                return FoundElement;
             }
         }
 
-        [Obsolete("Use `Element.Displayed` instead!")] public bool Exists => Displayed;
+        private IWebElement FoundElement => Wait.Until(driver =>
+        {
+            var element = driver.FindElement(FoundBy);
+
+            return element.Displayed ? element : null;
+        });
+
+        
 
         private IWebElement Current => Locate ?? throw new NullReferenceException("Element could not be located because it was null");
+        
+        #endregion
+
+        #region Public Props
+
+        public string Label { get; set; }
+        
+        [Obsolete("Use `Element.Displayed` instead!")]
+        public bool Exists => Displayed;
+        public By FoundBy { get; set; }
 
         public Func<IWebDriver, bool> IsDisplaying => WaitConditions.ElementDisplayed(Current);
 
         public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(Current);
+
+        #endregion
+        
+        #region Public IWebElement Props
 
         public string TagName => Current.TagName;
 
@@ -105,6 +126,10 @@ namespace Basin.Selenium
             }
         }
 
+        #endregion
+
+        #region Public IWebElement Methods
+
         public void Clear() => Current.Clear();
 
         public void Click() => Current.Click();
@@ -123,12 +148,9 @@ namespace Basin.Selenium
 
         public void Submit() => Current.Submit();
 
-        public void Hover()
-        {
-            var actions = new Actions(BrowserSession.Current);
-
-            actions.MoveToElement(Current).Perform();
-        }
+        #endregion
+        
+        #region Public Locator Methods
 
         public Element Inside(Element parentElement)
         {
@@ -249,11 +271,26 @@ namespace Basin.Selenium
             return this;
         }
 
+        public Element Shadow => (Element) Js.ExecuteScript("return arguments[0].shadowRoot", this);
+        
+        #endregion
+        
+        #region Public Misc. Methods
+
+        public void Hover()
+        {
+            var actions = new Actions(BrowserSession.Current);
+
+            actions.MoveToElement(Current).Perform();
+        }
+        
         public Element IfTextMatches(string pattern)
         {
-            if (!Displayed) throw new NoSuchElementException("Could match element text because element was not visible.");
+            if (!Displayed)
+                throw new NoSuchElementException("Could not match element text because element was not visible.");
 
-            if (!Regex.IsMatch(Text, pattern)) throw new ArgumentException("Element's text did not match the pattern provided.");
+            if (!Regex.IsMatch(Text, pattern))
+                throw new ArgumentException("Element's text did not match the pattern provided.");
 
             return this;
         }
@@ -267,5 +304,7 @@ namespace Basin.Selenium
                 return new Elements(BrowserSession.Current?.FindElements(by));
             }
         }
+
+        #endregion
     }
 }
