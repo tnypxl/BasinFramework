@@ -114,7 +114,7 @@ For the most part, nothing else is needed. But if you need to access the `IWebDr
 Maybe I already have code written to manage driver instances. Just pass in an instance of IWebDriver.
 
 ```c#
-BrowserSession.Init(new FirefoxBrowser().Driver);
+BrowserSession.Init(new ChromeDriver());
 BrowserSession.Goto("http://someurl");
 ```
 
