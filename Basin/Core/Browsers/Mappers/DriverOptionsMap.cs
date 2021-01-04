@@ -3,9 +3,9 @@ using Basin.Config.Interfaces;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public abstract class DriverOptionsMap<TDriverOptions> where TDriverOptions : new()
+    public abstract class DriverOptionsMap<out DriverOptions>
     {
-        protected DriverOptionsMap() => Options = new TDriverOptions();
+        protected DriverOptionsMap() => Options = new DriverOptions();
 
         public abstract string PathToBrowserBinary { set; }
 
@@ -21,6 +21,6 @@ namespace Basin.Core.Browsers.Mappers
 
         public abstract void SetCapabilities(Dictionary<string, object> value);
 
-        public TDriverOptions Options { get; }
+        public DriverOptions Options { get; }
     }
 }
