@@ -17,7 +17,7 @@
 		<OutputType>Library</OutputType>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<Description>A .NET browser automation framework based on Selenium WebDriver</Description>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
