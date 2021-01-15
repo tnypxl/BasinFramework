@@ -23,24 +23,13 @@ services:
     ports:
       - "8080:8080"
     command: ["--selenoid-uri", "http://selenoid:4444"]
-  
-  # chrome:
-  #   networks:
-  #     selenoid: null
-  #   image: selenoid/chrome:83.0
-
-  # firefox:
-  #   networks:
-  #     selenoid: null
-  #   image: selenoid/firefox:78.0
 
   app:
     network_mode: bridge
     build: ./docker/TheInternet
-    # image: gprestes/the-internet
     ports:
       - "7080:5000"
-    
+
   chrome:
     image: selenoid/chrome:84.0
 
