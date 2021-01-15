@@ -3,31 +3,25 @@ name: Basin Release
 on:
   pull_request:
     types:
-      - opened
-      - reopened
-      - synchronize
       - closed
-    labeled:
-      - release
     branches:
       - master
 
 jobs:
-  
   publish_and_release:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    
+
     env:
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 1
-    
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.401
+          dotnet-version: 5.0.102
 
       - name: Publish NuGet
         id: publish_nuget
@@ -50,17 +44,13 @@ jobs:
           tag_name: ${{ steps.publish_nuget.outputs.VERSION }}
           release_name: ${{ steps.publish_nuget.outputs.VERSION }}
           body_path: RELEASE_NOTES.md
-      
-      
 
       - name: Add NuGet to Release
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.publish_nuget.outputs.PACKAGE_PATH }}
           asset_name: ${{ steps.publish_nuget.outputs.PACKAGE_NAME }}
           asset_content_type: application/nupkg
-      
-          
