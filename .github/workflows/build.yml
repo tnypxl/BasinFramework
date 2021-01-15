@@ -15,28 +15,28 @@ jobs:
 
       - name: Setup Test Environment
         run: docker-compose up -d
-      
+
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.401
+          dotnet-version: 5.0.102
 
       # - name: Start The Internet
       #   uses: docker
       #   run:
-      
+
       - name: Install Dependencies
         run: dotnet restore
-      
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      
+
       - name: Test
         run: dotnet test --no-restore
 
       - name: Teardown Test Environment
         run: docker-compose down
-      
+
       # - name: Publish Nuget
       #   uses: rohith/publish-nuget@v2
       #   with:
@@ -47,4 +47,3 @@ jobs:
       #     TAG_COMMIT: true
       #     TAG_FORMAT: v*
       #     NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        
