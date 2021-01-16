@@ -15,9 +15,9 @@
       <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.26.0.1" />
       <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1" />
       <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
-      <PackageReference Include="SpecFlow" Version="3.3.16-beta" />
-      <PackageReference Include="SpecFlow.NUnit" Version="3.3.16-beta" />
-      <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.3.16-beta" />
+<!--      <PackageReference Include="SpecFlow" Version="3.3.16-beta" />-->
+<!--      <PackageReference Include="SpecFlow.NUnit" Version="3.3.16-beta" />-->
+<!--      <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.3.16-beta" />-->
     </ItemGroup>
 
     <ItemGroup>
