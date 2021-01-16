@@ -211,7 +211,7 @@ namespace Basin.Core.Locators
                 // So we have to make this unholy mess to get the same behavior with XPath 1.0
                 "$|" => $@"contains({attrOrFuncName}, ""{attrOrFuncValue}"") and not(normalize-space(substring-after({attrOrFuncName}, ""{attrOrFuncValue}"")))",
                 "*|" => $@"contains({attrOrFuncName}, ""{attrOrFuncValue}"")",
-                _ => $@"{attrOrFuncName}=""{attrOrFuncValue}""",
+                _ => $@"{attrOrFuncName}=""{attrOrFuncValue}"""
             };
 
             return inclusive
