@@ -24,8 +24,9 @@ namespace Basin
         public static void SetConfig(string configPath)
         {
             _config = new CurrentConfig(GetConfig.UseJsonFile(configPath)
-                                                 .UseTypeParser(new DictionaryParser())
-                                                 .Build());
+                .UseTypeParser(new DictionaryParser())
+                .Build());
+
             Site = _config.Site;
             Browser = _config.Browser;
             Pages = _config.Pages;

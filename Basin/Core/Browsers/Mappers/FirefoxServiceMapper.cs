@@ -25,10 +25,10 @@ namespace Basin.Core.Browsers.Mappers
 
         public FirefoxServiceMapper(IBrowserConfig config)
         {
-            PathToDriverBinary = config.PathToDriverBinary ?? PathToDriverBinary;
+            PathToDriverBinary ??= config.PathToDriverBinary;
             HideCommandPrompt = config.HideCommandPrompt;
 
-            CreateService(config.PathToDriverBinary);
+            CreateService(PathToDriverBinary);
         }
 
         private void CreateService(string pathToDriverBinary)
