@@ -1,7 +1,7 @@
 {
   "Environment": {
-    "Site": "CI",
-    "Browser": "CI Chrome"
+    "Site": "DEV",
+    "Browser": "Firefox"
   },
   "Sites": [
     {
@@ -28,6 +28,11 @@
     {
       "Id": "Firefox",
       "Kind": "firefox",
+      "Headless": true
+    },
+    {
+      "Id": "Chrome",
+      "Kind": "chrome",
       "Headless": true
     }
   ],

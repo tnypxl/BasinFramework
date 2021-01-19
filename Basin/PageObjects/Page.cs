@@ -1,16 +1,11 @@
-using System;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 
 namespace Basin.PageObjects
 {
-    public delegate void Screens();
-
     public abstract class Page : PageMap, IPageBase
     {
         public Wait Wait => BrowserSession.Wait;
-
-        // public TPage On<TPage>() where TPage : new() => new TPage();
     }
 
     public abstract class Page<TPageMap> : IPageBase where TPageMap : new()

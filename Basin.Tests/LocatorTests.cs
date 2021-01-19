@@ -5,15 +5,15 @@ namespace Basin.Tests
 {
     public class LocatorTests
     {
-        public Locator Div, Span, UnorderedList, ListItem;
+        private Locator _div, _span, _unorderedList, _listItem;
 
         [SetUp]
         public void SetUp()
         {
-            Div = new Locator("div");
-            Span = new Locator("span");
-            UnorderedList = new Locator("ul");
-            ListItem = new Locator("li");
+            _div = new Locator("div");
+            _span = new Locator("span");
+            _unorderedList = new Locator("ul");
+            _listItem = new Locator("li");
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div";
 
-            Assert.That(Div.Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[contains(concat(' ',normalize-space(@class),' '),' foo ')]";
 
-            Assert.That(Div.WithClass("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithClass("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[not(contains(concat(' ',normalize-space(@class),' '),' foo '))]";
 
-            Assert.That(Div.WithClass("foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithClass("foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Basin.Tests
 
             var expectedXPath = $"//div[{expectedCssClassXPaths}]";
 
-            Assert.That(Div.WithClass("foo", "bar", "!baz").Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithClass("foo", "bar", "!baz").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = @"//div[@id=""foo""]";
 
-            Assert.That(Div.WithId("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithId("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = @"//div[@myattr=""foo""]";
 
-            Assert.That(Div.WithAttr("myattr", "foo").Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithAttr("myattr", "foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = @"//div[not(@myattr=""foo"")]";
 
-            Assert.That(Div.WithAttr("myattr", "foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithAttr("myattr", "foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[@myattr]";
 
-            Assert.That(Div.WithAttr("myattr").Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithAttr("myattr").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[not(@myattr)]";
 
-            Assert.That(Div.WithAttr("myattr", false).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithAttr("myattr", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[./span]";
 
-            Assert.That(Div.WithChild(Span).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithChild(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[not(./span)]";
 
-            Assert.That(Div.WithChild(Span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithChild(_span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[.//span]";
 
-            Assert.That(Div.WithDescendant(Span).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithDescendant(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[not(.//span)]";
 
-            Assert.That(Div.WithDescendant(Span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.WithDescendant(_span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -144,7 +144,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div/parent::*";
 
-            Assert.That(Div.Parent().Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Parent().Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//span/parent::div";
 
-            Assert.That(Span.Parent(Div).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_span.Parent(_div).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -162,7 +162,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div/child::*";
 
-            Assert.That(Div.Child().Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Child().Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div/child::span";
 
-            Assert.That(Div.Child(Span).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Child(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -180,7 +180,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div[4]";
 
-            Assert.That(Div.AtPosition(4).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.AtPosition(4).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//ul/following-sibling::div";
 
-            Assert.That(Div.Follows(UnorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Follows(_unorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -198,7 +198,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//ul/preceding-sibling::div";
 
-            Assert.That(Div.Precedes(UnorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_div.Precedes(_unorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace Basin.Tests
         {
             const string expectedXPath = "//div//span";
 
-            Assert.That(Span.Inside(Div).Selector.ToString(), Is.EqualTo(expectedXPath));
+            Assert.That(_span.Inside(_div).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
         [Test]
@@ -219,10 +219,10 @@ namespace Basin.Tests
             const string expectedEndsWithTextXPath = @"//div[contains(., ""foo"") and not(normalize-space(substring-after(., ""foo"")))]";
             const string expectedContainsTextXPath = @"//li[contains(., ""foo"")]";
 
-            Assert.That(Span.WithText("foo bar, baz?").Selector.ToString(), Is.EqualTo(expectedExactTextXPath));
-            Assert.That(UnorderedList.WithText("^|foo").Selector.ToString(), Is.EqualTo(expectedStartsWithTextXPath));
-            Assert.That(Div.WithText("$|foo").Selector.ToString(), Is.EqualTo(expectedEndsWithTextXPath));
-            Assert.That(ListItem.WithText("*|foo").Selector.ToString(), Is.EqualTo(expectedContainsTextXPath));
+            Assert.That(_span.WithText("foo bar, baz?").Selector.ToString(), Is.EqualTo(expectedExactTextXPath));
+            Assert.That(_unorderedList.WithText("^|foo").Selector.ToString(), Is.EqualTo(expectedStartsWithTextXPath));
+            Assert.That(_div.WithText("$|foo").Selector.ToString(), Is.EqualTo(expectedEndsWithTextXPath));
+            Assert.That(_listItem.WithText("*|foo").Selector.ToString(), Is.EqualTo(expectedContainsTextXPath));
         }
     }
 }
