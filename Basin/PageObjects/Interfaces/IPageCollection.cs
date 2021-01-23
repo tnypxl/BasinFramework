@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Basin.PageObjects.Interfaces
@@ -11,5 +10,7 @@ namespace Basin.PageObjects.Interfaces
         TPage Get<TPage>();
 
         IDictionary<string, object> Pages { get; }
+
+        void Use<T>(Action<T> action);
     }
 }
