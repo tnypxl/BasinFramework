@@ -57,7 +57,7 @@ namespace Basin.Selenium
         {
             get
             {
-                FoundBy ??= _locator.By;
+                FoundBy = _locator.By;
 
                 return Wait.Until(driver =>
                 {
@@ -128,6 +128,11 @@ namespace Basin.Selenium
             var actions = new Actions(BrowserSession.Current);
 
             actions.MoveToElement(Current).Perform();
+        }
+
+        public ILocatorBuilder GetLocator()
+        {
+            return _locator;
         }
 
         public Element Inside(Element parentElement)

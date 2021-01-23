@@ -1,9 +1,10 @@
 using Basin.Core.Locators;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Basin.Tests
 {
-    public class LocatorTests
+    public class LocatorTests : TestBase
     {
         private Locator _div, _span, _unorderedList, _listItem;
 
@@ -16,8 +17,7 @@ namespace Basin.Tests
             _listItem = new Locator("li");
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathWithARootTagName()
         {
             const string expectedXPath = "//div";
@@ -25,8 +25,7 @@ namespace Basin.Tests
             Assert.That(_div.Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathWithAnHtmlClassAttributeAndValue()
         {
             const string expectedXPath = "//div[contains(concat(' ',normalize-space(@class),' '),' foo ')]";
@@ -34,8 +33,7 @@ namespace Basin.Tests
             Assert.That(_div.WithClass("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathWithHtmlClassAttributeAndValueAsNonInclusive()
         {
             const string expectedXPath = "//div[not(contains(concat(' ',normalize-space(@class),' '),' foo '))]";
@@ -43,8 +41,7 @@ namespace Basin.Tests
             Assert.That(_div.WithClass("foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathWithMultipleHtmlClassAttributeAndValues()
         {
             var expectedCssClassXPaths = string.Join(" and ",
@@ -57,8 +54,7 @@ namespace Basin.Tests
             Assert.That(_div.WithClass("foo", "bar", "!baz").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithHtmlIdAttributeAndValue()
         {
             const string expectedXPath = @"//div[@id=""foo""]";
@@ -66,8 +62,7 @@ namespace Basin.Tests
             Assert.That(_div.WithId("foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithHtmlAttributeAndValue()
         {
             const string expectedXPath = @"//div[@myattr=""foo""]";
@@ -75,8 +70,7 @@ namespace Basin.Tests
             Assert.That(_div.WithAttr("myattr", "foo").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsNonInclusiveXPathForElementWithHtmlAttributeAndValue()
         {
             const string expectedXPath = @"//div[not(@myattr=""foo"")]";
@@ -84,8 +78,7 @@ namespace Basin.Tests
             Assert.That(_div.WithAttr("myattr", "foo", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithHtmlAttribute()
         {
             const string expectedXPath = "//div[@myattr]";
@@ -93,8 +86,7 @@ namespace Basin.Tests
             Assert.That(_div.WithAttr("myattr").Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsNonInclusiveXPathForElementWithHtmlAttribute()
         {
             const string expectedXPath = "//div[not(@myattr)]";
@@ -102,8 +94,7 @@ namespace Basin.Tests
             Assert.That(_div.WithAttr("myattr", false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithAChildElement()
         {
             const string expectedXPath = "//div[./span]";
@@ -111,8 +102,7 @@ namespace Basin.Tests
             Assert.That(_div.WithChild(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsNonInclusiveXPathForElementWithAChildElement()
         {
             const string expectedXPath = "//div[not(./span)]";
@@ -120,8 +110,7 @@ namespace Basin.Tests
             Assert.That(_div.WithChild(_span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithADescendantElement()
         {
             const string expectedXPath = "//div[.//span]";
@@ -129,8 +118,7 @@ namespace Basin.Tests
             Assert.That(_div.WithDescendant(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsNonInclusiveXPathForElementWithADescendantElement()
         {
             const string expectedXPath = "//div[not(.//span)]";
@@ -138,8 +126,7 @@ namespace Basin.Tests
             Assert.That(_div.WithDescendant(_span, false).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForParentOfElement()
         {
             const string expectedXPath = "//div/parent::*";
@@ -147,8 +134,7 @@ namespace Basin.Tests
             Assert.That(_div.Parent().Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForSpecificParentOfElement()
         {
             const string expectedXPath = "//span/parent::div";
@@ -156,8 +142,7 @@ namespace Basin.Tests
             Assert.That(_span.Parent(_div).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForChildElement()
         {
             const string expectedXPath = "//div/child::*";
@@ -165,8 +150,7 @@ namespace Basin.Tests
             Assert.That(_div.Child().Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForSpecificChildElement()
         {
             const string expectedXPath = "//div/child::span";
@@ -174,8 +158,7 @@ namespace Basin.Tests
             Assert.That(_div.Child(_span).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementAtAnIndexPosition()
         {
             const string expectedXPath = "//div[4]";
@@ -183,8 +166,7 @@ namespace Basin.Tests
             Assert.That(_div.AtPosition(4).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementThatFollowsAnotherElement()
         {
             const string expectedXPath = "//ul/following-sibling::div";
@@ -192,8 +174,7 @@ namespace Basin.Tests
             Assert.That(_div.Follows(_unorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementThatPrecedesAnotherElement()
         {
             const string expectedXPath = "//ul/preceding-sibling::div";
@@ -201,8 +182,7 @@ namespace Basin.Tests
             Assert.That(_div.Precedes(_unorderedList).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementThatIsInsideAnotherElement()
         {
             const string expectedXPath = "//div//span";
@@ -210,8 +190,7 @@ namespace Basin.Tests
             Assert.That(_span.Inside(_div).Selector.ToString(), Is.EqualTo(expectedXPath));
         }
 
-        [Test]
-        [Category("Unit")]
+        [Test, Category("Unit")]
         public void LocatorBuildsXPathForElementWithText()
         {
             const string expectedExactTextXPath = @"//span[.=""foo bar, baz?""]";
@@ -223,6 +202,14 @@ namespace Basin.Tests
             Assert.That(_unorderedList.WithText("^|foo").Selector.ToString(), Is.EqualTo(expectedStartsWithTextXPath));
             Assert.That(_div.WithText("$|foo").Selector.ToString(), Is.EqualTo(expectedEndsWithTextXPath));
             Assert.That(_listItem.WithText("*|foo").Selector.ToString(), Is.EqualTo(expectedContainsTextXPath));
+        }
+
+        [Test, Category("Unit")]
+        public void LocatorReturnsSeleniumByObject()
+        {
+            var expectedBy =  By.XPath("//div");
+
+            Assert.That(_div.By, Is.EqualTo(expectedBy));
         }
     }
 }
