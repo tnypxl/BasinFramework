@@ -1,5 +1,3 @@
-using Config.Net;
-
 namespace Basin.Config.Interfaces
 {
     public interface IEnvironmentConfig
