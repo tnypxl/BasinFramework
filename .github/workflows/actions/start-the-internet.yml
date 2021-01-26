@@ -1,7 +1,0 @@
-name: Start The Internet
-description: Uses custom dockerfile to spin up instance The Internet
-author: github@tnypxl.com
-
-runs:
-  using: docker
-  image: Dockerfile
