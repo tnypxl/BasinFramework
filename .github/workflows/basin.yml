@@ -1,8 +1,5 @@
+name: Basin Pipeline
 on:
-  push:
-    branches:
-      - master
-
   pull_request:
     branches:
       - master
@@ -42,43 +39,42 @@ jobs:
     if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release') }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'This is a release'
-#      - uses: actions/checkout@v2
-#
-#      - name: Setup Dotnet
-#        uses: actions/setup-dotnet@v1
-#        with:
-#          dotnet-version: 5.0.102
-#
-#      - name: Publish NuGet
-#        id: publish_nuget
-#        uses: brandedoutcast/publish-nuget@v2
-#        with:
-#          PACKAGE_NAME: BasinFramework
-#          PROJECT_FILE_PATH: Basin/Basin.csproj
-#          VERSION_FILE_PATH: Basin/Basin.csproj
-#          VERSION_REGEX: <PackageVersion>(.*?)</PackageVersion>
-#          TAG_COMMIT: true
-#          TAG_FORMAT: v*
-#          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-#
-#      - name: Create Release
-#        if: steps.publish_nuget.outputs.VERSION != null
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: ${{ steps.publish_nuget.outputs.VERSION }}
-#          release_name: ${{ steps.publish_nuget.outputs.VERSION }}
-#          body_path: RELEASE_NOTES.md
-#
-#      - name: Upload Nuget
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_path: ${{ steps.publish_nuget.outputs.PACKAGE_PATH }}
-#          asset_name: ${{ steps.publish_nuget.outputs.PACKAGE_NAME }}
-#          asset_content_type: application/nupkg
+      - uses: actions/checkout@v2
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.102
+
+      - name: Publish NuGet
+        id: publish_nuget
+        uses: brandedoutcast/publish-nuget@v2
+        with:
+          PACKAGE_NAME: BasinFramework
+          PROJECT_FILE_PATH: Basin/Basin.csproj
+          VERSION_FILE_PATH: Basin/Basin.csproj
+          VERSION_REGEX: <PackageVersion>(.*?)</PackageVersion>
+          TAG_COMMIT: true
+          TAG_FORMAT: v*
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+
+      - name: Create Release
+        if: steps.publish_nuget.outputs.VERSION != null
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.publish_nuget.outputs.VERSION }}
+          release_name: ${{ steps.publish_nuget.outputs.VERSION }}
+          body_path: RELEASE_NOTES.md
+
+      - name: Upload Nuget
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.publish_nuget.outputs.PACKAGE_PATH }}
+          asset_name: ${{ steps.publish_nuget.outputs.PACKAGE_NAME }}
+          asset_content_type: application/nupkg
