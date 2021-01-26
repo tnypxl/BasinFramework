@@ -30,7 +30,7 @@ namespace Basin.Core.Browsers
 
         public void CreateDriver() => CreateDriver(null);
 
-        public void CreateDriver(Uri host = null)
+        public void CreateDriver(Uri host)
         {
             Driver = host == null
                 ? new FirefoxDriver(Service, Options)

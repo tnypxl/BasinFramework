@@ -1,5 +1,3 @@
-using System.IO;
-using Basin.PageObjects;
 using Basin.Selenium;
 using Basin.Tests.PageObjects;
 using NUnit.Framework;
