@@ -7,7 +7,6 @@ on:
     branches:
       - master
     types:
-      - labeled
       - opened
       - closed
       - reopened
