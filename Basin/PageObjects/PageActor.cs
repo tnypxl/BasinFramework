@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 using OpenQA.Selenium;
@@ -8,10 +9,7 @@ namespace Basin.PageObjects
 {
     public class PageActor : IPageActor
     {
-        public PageActor()
-        {
-            throw new NotSupportedException();
-        }
+        private static IJavaScriptExecutor Javascript => (IJavaScriptExecutor)BrowserSession.Current;
 
         public Actions Actions { get; } = new Actions(BrowserSession.Current);
 
@@ -33,7 +31,7 @@ namespace Basin.PageObjects
             }
         }
 
-        public virtual bool WaitForNumberOfElements(Element element, int numberOfElements = 2)
+        public virtual bool WaitForNumberOfElements(Element element, int numberOfElements)
         {
             try
             {
@@ -62,13 +60,57 @@ namespace Basin.PageObjects
             return element.Displayed;
         }
 
+        public bool SeeText(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SeeText(string text, Element element)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void PressKey(params string[] keys)
         {
 
             Actions.SendKeys(string.Join(string.Empty, keys)).Perform();
         }
 
+        public virtual void CheckOption(Element element)
+        {
+            if (!IsCheckable(element) && string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
+
+            element.Click();
+        }
+
+        public void UncheckOption(Element element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SelectOption(Element element, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ExecuteScript(string script)
+        {
+            return Javascript.ExecuteScript(script);
+        }
+
+        public object ExecuteScript(string script, params object[] args)
+        {
+            return Javascript.ExecuteScript(script, args);
+        }
+
         public virtual Wait Wait => BrowserSession.Wait;
+
+        private static bool IsCheckable(Element element)
+        {
+            return element.TagName == "input"
+                   && Regex.IsMatch(element.GetAttribute("type"), "checkbox|radio")
+                   && element.Enabled;
+        }
 
     }
 }

@@ -28,6 +28,7 @@ namespace Basin.Tests
             Pages.Add(new HomePage());
             Pages.Add(new AddRemoveElementsExamplePage());
             Pages.Add(new LargeAndDeepDomExamplePage());
+            Pages.Add(new CheckboxesExamplePage());
         }
 
         [TearDown]
