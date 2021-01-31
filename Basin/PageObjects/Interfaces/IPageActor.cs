@@ -12,11 +12,11 @@ namespace Basin.PageObjects.Interfaces
 
         void Click(Element element);
 
-        void EnterText(Element element, string text);
+        void EnterText(string text, Element element);
 
-        bool WaitForElement(Element element);
+        void WaitForElement(Element element);
 
-        bool WaitForNumberOfElements(Element element, int numberOfElements);
+        void WaitForNumberOfElements(int numberOfElements, Element element);
 
         int GetNumberOfElements(Element element);
 
@@ -34,10 +34,11 @@ namespace Basin.PageObjects.Interfaces
 
         void UncheckOption(Element element);
 
-        void SelectOption(Element element, string value);
+        void SelectOption(string value, Element element);
 
         object ExecuteScript(string script);
 
         object ExecuteScript(string script, params object[] args);
+        bool SeeNumberOfElements(int numberOfElements, Element element);
     }
 }

@@ -7,42 +7,24 @@ using OpenQA.Selenium.Interactions;
 
 namespace Basin.PageObjects
 {
-    public class PageActor : IPageActor
+    public class PageActor : PageMap, IPageActor
     {
-        private static IJavaScriptExecutor Javascript => (IJavaScriptExecutor)BrowserSession.Current;
+        private static IJavaScriptExecutor Javascript { get; } = (IJavaScriptExecutor)BrowserSession.Current;
 
-        public Actions Actions { get; } = new Actions(BrowserSession.Current);
+        public Actions Actions => new Actions(BrowserSession.Current);
 
         public virtual void Click(Element element) => element.Click();
 
-        public virtual void EnterText(Element element, string text) => element.SendKeys(text);
+        public virtual void EnterText(string text, Element element) => element.SendKeys(text);
 
-        public virtual bool WaitForElement(Element element)
+        public virtual void WaitForElement(Element element)
         {
-            try
-            {
-                return Wait.Until(element.IsDisplaying);
-            }
-            catch (WebDriverTimeoutException e)
-            {
-                Console.WriteLine(e);
-
-                return false;
-            }
+            Wait.Until(_ => element.Displayed);
         }
 
-        public virtual bool WaitForNumberOfElements(Element element, int numberOfElements)
+        public virtual void WaitForNumberOfElements(int numberOfElements, Element element)
         {
-            try
-            {
-                return Wait.Until(_ => element.All.Count > 1 || element.All.Count == numberOfElements);
-            }
-            catch (WebDriverTimeoutException e)
-            {
-                Console.WriteLine(e);
-
-                return false;
-            }
+            Wait.Until(_ => element.All.Count > 1 && element.All.Count == numberOfElements);
         }
 
         public virtual int GetNumberOfElements(Element element)
@@ -60,56 +42,88 @@ namespace Basin.PageObjects
             return element.Displayed;
         }
 
+        public virtual bool SeeNumberOfElements(int numberOfElements, Element element)
+        {
+            var actualNumberOfElements = GetNumberOfElements(element);
+
+            return actualNumberOfElements == numberOfElements;
+        }
+
         public bool SeeText(string text)
         {
-            throw new NotImplementedException();
+            return new Element("body").Text.Contains(text);
         }
 
         public bool SeeText(string text, Element element)
         {
-            throw new NotImplementedException();
+            return element.Text.Contains(text);
         }
 
         public virtual void PressKey(params string[] keys)
         {
-
             Actions.SendKeys(string.Join(string.Empty, keys)).Perform();
         }
 
         public virtual void CheckOption(Element element)
         {
-            if (!IsCheckable(element) && string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
+            IsCheckboxOrRadio(element);
+
+            if (!string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
 
             element.Click();
         }
 
-        public void UncheckOption(Element element)
+        public virtual void UncheckOption(Element element)
         {
-            throw new NotImplementedException();
+            IsCheckboxOrRadio(element);
+
+            if (string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
+
+            element.Click();
         }
 
-        public void SelectOption(Element element, string value)
+        public virtual void SelectOption(string optionValue, Element selectList)
         {
-            throw new NotImplementedException();
+            IsSelectList(selectList);
+
+            var optionByText = OptionTag.WithText(optionValue).Inside(selectList);
+            var optionByValue = OptionTag.WithAttr("value", optionValue).Inside(selectList);
+
+            Click(selectList);
+
+            if (optionByText.Displayed) Click(optionByText);
+            if (optionByValue.Displayed) Click(optionByValue);
+
+            throw new ArgumentException($"Option with text or value '{optionValue}' could not be located");
         }
 
-        public object ExecuteScript(string script)
+
+        public virtual object ExecuteScript(string script)
         {
             return Javascript.ExecuteScript(script);
         }
 
-        public object ExecuteScript(string script, params object[] args)
+        public virtual object ExecuteScript(string script, params object[] args)
         {
             return Javascript.ExecuteScript(script, args);
         }
 
         public virtual Wait Wait => BrowserSession.Wait;
 
-        private static bool IsCheckable(Element element)
+        private static void IsSelectList(IWebElement selectList)
         {
-            return element.TagName == "input"
-                   && Regex.IsMatch(element.GetAttribute("type"), "checkbox|radio")
-                   && element.Enabled;
+            if (selectList.TagName == "select") return;
+
+            throw new ArgumentException("Element is not a select list input.");
+        }
+
+        private static void IsCheckboxOrRadio(IWebElement element)
+        {
+            if (element.TagName == "input"
+                && Regex.IsMatch(element.GetAttribute("type"), "checkbox|radio")
+                && element.Enabled) return;
+
+            throw new ArgumentException("Element is not a checkbox or radio input");
         }
 
     }
