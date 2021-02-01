@@ -46,7 +46,9 @@ namespace Basin.Tests.PageObjects
 
         private Element EnableDisableButton => ButtonTag.WithAttr("onclick", "swapInput()");
 
-        public Element Message(string text) => ParagraphTag.WithId("message").WithText(text);
+        public Element MessageContainer => ParagraphTag.WithId("message");
+
+        public Element Message(string text) => MessageContainer.WithText(text);
 
         public Element AddCheckboxButton => AddRemoveButton.WithText("Add");
 

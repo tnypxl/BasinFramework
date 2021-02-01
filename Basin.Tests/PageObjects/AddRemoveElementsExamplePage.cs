@@ -17,7 +17,7 @@ namespace Basin.Tests.PageObjects
             {
                 var addedElementsCount = Map.DeleteButton.All.Count;
                 Map.AddElementButton.Click();
-                Wait.Until(_ => addedElementsCount > i);
+                Wait.Until(_ => addedElementsCount >= i);
             }
         }
 

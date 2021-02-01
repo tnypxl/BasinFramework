@@ -9,7 +9,12 @@ namespace Basin.PageObjects
 {
     public class PageActor : PageMap, IPageActor
     {
-        private static IJavaScriptExecutor Javascript { get; } = (IJavaScriptExecutor)BrowserSession.Current;
+        [ThreadStatic] private static IJavaScriptExecutor _javascript;
+
+        public PageActor()
+        {
+            _javascript = (IJavaScriptExecutor)BrowserSession.Current;
+        }
 
         public Actions Actions => new Actions(BrowserSession.Current);
 
@@ -24,7 +29,7 @@ namespace Basin.PageObjects
 
         public virtual void WaitForNumberOfElements(int numberOfElements, Element element)
         {
-            Wait.Until(_ => element.All.Count > 1 && element.All.Count == numberOfElements);
+            Wait.Until(_ => element.All.Count >= 1 && element.All.Count == numberOfElements);
         }
 
         public virtual int GetNumberOfElements(Element element)
@@ -51,7 +56,9 @@ namespace Basin.PageObjects
 
         public bool SeeText(string text)
         {
-            return new Element("body").Text.Contains(text);
+            // var bodyWithText = BodyTag.WithText(text);
+
+            return BodyTag.Text.Contains(text);
         }
 
         public bool SeeText(string text, Element element)
@@ -100,12 +107,12 @@ namespace Basin.PageObjects
 
         public virtual object ExecuteScript(string script)
         {
-            return Javascript.ExecuteScript(script);
+            return _javascript.ExecuteScript(script);
         }
 
         public virtual object ExecuteScript(string script, params object[] args)
         {
-            return Javascript.ExecuteScript(script, args);
+            return _javascript.ExecuteScript(script, args);
         }
 
         public virtual Wait Wait => BrowserSession.Wait;

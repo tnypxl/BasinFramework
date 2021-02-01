@@ -19,6 +19,7 @@
       "Kind": "chrome",
       "Headless": true,
       "ElementTimeout": 5,
+      "Timeout": 30,
       "Version": "84.0",
       "Host": "http://localhost:4444/wd/hub",
       "Capabilities": {
