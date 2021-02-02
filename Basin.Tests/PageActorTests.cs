@@ -6,6 +6,8 @@ using OpenQA.Selenium;
 
 namespace Basin.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class PageActorTests : TestBase
     {
         private static PageActor I { get; } = new();
@@ -23,6 +25,8 @@ namespace Basin.Tests
         private DynamicLoadingExamplePage DynamicLoadingPage => Pages.Get<DynamicLoadingExamplePage>();
 
         private AddRemoveElementsExamplePage AddRemoveElementsPage => Pages.Get<AddRemoveElementsExamplePage>();
+
+        private DropdownExamplePage DropdownPage => Pages.Get<DropdownExamplePage>();
 
         [Test, Category("Integration")]
         public void ActorCanToggleOnCheckbox()
@@ -111,6 +115,15 @@ namespace Basin.Tests
             I.Click(DynamicLoadingPage.StartButton);
 
             Assert.DoesNotThrow(() => I.WaitForNumberOfElements(1, DynamicLoadingPage.FinishText));
+        }
+
+        [Test, Category("Integration")]
+        public void ActorCanSelectOptionFromSelectList()
+        {
+            I.Click(HomePage.ExampleLink("Dropdown"));
+            I.SelectOption("Option 1", DropdownPage.SelectList);
+
+            Assert.That(DropdownPage.SelectList.Child().WithText("Option 1").Selected);
         }
     }
 }

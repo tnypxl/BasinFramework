@@ -73,7 +73,7 @@ namespace Basin.PageObjects
 
         public virtual void CheckOption(Element element)
         {
-            IsCheckboxOrRadio(element);
+            IsCheckableInput(element);
 
             if (!string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
 
@@ -82,7 +82,7 @@ namespace Basin.PageObjects
 
         public virtual void UncheckOption(Element element)
         {
-            IsCheckboxOrRadio(element);
+            IsCheckableInput(element);
 
             if (string.IsNullOrEmpty(element.GetAttribute("checked"))) return;
 
@@ -98,10 +98,16 @@ namespace Basin.PageObjects
 
             Click(selectList);
 
-            if (optionByText.Displayed) Click(optionByText);
-            if (optionByValue.Displayed) Click(optionByValue);
+            try
+            {
+                if (optionByText.Displayed) Click(optionByText);
+                if (optionByValue.Displayed) Click(optionByValue);
+            }
+            catch
+            {
 
-            throw new ArgumentException($"Option with text or value '{optionValue}' could not be located");
+                throw new ArgumentException($"Option with text or value '{optionValue}' could not be located");
+            }
         }
 
 
@@ -124,13 +130,13 @@ namespace Basin.PageObjects
             throw new ArgumentException("Element is not a select list input.");
         }
 
-        private static void IsCheckboxOrRadio(IWebElement element)
+        private static void IsCheckableInput(IWebElement element)
         {
             if (element.TagName == "input"
                 && Regex.IsMatch(element.GetAttribute("type"), "checkbox|radio")
                 && element.Enabled) return;
 
-            throw new ArgumentException("Element is not a checkbox or radio input");
+            throw new ArgumentException("Element is not a checkbox or radio input or is disabled");
         }
 
     }

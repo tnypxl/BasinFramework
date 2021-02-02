@@ -4,6 +4,8 @@ using OpenQA.Selenium;
 
 namespace Basin.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class LocatorTests : TestBase
     {
         private Locator _div, _span, _unorderedList, _listItem;

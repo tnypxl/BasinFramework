@@ -33,6 +33,7 @@ namespace Basin.Tests
             Pages.Add(new KeyPressesExamplePage());
             Pages.Add(new DynamicControlsExamplePage());
             Pages.Add(new DynamicLoadingExamplePage());
+            Pages.Add(new DropdownExamplePage());
         }
 
         [TearDown]

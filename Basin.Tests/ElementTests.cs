@@ -5,6 +5,8 @@ using OpenQA.Selenium;
 
 namespace Basin.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ElementTests : TestBase
     {
         private HomePage HomePage => Pages.Get<HomePage>();
