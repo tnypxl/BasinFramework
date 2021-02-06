@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -7,6 +8,8 @@ namespace Basin.Core.Locators
     public sealed class Locator : ILocatorBuilder
     {
         public By By => By.XPath(Selector.ToString());
+
+        // [ThreadStatic] private static StringBuilder Selector;
 
         public StringBuilder Selector { get; }
 
@@ -32,7 +35,7 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithClass(string className, bool inclusive = true)
         {
-            Selector.Append("[");
+            Selector.Append('[');
 
             if (!inclusive) Selector.Append("not(");
 
@@ -40,21 +43,21 @@ namespace Basin.Core.Locators
                     .Append(className)
                     .Append(" ')");
 
-            if (!inclusive) Selector.Append(")");
+            if (!inclusive) Selector.Append(')');
 
-            Selector.Append("]");
+            Selector.Append(']');
 
             return this;
         }
 
         public ILocatorBuilder WithClass(params string[] classNames)
         {
-            for (int i = 0; i < classNames.Length; i++)
+            for (var i = 0; i < classNames.Length; i++)
                 classNames[i] = GetClassNameXPath(classNames[i]);
 
-            Selector.Append("[")
+            Selector.Append('[')
                     .AppendJoin(" and ", classNames)
-                    .Append("]");
+                    .Append(']');
 
             return this;
         }
@@ -68,14 +71,14 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithAttr(string name, bool inclusive = true)
         {
-            Selector.Append("[");
+            Selector.Append('[');
 
             if (!inclusive) Selector.Append("not(");
 
-            Selector.Append("@")
+            Selector.Append('@')
                     .Append(name);
 
-            if (!inclusive) Selector.Append(")");
+            if (!inclusive) Selector.Append(')');
 
             Selector.Append(']');
 
@@ -91,14 +94,14 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithChild(ILocatorBuilder child, bool inclusive = true)
         {
-            Selector.Append("[");
+            Selector.Append('[');
 
             if (!inclusive) Selector.Append("not(");
 
-            Selector.Append(".")
+            Selector.Append('.')
                     .Append(child.Selector.Remove(0, 1));
 
-            if (!inclusive) Selector.Append(")");
+            if (!inclusive) Selector.Append(')');
 
             Selector.Append(']');
 
@@ -107,14 +110,14 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder WithDescendant(ILocatorBuilder descendant, bool inclusive = true)
         {
-            Selector.Append("[");
+            Selector.Append('[');
 
             if (!inclusive) Selector.Append("not(");
 
-            Selector.Append(".")
+            Selector.Append('.')
                     .Append(descendant.Selector);
 
-            if (!inclusive) Selector.Append(")");
+            if (!inclusive) Selector.Append(')');
 
             Selector.Append(']');
 
@@ -171,9 +174,9 @@ namespace Basin.Core.Locators
 
         public ILocatorBuilder AtPosition(int position)
         {
-            Selector.Append("[")
-                    .Append(position.ToString())
-                    .Append("]");
+            Selector.Append('[')
+                    .Append(position)
+                    .Append(']');
 
             return this;
         }
@@ -181,7 +184,7 @@ namespace Basin.Core.Locators
         private static string GetClassNameXPath(string className)
         {
             var classNameXpath = new StringBuilder();
-            bool exclude = Regex.IsMatch(className, "^!");
+            var exclude = Regex.IsMatch(className, "^!");
 
             if (exclude) classNameXpath.Append("not(");
 

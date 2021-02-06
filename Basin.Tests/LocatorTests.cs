@@ -1,3 +1,4 @@
+using System;
 using Basin.Core.Locators;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -8,7 +9,8 @@ namespace Basin.Tests
     [Parallelizable(ParallelScope.All)]
     public class LocatorTests : TestBase
     {
-        private Locator _div, _span, _unorderedList, _listItem;
+        [ThreadStatic]
+        private static Locator _div, _span, _unorderedList, _listItem;
 
         [SetUp]
         public void SetUp()

@@ -34,11 +34,14 @@ namespace Basin.PageObjects.Interfaces
 
         void UncheckOption(Element element);
 
-        void SelectOption(string value, Element element);
-
         object ExecuteScript(string script);
 
         object ExecuteScript(string script, params object[] args);
+
         bool SeeNumberOfElements(int numberOfElements, Element element);
+
+        void SelectOptionByText(string optionText, Element selectList);
+
+        void SelectOptionByValue(string optionValue, Element selectList);
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
@@ -54,14 +56,14 @@ namespace Basin.PageObjects
             return actualNumberOfElements == numberOfElements;
         }
 
-        public bool SeeText(string text)
+        public virtual bool SeeText(string text)
         {
             // var bodyWithText = BodyTag.WithText(text);
 
             return BodyTag.Text.Contains(text);
         }
 
-        public bool SeeText(string text, Element element)
+        public virtual bool SeeText(string text, Element element)
         {
             return element.Text.Contains(text);
         }
@@ -89,27 +91,19 @@ namespace Basin.PageObjects
             element.Click();
         }
 
-        public virtual void SelectOption(string optionValue, Element selectList)
+        public virtual void SelectOptionByText(string optionText, Element selectList)
         {
             IsSelectList(selectList);
-
-            var optionByText = OptionTag.WithText(optionValue).Inside(selectList);
-            var optionByValue = OptionTag.WithAttr("value", optionValue).Inside(selectList);
-
             Click(selectList);
-
-            try
-            {
-                if (optionByText.Displayed) Click(optionByText);
-                if (optionByValue.Displayed) Click(optionByValue);
-            }
-            catch
-            {
-
-                throw new ArgumentException($"Option with text or value '{optionValue}' could not be located");
-            }
+            Click(OptionTag.WithText(optionText).Inside(selectList));
         }
 
+        public virtual void SelectOptionByValue(string optionValue, Element selectList)
+        {
+            IsSelectList(selectList);
+            Click(selectList);
+            Click(OptionTag.WithAttr("value", optionValue).Inside(selectList));
+        }
 
         public virtual object ExecuteScript(string script)
         {
@@ -118,7 +112,7 @@ namespace Basin.PageObjects
 
         public virtual object ExecuteScript(string script, params object[] args)
         {
-            return _javascript.ExecuteScript(script, args);
+            return _javascript.ExecuteScript(script, ProcessScriptArgs(args));
         }
 
         public virtual Wait Wait => BrowserSession.Wait;
@@ -139,5 +133,18 @@ namespace Basin.PageObjects
             throw new ArgumentException("Element is not a checkbox or radio input or is disabled");
         }
 
+        private static IList<object> ProcessScriptArgs(params object[] args)
+        {
+            var newArgs = args;
+
+            for (var i = 0; i < newArgs.Length; i++)
+            {
+
+                if (newArgs[i].GetType() is Element)
+                    newArgs[i] = (IWebElement) args[i];
+            }
+
+            return newArgs;
+        }
     }
 }

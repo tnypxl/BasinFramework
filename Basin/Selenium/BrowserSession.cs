@@ -18,7 +18,7 @@ namespace Basin.Selenium
 
         public static void Init()
         {
-            _driver = ConfiguredBrowserFactory.Current;
+            _driver = ConfiguredBrowserFactory.Create;
 
             FinishSetup();
         }

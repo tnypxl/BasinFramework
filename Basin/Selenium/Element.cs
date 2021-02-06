@@ -256,7 +256,7 @@ namespace Basin.Selenium
 
         public Element IfTextMatches(string pattern)
         {
-            if (!Displayed) throw new NoSuchElementException("Could match element text because element was not visible.");
+            if (!Displayed) throw new NoSuchElementException("Could not match element text because element was not visible.");
 
             if (!Regex.IsMatch(Text, pattern)) throw new ArgumentException("Element's text did not match the pattern provided.");
 

@@ -5,7 +5,7 @@ namespace Basin.Core.Browsers
 {
     public static class ConfiguredBrowserFactory
     {
-        public static IWebDriver Current => BasinEnv.Browser.Kind switch
+        public static IWebDriver Create => BasinEnv.Browser.Kind switch
         {
             "chrome" => new ChromeBrowser(BasinEnv.Browser).Driver,
             "firefox" => new FirefoxBrowser(BasinEnv.Browser).Driver,

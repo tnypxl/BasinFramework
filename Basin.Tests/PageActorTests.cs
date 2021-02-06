@@ -1,5 +1,6 @@
 ﻿using System;
 using Basin.PageObjects;
+using Basin.Selenium;
 using Basin.Tests.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -25,6 +26,8 @@ namespace Basin.Tests
         private DynamicLoadingExamplePage DynamicLoadingPage => Pages.Get<DynamicLoadingExamplePage>();
 
         private AddRemoveElementsExamplePage AddRemoveElementsPage => Pages.Get<AddRemoveElementsExamplePage>();
+
+        private LargeAndDeepDomExamplePage LargeAndDeepDomPage => Pages.Get<LargeAndDeepDomExamplePage>();
 
         private DropdownExamplePage DropdownPage => Pages.Get<DropdownExamplePage>();
 
@@ -57,8 +60,8 @@ namespace Basin.Tests
         {
             I.Click(HomePage.ExampleLink("Checkboxes"));
 
-            Assert.That(I.See(CheckboxesPage.FirstCheckbox));
-            Assert.That(I.DontSee(CheckboxesPage.FirstCheckbox.WithAttr("checked")));
+            Assert.That(I.See(CheckboxesPage.FirstCheckbox), Is.True);
+            Assert.That(I.DontSee(CheckboxesPage.FirstCheckbox.WithAttr("checked")), Is.True);
         }
 
         [Test, Category("Integration")]
@@ -104,7 +107,12 @@ namespace Basin.Tests
             I.Click(DynamicControlsPage.Map.RemoveCheckboxButton);
             I.WaitForElement(DynamicControlsPage.Map.MessageContainer);
 
-            Assert.That(I.SeeText("It's gone!"));
+            Assert.That(I.SeeText("It's gone!"), Is.True);
+
+            I.Click(DynamicControlsPage.Map.AddCheckboxButton);
+            I.Wait.Until(_ => !DynamicControlsPage.Map.AddCheckboxButton.Displayed);
+
+            Assert.That(I.SeeText("It's back!", DynamicControlsPage.Map.MessageContainer));
         }
 
         [Test, Category("Integration")]
@@ -118,12 +126,45 @@ namespace Basin.Tests
         }
 
         [Test, Category("Integration")]
+        public void ActorCanSeeNumberOfElements()
+        {
+            I.Click(HomePage.ExampleLink("Add/Remove Elements"));
+            AddRemoveElementsPage.AddMultipleElements(3);
+
+            Assert.That(I.SeeNumberOfElements(3, AddRemoveElementsPage.Map.DeleteButton), Is.True);
+        }
+
+        [Test, Category("Integration")]
         public void ActorCanSelectOptionFromSelectList()
         {
             I.Click(HomePage.ExampleLink("Dropdown"));
-            I.SelectOption("Option 1", DropdownPage.SelectList);
+            I.SelectOptionByText("Option 1", DropdownPage.SelectList);
 
-            Assert.That(DropdownPage.SelectList.Child().WithText("Option 1").Selected);
+            Assert.That(DropdownPage.SelectList.Child().WithText("Option 1").Selected, Is.True);
+
+            I.SelectOptionByValue("2", DropdownPage.SelectList);
+
+            Assert.That(DropdownPage.SelectList.Child().WithText("Option 2").Selected, Is.True);
+            Assert.Throws<WebDriverTimeoutException>(() => I.SelectOptionByText("Option 3", DropdownPage.SelectList));
+        }
+
+        [Test, Category("Integration")]
+        public void ActorCanExecuteScriptThatReturnsText()
+        {
+            I.Click(HomePage.ExampleLink("Large & Deep DOM"));
+            var elementText = (string) I.ExecuteScript("return document.getElementById('sibling-2.2').textContent");
+
+            Assert.That(elementText, Is.EqualTo("2.2"));
+        }
+
+        [Test, Category("Integration")]
+        public void ActorCanExecuteScriptThatReturnsAnIWebElement()
+        {
+            I.Click(HomePage.ExampleLink("Large & Deep DOM"));
+
+            var element = (IWebElement) I.ExecuteScript("return args[0].textContent + args[1]", LargeAndDeepDomPage.Item("2.2"), "derp");
+
+            Assert.That(element.Displayed, Is.True);
         }
     }
 }
