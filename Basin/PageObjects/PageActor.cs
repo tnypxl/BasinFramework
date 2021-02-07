@@ -6,6 +6,7 @@ using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Remote;
 
 namespace Basin.PageObjects
 {
@@ -139,9 +140,8 @@ namespace Basin.PageObjects
 
             for (var i = 0; i < newArgs.Length; i++)
             {
-
-                if (newArgs[i].GetType() is Element)
-                    newArgs[i] = (IWebElement) args[i];
+                if (newArgs[i] is Element)
+                    newArgs[i] = newArgs[i] as IWebElement;
             }
 
             return newArgs;
