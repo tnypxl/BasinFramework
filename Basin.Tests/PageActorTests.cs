@@ -1,6 +1,4 @@
-﻿using System;
-using Basin.PageObjects;
-using Basin.Selenium;
+﻿using Basin.PageObjects;
 using Basin.Tests.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -152,8 +150,9 @@ namespace Basin.Tests
         public void ActorCanExecuteScriptThatReturnsText()
         {
             I.Click(HomePage.ExampleLink("Large & Deep DOM"));
-            var elementText = (string) I.ExecuteScript("return document.getElementById('sibling-2.2').textContent");
+            var elementText = I.ExecuteScript("return document.getElementById('sibling-2.2').textContent");
 
+            Assert.That(elementText, Is.InstanceOf<string>());
             Assert.That(elementText, Is.EqualTo("2.2"));
         }
 
@@ -162,9 +161,12 @@ namespace Basin.Tests
         {
             I.Click(HomePage.ExampleLink("Large & Deep DOM"));
 
-            var element = (IWebElement) I.ExecuteScript("return args[0].textContent + args[1]", LargeAndDeepDomPage.Item("2.2"), "derp");
+            var actualElement = LargeAndDeepDomPage.Item("2.2");
+            var element = I.ExecuteScript("return arguments[0];", actualElement);
+            var webElement = (IWebElement) element;
 
-            Assert.That(element.Displayed, Is.True);
+            Assert.That(element, Is.InstanceOf<IWebElement>());
+            Assert.That(webElement.Displayed, Is.True);
         }
     }
 }
