@@ -16,6 +16,8 @@ namespace Basin.PageObjects.Interfaces
 
         void WaitForElement(Element element);
 
+        void WaitForElement(Element element, int numberOfSeconds);
+
         void WaitForNumberOfElements(int numberOfElements, Element element);
 
         int GetNumberOfElements(Element element);

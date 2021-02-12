@@ -42,5 +42,13 @@ namespace Basin.Selenium
         {
             return _wait.Until(condition);
         }
+
+        public bool Until(Func<IWebDriver, bool> condition, int waitSeconds)
+        {
+            var wait = _wait;
+            wait.Timeout = TimeSpan.FromSeconds(waitSeconds);
+
+            return _wait.Until(condition);
+        }
     }
 }

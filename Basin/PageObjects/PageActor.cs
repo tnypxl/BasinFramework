@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
 
 namespace Basin.PageObjects
 {
     public class PageActor : PageMap, IPageActor
     {
-        [ThreadStatic] private static IJavaScriptExecutor _javascript;
-
-        public PageActor()
-        {
-            _javascript = (IJavaScriptExecutor)BrowserSession.Current;
-        }
-
         public Actions Actions => new Actions(BrowserSession.Current);
 
         public virtual void Click(Element element) => element.Click();
@@ -28,6 +18,11 @@ namespace Basin.PageObjects
         public virtual void WaitForElement(Element element)
         {
             Wait.Until(_ => element.Displayed);
+        }
+
+        public virtual void WaitForElement(Element element, int numberOfSeconds)
+        {
+            Wait.Until(_ => element.Displayed, numberOfSeconds);
         }
 
         public virtual void WaitForNumberOfElements(int numberOfElements, Element element)
@@ -108,12 +103,19 @@ namespace Basin.PageObjects
 
         public virtual object ExecuteScript(string script)
         {
-            return _javascript.ExecuteScript(script);
+            var javascript = (IJavaScriptExecutor) BrowserSession.Current;
+            var result = javascript.ExecuteScript(script);
+
+            return result;
         }
 
         public virtual object ExecuteScript(string script, params object[] args)
         {
-            return _javascript.ExecuteScript(script, ProcessScriptArgs(args));
+            var javascript = (IJavaScriptExecutor) BrowserSession.Current;
+            var newArgs = ProcessScriptArgs(args);
+            var result = javascript.ExecuteScript(script, newArgs);
+
+            return result;
         }
 
         public virtual Wait Wait => BrowserSession.Wait;
@@ -134,17 +136,17 @@ namespace Basin.PageObjects
             throw new ArgumentException("Element is not a checkbox or radio input or is disabled");
         }
 
-        private static IList<object> ProcessScriptArgs(params object[] args)
+        private static object[] ProcessScriptArgs(params object[] args)
         {
-            var newArgs = args;
-
-            for (var i = 0; i < newArgs.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
-                if (newArgs[i] is Element)
-                    newArgs[i] = newArgs[i] as IWebElement;
+                if (!(args[i] is Element)) continue;
+
+                var element = (Element) args[i];
+                args[i] = BrowserSession.Current.FindElement(element.GetLocator().By);
             }
 
-            return newArgs;
+            return args;
         }
     }
 }
