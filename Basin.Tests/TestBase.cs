@@ -3,7 +3,7 @@ using System.Linq;
 using Basin.PageObjects;
 using Basin.PageObjects.Interfaces;
 using Basin.Selenium;
-using Basin.Tests.PageObjects;
+using Basin.Tests.Selenium.PageObjects;
 using NUnit.Framework;
 
 namespace Basin.Tests
