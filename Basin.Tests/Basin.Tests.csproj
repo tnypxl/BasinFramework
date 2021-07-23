@@ -15,6 +15,7 @@
       <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.29.0" />
       <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1" />
       <PackageReference Include="Selenium.WebDriver.MicrosoftDriver" Version="17.17134.0" />
+      <PackageReference Include="Microsoft.Playwright" Version="1.13.0" />
     </ItemGroup>
 
     <ItemGroup>
