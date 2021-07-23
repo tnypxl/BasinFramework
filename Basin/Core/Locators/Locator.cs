@@ -1,12 +1,11 @@
 using System.Text;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium;
 
 namespace Basin.Core.Locators
 {
     public sealed class Locator : ILocatorBuilder
     {
-        public By By => By.XPath(Selector.ToString());
+        // public By By => By.XPath(Selector.ToString());
 
         public StringBuilder Selector { get; }
 

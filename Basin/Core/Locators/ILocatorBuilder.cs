@@ -1,11 +1,10 @@
 using System.Text;
-using OpenQA.Selenium;
 
 namespace Basin.Core.Locators
 {
     public interface ILocatorBuilder
     {
-        By By { get; }
+        // By By { get; }
 
         StringBuilder Selector { get; }
 
