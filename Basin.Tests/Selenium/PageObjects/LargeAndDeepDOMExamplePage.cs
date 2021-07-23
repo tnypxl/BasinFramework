@@ -2,7 +2,7 @@
 using Basin.Selenium;
 using OpenQA.Selenium;
 
-namespace Basin.Tests.PageObjects
+namespace Basin.Tests.Selenium.PageObjects
 {
     public class LargeAndDeepDomExamplePage : Page
     {

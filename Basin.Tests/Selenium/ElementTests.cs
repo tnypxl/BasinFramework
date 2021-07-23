@@ -1,9 +1,9 @@
 using Basin.Selenium;
-using Basin.Tests.PageObjects;
+using Basin.Tests.Selenium.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace Basin.Tests
+namespace Basin.Tests.Selenium
 {
     public class ElementTests : TestBase
     {

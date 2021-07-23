@@ -1,7 +1,7 @@
 using Basin.PageObjects;
 using Basin.Selenium;
 
-namespace Basin.Tests.PageObjects
+namespace Basin.Tests.Selenium.PageObjects
 {
     public class DynamicControlsExamplePage : Page<DynamicControlsExamplePageMap>
     {
