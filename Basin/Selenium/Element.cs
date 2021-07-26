@@ -11,30 +11,24 @@ namespace Basin.Selenium
 {
     public sealed class Element : IWebElement, IElement
     {
-        private readonly int _timeout;
+        private int Timeout { get; } = BasinEnv.Browser.ElementTimeout;
 
-        private readonly DefaultWait<IWebDriver> _wait;
+        private DefaultWait<IWebDriver> WaitInstance { get; } = new DefaultWait<IWebDriver>(BrowserSession.Current);
 
         private readonly ILocatorBuilder _locator;
 
         public Element()
         {
-            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
-            _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
         public Element(By by)
         {
             FoundBy = by;
-            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
-            _timeout = BasinEnv.Browser.ElementTimeout;
         }
 
         public Element(string tagName)
         {
-            _wait = new DefaultWait<IWebDriver>(BrowserSession.Current);
-            _locator = new Locator(tagName);
-            _timeout = BasinEnv.Browser.ElementTimeout;
+            _locator = new XPathLocator(tagName);
         }
 
         public string Label { get; set; }
@@ -45,11 +39,11 @@ namespace Basin.Selenium
         {
             get
             {
-                _wait.Timeout = TimeSpan.FromSeconds(_timeout);
-                _wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                _wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
+                WaitInstance.Timeout = TimeSpan.FromSeconds(Timeout);
+                WaitInstance.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                WaitInstance.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
-                return _wait;
+                return Wait;
             }
         }
 
@@ -57,7 +51,7 @@ namespace Basin.Selenium
         {
             get
             {
-                FoundBy = _locator.By;
+                FoundBy = By.XPath(_locator.Selector.ToString());
 
                 return Wait.Until(driver =>
                 {
@@ -267,7 +261,9 @@ namespace Basin.Selenium
         {
             get
             {
-                var by = _locator != null ? _locator.By : FoundBy;
+                var by = _locator != null
+                    ? By.XPath(_locator.Selector.ToString())
+                    : FoundBy;
 
                 return new Elements(BrowserSession.Current?.FindElements(by));
             }
