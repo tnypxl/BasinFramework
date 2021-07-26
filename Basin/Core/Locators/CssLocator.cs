@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium.Internal;
@@ -18,32 +19,27 @@ namespace Basin.Core.Locators
     {
         private string cssId;
 
+        private readonly string rootTagName;
+
+        private readonly List<string> cssPseudoClasses;
+
         private readonly List<string> cssClasses;
 
         private readonly List<string> cssAttributes;
 
-        private readonly StringBuilder rootSelector;
+        private readonly List<StringBuilder> rootSelectorHistory;
 
-        public override StringBuilder RootSelector => rootSelector;
+        public override StringBuilder Selector { get; }
 
-        public override StringBuilder Selector {
-            get {
-                var selector = new StringBuilder(rootSelector.ToString());
-
-                if (!string.IsNullOrEmpty(cssId)) selector.Append(cssId);
-
-                selector.AppendJoin("", cssAttributes);
-                selector.AppendJoin("", cssClasses);
-
-                return selector;
-            }
-        }
+        public override StringBuilder RootSelector => GetRootSelector();
 
         public CssLocator(string tagName)
         {
-            rootSelector = new StringBuilder(tagName);
+            rootTagName = tagName;
             cssClasses = new List<string>();
             cssAttributes = new List<string>();
+            cssPseudoClasses = new List<string>();
+            // cssCombinators = new List<StringBuilder>();
         }
 
         public override ILocatorBuilder AtPosition(int index)
@@ -53,7 +49,9 @@ namespace Basin.Core.Locators
 
         public override ILocatorBuilder Child()
         {
-            throw new NotSupportedException();
+            cssPseudoClasses.Add(":first-child");
+
+            return this;
         }
 
         public override ILocatorBuilder Child(ILocatorBuilder childLocator)
@@ -68,7 +66,10 @@ namespace Basin.Core.Locators
 
         public override ILocatorBuilder Inside(ILocatorBuilder parent)
         {
-            throw new NotImplementedException();
+            Selector.Insert(0, ' ')
+                    .Insert(0, parent.Selector);
+
+            return this;
         }
 
         public override ILocatorBuilder Parent()
@@ -83,7 +84,7 @@ namespace Basin.Core.Locators
 
         public override ILocatorBuilder Precedes(ILocatorBuilder sibling)
         {
-            return this;
+            throw new NotSupportedException();
         }
 
         public override ILocatorBuilder WithAttr(string name, bool inclusive = true)
@@ -129,6 +130,24 @@ namespace Basin.Core.Locators
             cssId = FormatCssId(id);
 
             return this;
+        }
+
+        private StringBuilder GetSelector() {
+
+        }
+
+        private StringBuilder GetRootSelector()
+        {
+            var selector = new StringBuilder(rootTagName);
+
+            if (!string.IsNullOrEmpty(cssId)) selector.Append(cssId);
+
+            selector.AppendJoin("", cssAttributes);
+            selector.AppendJoin("", cssClasses);
+
+            rootSelectorHistory.Add(selector);
+
+            return rootSelectorHistory.Last();
         }
 
         public override ILocatorBuilder WithText(string text, bool inclusive = true)
