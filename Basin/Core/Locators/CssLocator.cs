@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,7 +14,6 @@ namespace Basin.Core.Locators
             -> WithDescendant()
             -> WithText()
             -> Parent()
-            -> Child()
     */
     public class CssLocator : Locator
     {
@@ -23,11 +23,11 @@ namespace Basin.Core.Locators
 
         private readonly List<string> cssPseudoClasses;
 
+        private readonly List<string> cssCombinators;
+
         private readonly List<string> cssClasses;
 
         private readonly List<string> cssAttributes;
-
-        private readonly List<StringBuilder> rootSelectorHistory;
 
         public override StringBuilder Selector { get; }
 
@@ -39,7 +39,7 @@ namespace Basin.Core.Locators
             cssClasses = new List<string>();
             cssAttributes = new List<string>();
             cssPseudoClasses = new List<string>();
-            // cssCombinators = new List<StringBuilder>();
+            cssCombinators = new List<string>();
         }
 
         public override ILocatorBuilder AtPosition(int index)
@@ -49,7 +49,7 @@ namespace Basin.Core.Locators
 
         public override ILocatorBuilder Child()
         {
-            cssPseudoClasses.Add(":first-child");
+            cssCombinators.Add(" > *");
 
             return this;
         }
@@ -67,7 +67,7 @@ namespace Basin.Core.Locators
         public override ILocatorBuilder Inside(ILocatorBuilder parent)
         {
             Selector.Insert(0, ' ')
-                    .Insert(0, parent.Selector);
+                    .Insert(0, parent.Selector.ToString());
 
             return this;
         }
@@ -132,22 +132,24 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        private StringBuilder GetSelector() {
+        // private StringBuilder GetSelector()
+        // {
 
-        }
+        //     // return Selector.Append(GetRootSelector());
+        //     // Selector = new StringBuilder();
+        // }
 
         private StringBuilder GetRootSelector()
         {
-            var selector = new StringBuilder(rootTagName);
+            var rootSelector = new StringBuilder(rootTagName);
 
-            if (!string.IsNullOrEmpty(cssId)) selector.Append(cssId);
+            if (!string.IsNullOrEmpty(cssId)) rootSelector.Append(cssId);
 
-            selector.AppendJoin("", cssAttributes);
-            selector.AppendJoin("", cssClasses);
+            rootSelector.AppendJoin("", cssAttributes);
+            rootSelector.AppendJoin("", cssClasses);
+            // rootSelectorHistory.Add(rootSelector);
 
-            rootSelectorHistory.Add(selector);
-
-            return rootSelectorHistory.Last();
+            return rootSelector;
         }
 
         public override ILocatorBuilder WithText(string text, bool inclusive = true)

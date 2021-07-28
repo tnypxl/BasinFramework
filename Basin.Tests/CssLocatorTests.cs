@@ -79,11 +79,16 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void CssLocatorBuildsSelectorWhenInsideAnotherSelector()
+        public void CssLocatorBuildsSelectorWithCombinatorsAndOtherAttributes()
         {
-            const string expectedSelector = "div ul";
+            const string expectedSelector = "div ul#foo[name]";
 
-            Assert.That(_unorderedList.Inside(_div).Selector.ToString(), Is.EqualTo(expectedSelector));
+            Assert.That(
+                _unorderedList.WithAttr("name")
+                              .Inside(_div)
+                              .WithId("foo").Selector
+                              .ToString(),
+                Is.EqualTo(expectedSelector));
         }
     }
 }
