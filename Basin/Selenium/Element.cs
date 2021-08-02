@@ -13,7 +13,7 @@ namespace Basin.Selenium
     {
         private int Timeout { get; } = BasinEnv.Browser.ElementTimeout;
 
-        private DefaultWait<IWebDriver> WaitInstance { get; } = new DefaultWait<IWebDriver>(BrowserSession.Current);
+        private DefaultWait<IWebDriver> Wait { get; } = new DefaultWait<IWebDriver>(BrowserSession.Current);
 
         private readonly ILocatorBuilder _locator;
 
@@ -35,23 +35,14 @@ namespace Basin.Selenium
 
         public By FoundBy { get; set; }
 
-        private DefaultWait<IWebDriver> Wait
-        {
-            get
-            {
-                WaitInstance.Timeout = TimeSpan.FromSeconds(Timeout);
-                WaitInstance.IgnoreExceptionTypes(typeof(NoSuchElementException));
-                WaitInstance.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
-
-                return Wait;
-            }
-        }
-
         private IWebElement Locate
         {
             get
             {
                 FoundBy = By.XPath(_locator.Selector.ToString());
+                Wait.Timeout = TimeSpan.FromSeconds(Timeout);
+                Wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+                Wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException));
 
                 return Wait.Until(driver =>
                 {

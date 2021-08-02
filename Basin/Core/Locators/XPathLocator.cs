@@ -7,14 +7,13 @@ namespace Basin.Core.Locators
 {
     public class XPathLocator : Locator
     {
-
         public override StringBuilder RootSelector { get; }
 
         public override StringBuilder Selector { get; }
 
         public XPathLocator(string tagName)
         {
-            RootSelector.Append($"//{tagName})");
+            Selector = new StringBuilder($"//{tagName}");
             // Selector = new StringBuilder(RootSelector.ToString());
             // Selector.Append(rootSelector);
         }
