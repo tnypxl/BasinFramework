@@ -47,15 +47,23 @@ namespace Basin.Tests
         {
             const string expectedSelector = "div.foo";
 
-            Assert.That(_div.WithClass("foo").Selector.ToString(), Is.EqualTo(expectedSelector));
+            Assert.That(
+                _div
+                    .WithClass("foo").Selector
+                    .ToString(),
+                Is.EqualTo(expectedSelector));
         }
 
         [Test, Category("Unit")]
         public void CssLocatorBuildsSelectorWithMultipleClasses()
         {
-            const string expectedSelector = "div.derp.bar.baz";
+            const string expectedSelector = "div.foo.bar.baz";
 
-            Assert.That(_div.WithClass("foo", "bar", "baz").Selector.ToString(), Is.EqualTo(expectedSelector));
+            Assert.That(
+                _div
+                    .WithClass("foo", "bar", "baz").Selector
+                    .ToString(),
+                Is.EqualTo(expectedSelector));
         }
 
         [Test, Category("Unit")]
@@ -63,7 +71,11 @@ namespace Basin.Tests
         {
             const string expectedSelector = "div#foo";
 
-            Assert.That(_div.WithId("foo").Selector.ToString(), Is.EqualTo(expectedSelector));
+            Assert.That(
+                _div
+                    .WithId("foo").Selector
+                    .ToString(),
+                Is.EqualTo(expectedSelector));
         }
 
         [Test, Category("Unit")]
@@ -74,20 +86,51 @@ namespace Basin.Tests
             Assert.That(
                 _div.WithId("foo")
                     .WithClass("bar")
-                    .WithAttr("data-someAttr").Selector.ToString(),
+                    .WithAttr("data-someAttr").Selector
+                    .ToString(), 
                 Is.EqualTo(expectedSelector));
         }
 
         [Test, Category("Unit")]
-        public void CssLocatorBuildsSelectorWithCombinatorsAndOtherAttributes()
+        public void CssLocatorBuildsSelectorThatInsideAnotherSelector()
         {
-            const string expectedSelector = "div ul#foo[name]";
+            const string expectedSelector = "div ul";
 
             Assert.That(
-                _unorderedList.WithAttr("name")
-                              .Inside(_div)
-                              .WithId("foo").Selector
-                              .ToString(),
+                _unorderedList
+                    .Inside(_div).Selector
+                    .ToString(),
+                Is.EqualTo(expectedSelector));
+        }
+
+        [Test, Category("Unit")]
+        public void CssLocatorBuildsSelectorThatFollowsAnotherSelector()
+        {
+            const string expectedSelector = "ul ~ div";
+
+            Assert.That(
+                _div
+                    .Follows(_unorderedList).Selector
+                    .ToString(),
+                Is.EqualTo(expectedSelector)
+            );
+        }
+
+        [Test, Category("Unit")]
+        public void CssLocatorBuildsProperSelectorWhenMethodChainInNonLogicalOrder()
+        {
+            const string expectedSelector = "div ul#foo li[data-test-id='bar'] ~ span";
+
+            Assert.That(
+                _span
+                    .Follows(
+                        _listItem
+                            .WithAttr("data-test-id", "bar")
+                            .Inside(
+                                _unorderedList
+                                    .WithId("foo")
+                                    .Inside(_div))).Selector
+                                    .ToString(),
                 Is.EqualTo(expectedSelector));
         }
     }

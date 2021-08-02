@@ -18,7 +18,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathWithARootTagName()
+        public void XPathLocatorBuildsXPathWithARootTagName()
         {
             const string expectedXPath = "//div";
 
@@ -26,7 +26,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathWithAnHtmlClassAttributeAndValue()
+        public void XPathLocatorBuildsXPathWithAnHtmlClassAttributeAndValue()
         {
             const string expectedXPath = "//div[contains(concat(' ',normalize-space(@class),' '),' foo ')]";
 
@@ -34,7 +34,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathWithHtmlClassAttributeAndValueAsNonInclusive()
+        public void XPathLocatorBuildsXPathWithHtmlClassAttributeAndValueAsNonInclusive()
         {
             const string expectedXPath = "//div[not(contains(concat(' ',normalize-space(@class),' '),' foo '))]";
 
@@ -42,7 +42,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathWithMultipleHtmlClassAttributeAndValues()
+        public void XPathLocatorBuildsXPathWithMultipleHtmlClassAttributeAndValues()
         {
             var expectedCssClassXPaths = string.Join(" and ",
                 "contains(concat(' ',normalize-space(@class),' '),' foo ')",
@@ -55,7 +55,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithHtmlIdAttributeAndValue()
+        public void XPathLocatorBuildsSelectorWithHtmlIdAttributeAndValue()
         {
             const string expectedXPath = @"//div[@id=""foo""]";
 
@@ -63,7 +63,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithHtmlAttributeAndValue()
+        public void XPathLocatorBuildsSelectorWithHtmlAttributeAndValue()
         {
             const string expectedXPath = @"//div[@myattr=""foo""]";
 
@@ -71,7 +71,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsNonInclusiveXPathForElementWithHtmlAttributeAndValue()
+        public void XPathLocatorBuildsNonInclusiveSelectorWithHtmlAttributeAndValue()
         {
             const string expectedXPath = @"//div[not(@myattr=""foo"")]";
 
@@ -79,7 +79,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithHtmlAttribute()
+        public void XPathLocatorBuildsSelectorWithHtmlAttribute()
         {
             const string expectedXPath = "//div[@myattr]";
 
@@ -87,7 +87,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsNonInclusiveXPathForElementWithHtmlAttribute()
+        public void XPathLocatorBuildsNonInclusiveSelectorWithHtmlAttribute()
         {
             const string expectedXPath = "//div[not(@myattr)]";
 
@@ -95,7 +95,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithAChildElement()
+        public void XPathLocatorBuildsSelectorWithAChildSelector()
         {
             const string expectedXPath = "//div[./span]";
 
@@ -103,7 +103,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsNonInclusiveXPathForElementWithAChildElement()
+        public void XPathLocatorBuildsNonInclusiveSelectorWithAChildSelector()
         {
             const string expectedXPath = "//div[not(./span)]";
 
@@ -111,7 +111,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithADescendantElement()
+        public void XPathLocatorBuildsSelectorWithADescendantSelector()
         {
             const string expectedXPath = "//div[.//span]";
 
@@ -119,7 +119,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsNonInclusiveXPathForElementWithADescendantElement()
+        public void XPathLocatorBuildsNonInclusiveSelectorWithADescendantSelector()
         {
             const string expectedXPath = "//div[not(.//span)]";
 
@@ -127,7 +127,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForParentOfElement()
+        public void XPathLocatorBuildsXPathForParentOfSelector()
         {
             const string expectedXPath = "//div/parent::*";
 
@@ -135,7 +135,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForSpecificParentOfElement()
+        public void XPathLocatorBuildsXPathForSpecificParentOfSelector()
         {
             const string expectedXPath = "//span/parent::div";
 
@@ -143,7 +143,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForChildElement()
+        public void XPathLocatorBuildsXPathForChildSelector()
         {
             const string expectedXPath = "//div/child::*";
 
@@ -151,7 +151,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForSpecificChildElement()
+        public void XPathLocatorBuildsXPathForSpecificChildSelector()
         {
             const string expectedXPath = "//div/child::span";
 
@@ -159,7 +159,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementAtAnIndexPosition()
+        public void XPathLocatorBuildsSelectorAtPostionInListOfMatchingSelectors()
         {
             const string expectedXPath = "//div[4]";
 
@@ -167,7 +167,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementThatFollowsAnotherElement()
+        public void XPathLocatorBuildsSelectorThatFollowsAnotherSelector()
         {
             const string expectedXPath = "//ul/following-sibling::div";
 
@@ -175,7 +175,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementThatPrecedesAnotherElement()
+        public void XPathLocatorBuildsSelectorThatPrecedesAnotherSelector()
         {
             const string expectedXPath = "//ul/preceding-sibling::div";
 
@@ -183,7 +183,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementThatIsInsideAnotherElement()
+        public void XPathLocatorBuildsSelectorThatIsInsideAnotherSelector()
         {
             const string expectedXPath = "//div//span";
 
@@ -191,7 +191,7 @@ namespace Basin.Tests
         }
 
         [Test, Category("Unit")]
-        public void LocatorBuildsXPathForElementWithText()
+        public void XPathLocatorBuildsSelectorWithText()
         {
             const string expectedExactTextXPath = @"//span[.=""foo bar, baz?""]";
             const string expectedStartsWithTextXPath = @"//ul[starts-with(., ""foo"")]";
@@ -205,7 +205,7 @@ namespace Basin.Tests
         }
 
         // [Test, Category("Unit")]
-        // public void LocatorReturnsSeleniumByObject()
+        // public void XPathLocatorReturnsSeleniumByObject()
         // {
         //     var expectedBy =  By.XPath("//div");
 
