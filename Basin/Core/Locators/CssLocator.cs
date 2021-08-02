@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using OpenQA.Selenium.Internal;
 
 namespace Basin.Core.Locators
@@ -21,15 +22,19 @@ namespace Basin.Core.Locators
 
         private readonly string rootTagName;
 
-        private readonly List<string> cssPseudoClasses;
-
-        private readonly List<string> cssCombinators;
+        // private readonly List<string> cssCombinators;
 
         private readonly List<string> cssClasses;
 
+        private readonly List<string> cssPseudoClasses;
+
         private readonly List<string> cssAttributes;
 
-        public override StringBuilder Selector { get; }
+        private readonly List<string> leftCombinators;
+
+        private readonly List<string> rightCombinators;
+
+        public override StringBuilder Selector => GetSelector();
 
         public override StringBuilder RootSelector => GetRootSelector();
 
@@ -39,35 +44,42 @@ namespace Basin.Core.Locators
             cssClasses = new List<string>();
             cssAttributes = new List<string>();
             cssPseudoClasses = new List<string>();
-            cssCombinators = new List<string>();
+            leftCombinators = new List<string>();
+            rightCombinators = new List<string>();
+            // cssCombinators = new List<string>();
         }
 
         public override ILocatorBuilder AtPosition(int index)
         {
-            throw new NotImplementedException();
+            cssPseudoClasses.Add($":nth-child({index})");
+
+            return this;
         }
 
         public override ILocatorBuilder Child()
         {
-            cssCombinators.Add(" > *");
+            rightCombinators.Add(" > *");
 
             return this;
         }
 
         public override ILocatorBuilder Child(ILocatorBuilder childLocator)
         {
-            throw new NotImplementedException();
+            rightCombinators.Add($" > {childLocator.Selector}");
+
+            return this;
         }
 
         public override ILocatorBuilder Follows(ILocatorBuilder sibling)
         {
-            throw new NotImplementedException();
+            leftCombinators.Add($"{sibling.Selector} ~ ");
+
+            return this;
         }
 
         public override ILocatorBuilder Inside(ILocatorBuilder parent)
         {
-            Selector.Insert(0, ' ')
-                    .Insert(0, parent.Selector.ToString());
+            leftCombinators.Add($"{parent.Selector} ");
 
             return this;
         }
@@ -132,12 +144,31 @@ namespace Basin.Core.Locators
             return this;
         }
 
-        // private StringBuilder GetSelector()
-        // {
+        private StringBuilder GetSelector()
+        {
+            var selector = new StringBuilder(GetRootSelector().ToString());
 
-        //     // return Selector.Append(GetRootSelector());
-        //     // Selector = new StringBuilder();
-        // }
+            selector = AddLeftCombinators(selector);
+            selector = AddRightCombinators(selector);
+
+            return selector;
+        }
+
+        private StringBuilder AddRightCombinators(StringBuilder selector)
+        {
+            foreach (var combinator in rightCombinators)
+                selector.Append(combinator);
+
+            return selector;
+        }
+
+        private StringBuilder AddLeftCombinators(StringBuilder selector)
+        {
+            foreach (var combinator in leftCombinators)
+                selector.Insert(0, combinator);
+
+            return selector;
+        }
 
         private StringBuilder GetRootSelector()
         {
@@ -147,6 +178,7 @@ namespace Basin.Core.Locators
 
             rootSelector.AppendJoin("", cssAttributes);
             rootSelector.AppendJoin("", cssClasses);
+            rootSelector.AppendJoin("", cssPseudoClasses);
             // rootSelectorHistory.Add(rootSelector);
 
             return rootSelector;
