@@ -4,7 +4,7 @@
 		<PackageVersion>1.2.7.1</PackageVersion>
 		<Title>Basin Framework</Title>
 		<Authors>Arik Jones</Authors>
-		<LangVersion>8</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<Copyright>Arik Jones</Copyright>
 		<PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
 		<PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
