@@ -6,7 +6,7 @@
   "Sites": [
     {
       "Id": "DEV",
-      "Url": "https://the-internet.herokuapp.com"
+      "Url": "http://the-internet.herokuapp.com"
     },
     {
       "Id": "CI",
@@ -19,7 +19,7 @@
       "Kind": "chrome",
       "Headless": true,
       "ElementTimeout": 5,
-      "Version": "84.0",
+      "Version": "96.0",
       "Host": "http://localhost:4444/wd/hub",
       "Capabilities": {
         "applicationContainers": ["basinframework_app_1"]
