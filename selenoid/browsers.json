@@ -14,7 +14,7 @@
   "chrome": {
     "versions": {
       "84.0": {
-        "image": "selenoid/chrome:91.0",
+        "image": "selenoid/chrome:96.0",
         "port": "4444",
         "path": "/",
         "tmpfs": {
