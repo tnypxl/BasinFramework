@@ -3,11 +3,11 @@ using OpenQA.Selenium;
 
 namespace Basin.Core.Browsers
 {
-    public static class ConfiguredBrowserFactory
+    public static class BrowserFactory
     {
         public static IWebDriver Current => BasinEnv.Browser.Kind switch
         {
-            "chrome" => new ChromiumBrowser(BasinEnv.Browser).Driver,
+            "chrome" => new ChromeBrowser(BasinEnv.Browser).Driver,
             "firefox" => new FirefoxBrowser(BasinEnv.Browser).Driver,
             "ie" => new InternetExplorerBrowser(BasinEnv.Browser).Driver,
             _ => throw new NotSupportedException($"'{BasinEnv.Browser.Kind}' is not a supported browser")

@@ -1,21 +1,21 @@
 using System;
 using Basin.Config.Interfaces;
-using OpenQA.Selenium.Chromium;
+using OpenQA.Selenium.Chrome;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class ChromiumServiceMapper : DriverServiceMap<ChromiumDriverService>
+    public sealed class ChromeServiceMapper : DriverServiceMap<ChromeDriverService>
     {
         public override string PathToDriverBinary { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
         public override bool HideCommandPrompt { get; set; } = true;
 
-        public ChromiumServiceMapper()
+        public ChromeServiceMapper()
         {
             CreateService(PathToDriverBinary);
         }
 
-        public ChromiumServiceMapper(IBrowserConfig config)
+        public ChromeServiceMapper(IBrowserConfig config)
         {
             PathToDriverBinary = config.PathToDriverBinary ?? PathToDriverBinary;
             HideCommandPrompt = config.HideCommandPrompt;
@@ -23,7 +23,7 @@ namespace Basin.Core.Browsers.Mappers
             CreateService(PathToDriverBinary);
         }
 
-        public ChromiumServiceMapper(string pathToDriverBinary)
+        public ChromeServiceMapper(string pathToDriverBinary)
         {
             PathToDriverBinary = pathToDriverBinary;
 
@@ -32,7 +32,7 @@ namespace Basin.Core.Browsers.Mappers
 
         private void CreateService(string pathToDriverBinary)
         {
-            Service = ChromiumDriverService;
+            Service = ChromeDriverService.CreateDefaultService(pathToDriverBinary);
             Service.HideCommandPromptWindow = HideCommandPrompt;
         }
     }

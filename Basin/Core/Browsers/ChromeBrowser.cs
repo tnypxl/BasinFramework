@@ -8,9 +8,9 @@ using OpenQA.Selenium.Remote;
 
 namespace Basin.Core.Browsers
 {
-    public class ChromiumBrowser : IChromiumBrowser
+    public class ChromeBrowser : IChromeBrowser
     {
-        public ChromiumBrowser(IBrowserConfig config)
+        public ChromeBrowser(IBrowserConfig config)
         {
             Service = new ChromeServiceMapper(config).Service;
             Options = new ChromeOptionsMapper(config).Options;
@@ -28,7 +28,7 @@ namespace Basin.Core.Browsers
 
         public void CreateDriver(Uri host)
         {
-            Driver = (host == null)
+            Driver = host == null
                 ? new ChromeDriver(Service, Options)
                 : new RemoteWebDriver(host, Options);
         }
