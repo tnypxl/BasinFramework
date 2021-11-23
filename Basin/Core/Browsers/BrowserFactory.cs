@@ -7,7 +7,7 @@ namespace Basin.Core.Browsers
     {
         public static IWebDriver Current => BasinEnv.Browser.Kind switch
         {
-            "chrome" => new ChromeBrowser(BasinEnv.Browser).Driver,
+            "chrome" => new ChromiumBrowser(BasinEnv.Browser).Driver,
             "firefox" => new FirefoxBrowser(BasinEnv.Browser).Driver,
             "ie" => new InternetExplorerBrowser(BasinEnv.Browser).Driver,
             _ => throw new NotSupportedException($"'{BasinEnv.Browser.Kind}' is not a supported browser")

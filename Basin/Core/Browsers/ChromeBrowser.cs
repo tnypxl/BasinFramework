@@ -8,9 +8,9 @@ using OpenQA.Selenium.Remote;
 
 namespace Basin.Core.Browsers
 {
-    public class ChromeBrowser : IChromeBrowser
+    public class ChromiumBrowser : IChromiumBrowser
     {
-        public ChromeBrowser(IBrowserConfig config)
+        public ChromiumBrowser(IBrowserConfig config)
         {
             Service = new ChromeServiceMapper(config).Service;
             Options = new ChromeOptionsMapper(config).Options;
