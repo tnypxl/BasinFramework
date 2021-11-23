@@ -1,6 +1,6 @@
 {
   "Environment": {
-    "Site": "DEV",
+    "Site": "CI",
     "Browser": "CI Chrome"
   },
   "Sites": [
