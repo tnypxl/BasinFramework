@@ -78,6 +78,8 @@ namespace Basin.Selenium
 
         public Func<IWebDriver, bool> IsNotDisplaying => WaitConditions.ElementNotDisplayed(Current);
 
+        public ISearchContext GetShadowRoot() => Current.GetShadowRoot();
+
         public string TagName => Current.TagName;
 
         public string Text => Current.Text;
@@ -115,9 +117,14 @@ namespace Basin.Selenium
 
         public string GetAttribute(string attributeName) => Current.GetAttribute(attributeName);
 
-        public string GetCssValue(string propertyName) => Current.GetCssValue(propertyName);
+        public string GetDomAttribute(string attributeName) => Current.GetDomAttribute(attributeName);
 
-        public string GetProperty(string propertyName) => Current.GetProperty(propertyName);
+        [Obsolete("GetProperty method is obsolete. Use GetDomProperty method instead.")]
+        public string GetProperty(string propertyName) => Current.GetDomProperty(propertyName);
+
+        public string GetDomProperty(string propertyName) => Current.GetDomProperty(propertyName);
+
+        public string GetCssValue(string propertyName) => Current.GetCssValue(propertyName);
 
         public void SendKeys(string text) => Current.SendKeys(text);
 

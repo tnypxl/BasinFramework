@@ -1,12 +1,12 @@
 {
   "Environment": {
-    "Site": "CI",
+    "Site": "DEV",
     "Browser": "CI Chrome"
   },
   "Sites": [
     {
       "Id": "DEV",
-      "Url": "http://the-internet.herokuapp.com"
+      "Url": "https://the-internet.herokuapp.com"
     },
     {
       "Id": "CI",
