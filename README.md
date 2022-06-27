@@ -7,10 +7,10 @@ An opinionated browser test framework for Selenium WebDriver. There are many lik
 
 ## Getting stared
 
-### Install 
+### Install
 
-```
-$ dotnet add package BasinFramework
+```shell
+dotnet add package BasinFramework
 ```
 
 ### Configuration
@@ -86,7 +86,8 @@ BasinEnv.UseBrowser("Some Other Browser Id");
 ```
 
 Or use a config object
-```c#
+
+```csharp
 BasinEnv.UseSite(new SiteConfig() {
     Id = "My New Site",
     Url = "http://dopesites.example.com"
@@ -130,7 +131,7 @@ using OpenQA.Selenium;
 namespace Example
 {
     public class LoginPage : Page
-    {	
+    { 
         // Page elements
         public Element UsernameField => TextInputTag.WithId("username");
         public Element PasswordField => InputTag.WithAttr("type", "password").WithId("password");
@@ -181,7 +182,7 @@ namespace Example
 }
 ```
 
-Now I have clean separate APIs for calling page elements and behaviors. Page map classes are portable and can be used in other classes that need the same element locators. 
+Now I have clean separate APIs for calling page elements and behaviors. Page map classes are portable and can be used in other classes that need the same element locators.
 
 How page objects should be organized is quite subjective, but the goal of these interfaces and abstracts classes is to provide some basic structure without getting in the way.
 
@@ -198,6 +199,3 @@ Thanks to [ElSnoMan](https://github.com/ElSnoMan) and
 from Applitools for this [Course](https://testautomationu.applitools.com/test-automation-framework-csharp/)
 
 Basin is based on and heavily inspired by the source code from [this repo](https://github.com/ElSnoMan/from-scripting-to-framework)
-
-
-
