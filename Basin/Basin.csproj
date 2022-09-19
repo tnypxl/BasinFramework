@@ -4,7 +4,7 @@
 		<PackageVersion>1.2.7.1</PackageVersion>
 		<Title>Basin Framework</Title>
 		<Authors>Arik Jones</Authors>
-		<LangVersion>8</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<Copyright>Arik Jones</Copyright>
 		<PackageProjectUrl>https://github.com/tnypxl/BasinFrameworkDotNetCore</PackageProjectUrl>
 		<PackageLicenseUrl>https://raw.githubusercontent.com/tnypxl/BasinFrameworkDotNetCore/master/LICENSE</PackageLicenseUrl>
@@ -24,7 +24,6 @@
 		<PackageReference Include="Config.Net" Version="4.14.23" />
 		<PackageReference Include="Config.Net.Json" Version="4.14.23" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-		<PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-		<PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.1" />
+		<PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
 	</ItemGroup>
 </Project>

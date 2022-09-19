@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace Basin.Core.Browsers
 {
-    public static class ConfiguredBrowserFactory
+    public static class BrowserFactory
     {
         public static IWebDriver Current => BasinEnv.Browser.Kind switch
         {

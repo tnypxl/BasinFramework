@@ -31,7 +31,7 @@ services:
       - "7080:5000"
 
   chrome:
-    image: selenoid/chrome:84.0
+    image: selenoid/chrome:96.0
 
   firefox:
-    image: selenoid/firefox:79.0
+    image: selenoid/firefox:94.0

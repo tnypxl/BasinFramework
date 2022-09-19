@@ -4,7 +4,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace Basin.Core.Browsers.Mappers
 {
-    public class ChromeServiceMapper : DriverServiceMap<ChromeDriverService>
+    public sealed class ChromeServiceMapper : DriverServiceMap<ChromeDriverService>
     {
         public override string PathToDriverBinary { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 

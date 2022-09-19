@@ -7,19 +7,19 @@ namespace Basin.Tests.PageObjects
     {
         public HomePage()
         {
-            BuildExamples();
+            BuildExamplePages();
         }
 
-        private Element ExampleLink(string name) => AnchorTag.WithText(name).Inside(ListItemTag);
+        private Element LinkToExamplePage(string name) => AnchorTag.WithText(name).Inside(ListItemTag);
 
-        public void NavigateToExample(string name) => ExampleLink(name).Click();
+        private PageCollection ExamplePages { get; } = new();
 
-        public PageCollection Examples { get; } = new PageCollection();
-
-        public void BuildExamples()
+        private void BuildExamplePages()
         {
-            Examples.Add(new AddRemoveElementsExamplePage());
-            Examples.Add(new LargeAndDeepDomExamplePage());
+            ExamplePages.Add(new AddRemoveElementsExamplePage());
+            ExamplePages.Add(new LargeAndDeepDomExamplePage());
         }
+
+        public void NavigateToExample(string name) => LinkToExamplePage(name).Click();
     }
 }

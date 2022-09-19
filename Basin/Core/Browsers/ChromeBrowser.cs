@@ -28,7 +28,7 @@ namespace Basin.Core.Browsers
 
         public void CreateDriver(Uri host)
         {
-            Driver = (host == null)
+            Driver = host == null
                 ? new ChromeDriver(Service, Options)
                 : new RemoteWebDriver(host, Options);
         }
